@@ -1,0 +1,40 @@
+{
+  "title": "check in，please",
+  "version": "gameplay-concepts-v1",
+  "date": "2026-11-04",
+  "tool": "built-in image_gen",
+  "reference": "../art-direction/style-board-v3.png",
+  "status": "concept images, not game screenshots or executable assets",
+  "images": [
+    {
+      "id": "01-hotel-lobby",
+      "label": "旅店大厅与布置",
+      "file": "01-hotel-lobby.png"
+    },
+    {
+      "id": "02-guest-room",
+      "label": "客房内部与搜查",
+      "file": "02-guest-room.png"
+    },
+    {
+      "id": "03-character-model-sheet",
+      "label": "人物模型与转面设定",
+      "file": "03-character-model-sheet.png"
+    },
+    {
+      "id": "04-object-inspection",
+      "label": "物品查看界面",
+      "file": "04-object-inspection.png"
+    },
+    {
+      "id": "05-check-in-review",
+      "label": "前台证件审查界面",
+      "file": "05-check-in-review.png"
+    },
+    {
+      "id": "06-report-dossier",
+      "label": "举报与档案装配界面",
+      "file": "06-report-dossier.png"
+    }
+  ]
+}

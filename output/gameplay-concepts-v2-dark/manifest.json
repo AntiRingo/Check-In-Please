@@ -1,0 +1,40 @@
+{
+  "title": "check in，please",
+  "version": "gameplay-concepts-v2-dark",
+  "date": "2026-11-04",
+  "tool": "built-in image_gen",
+  "revision_of": "../gameplay-concepts-v1/",
+  "status": "atmospheric concept revision",
+  "images": [
+    {
+      "id": "01-hotel-lobby",
+      "label": "灰暗版旅店大厅",
+      "file": "01-hotel-lobby.png"
+    },
+    {
+      "id": "02-guest-room",
+      "label": "灰暗版客房搜查",
+      "file": "02-guest-room.png"
+    },
+    {
+      "id": "03-character-model-sheet",
+      "label": "灰暗版人物模型设定",
+      "file": "03-character-model-sheet.png"
+    },
+    {
+      "id": "04-object-inspection",
+      "label": "灰暗版物品查看",
+      "file": "04-object-inspection.png"
+    },
+    {
+      "id": "05-check-in-review",
+      "label": "灰暗版前台审查",
+      "file": "05-check-in-review.png"
+    },
+    {
+      "id": "06-report-dossier",
+      "label": "灰暗版举报档案",
+      "file": "06-report-dossier.png"
+    }
+  ]
+}

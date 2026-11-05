@@ -1,0 +1,14 @@
+UnityDemo/[Ll]ibrary/
+UnityDemo/[Tt]emp/
+UnityDemo/[Oo]bj/
+UnityDemo/[Ll]ogs/
+UnityDemo/[Uu]serSettings/
+UnityDemo/.vs/
+UnityDemo/*.csproj
+UnityDemo/*.sln
+Tests/bin/
+Tests/obj/
+Tools/**/bin/
+Tools/**/obj/
+Builds/*_BackUpThisFolder_ButDontShipItWithYourGame/
+*.tmp

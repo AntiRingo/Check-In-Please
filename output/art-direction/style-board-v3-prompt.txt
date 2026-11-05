@@ -1,0 +1,43 @@
+check in，please — Art direction v3
+Date: 2026-11-04
+Generation: built-in image_gen tool, edit mode
+Artifact: style-board-v3.png
+Input: style-board-v2.png
+Approved invariant: abstract symbolic character designs from v2.
+Revision: add state propaganda, official leader imagery, slogans, reporting box, and telescreens to the fictional northern totalitarian hotel environment.
+Status: visual concept. HOTEL 017, official seal, leader image and slogans are art-direction placeholders, not finalized story canon.
+
+FINAL GENERATION PROMPT
+
+Use case: precise-object-edit.
+Asset type: art direction board v03 for the fictional dystopian game "check in，please".
+Input image: style-board-v2.png is the EDIT TARGET.
+
+The user APPROVED the abstract character style and requests adding political propaganda and signs of all-pervasive state control to the SCENES, evoking the social atmosphere of Orwell's 1984 in an invented northern country.
+
+LOCKED / MUST PRESERVE:
+Keep EVERY character exactly as designed: pure black symbolic human shapes, tiny two pale eye bars, no noses, no mouths, no facial planes, no added anatomical detail. Preserve the entire right-hand character column, all three silhouettes and portraits, and the guest and ID portrait in the lower inspection panel. Preserve their shapes, clothing, pose, scale and placement.
+Keep the overall board layout, the lowercase title exactly "check in，please", all section headings, the six palette swatches, hotel floor plan, doors, stairs, winter architecture, furniture, readable gameplay lanes, cutaway perspective, paper UI and bottom buttons. Change only the small version subtitle from "美术方向 02" to "美术方向 03".
+Keep the cold slate/grey-green/coal/off-white palette and small weak amber lights. No snow indoors.
+
+ENVIRONMENTAL EDIT — add a carefully designed hierarchy of official propaganda, both imposing and mundane, into existing empty WALL surfaces and exterior space. This should look like a believable occupied government-administered hotel whose patrons are constantly addressed and watched. Original fictional symbolism only: use the existing circular seal enclosing THREE vertical bars, consistently. No actual flags, real political leaders, real-world party emblems or historical portraits. No direct quotation from 1984; use original short slogans below.
+
+1. PUBLIC AUTHORITY:
+In the main hotel panel, replace the small generic sign directly above reception with an official framed leader-image poster. The leader is an impersonal GRAPHIC SYMBOL: monumental black oval head, two pale eye bars, broad block shoulders, stiff collar, no nose/mouth/hair/real face, echoing the approved character shape language but front-facing and perfectly symmetrical. On its muted faded oxide-red paper field put the existing three-bar circular seal and the short readable slogan "秩序即安宁". Make this poster the main new propaganda focal point, without covering doors, staircases, walking figures or the receptionist.
+Keep "HOTEL 017" on the roof sign. Add two narrow weathered vertical state banners to appropriate exterior end piers, using the SAME seal and muted oxide red, modest scale, no huge new structures. Maintain the snow and quiet grey northern skyline.
+
+2. REPEATED SOCIAL INSTRUCTIONS:
+Add one small official corridor poster on a clear wall area between doors, with a simple black pictogram of two citizens and a registration form, headed "如实登记". Add one small sealed reporting slot or complaints/reporting box next to the existing regulation notice in the lobby, labelled "报告箱". These appear routinely maintained, with faded older paper edges and one newer replacement notice. A plausible dense printed schedule can be indicated with fine aligned lines, not illegible random words. Preserve ample empty wall and clear navigation; not every wall needs a poster.
+
+3. INESCAPABLE BROADCAST / SURVEILLANCE:
+Add one compact wall-mounted mid-century metal-framed 4:3 telescreen above the lobby regulation area, facing inhabitants rather than the viewer. It shows the same very simplified official head/seal over monochrome horizontal broadcast lines, with a tiny red status indicator, a speaker grille and visible cable. It is clearly permanently wired, with no accessible off switch. Keep the existing camera and corridor loudspeaker. The screen's light is a faint cold grey, not bright futuristic blue.
+
+4. REFLECT THIS IN THE CLOSE-UP SCENES:
+In the lower-left inspection panel, preserve the character and all tabletop/ID/permit/ration/ledger contents exactly, but add a small version of the SAME leader poster to an empty BACK WALL section and a discreet "如实登记" instruction above the service area. All propaganda is spatially behind the citizen, not floating in front of them and not blocking documents.
+In the lower-right corridor lighting study, add a modest leader poster or sealed notice at the far end so the eye is drawn to authority.
+In the lower-right guest-room lighting study, add one small wired wall telescreen or a small screen-and-speaker unit positioned to face the bed, showing the SAME three-bar seal. Keep the ordinary bed and weak warm bedside lamp; this is intrusion into a sparse private space.
+
+VISUAL LANGUAGE:
+Printed propaganda is flat, rigid, geometric, symmetrical, with an official limited palette of aged off-white, coal and desaturated oxide red. Poster typography is heavy, clean, slightly condensed and sober. Respect scene perspective and scale; there must be a readable contrast between faded lived-in surfaces and maintained official messaging. Political control feels normal, permanent and everywhere, not a temporary rally.
+Dark red accents now mark state authority in a few selected places but still occupy a small fraction of the full image.
+Preserve the two-dimensional graphic illustration and restrained texture. No realism, detailed faces, excessive grime, giant eyes in the sky, aggressive horror, gore, futuristic equipment, new foreground characters, decorative clutter, watermarks, or composition changes. Keep all approved characters unchanged. Deliver the revised coherent art direction board.

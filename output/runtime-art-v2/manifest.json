@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "date": "2026-11-05",
+  "tool": "built-in image_gen",
+  "usage": "Unity runtime assets; fixed-camera painted environments with real-time 3D characters and interactive document UI",
+  "asset_directory": "../../UnityDemo/Assets/CheckInPlease/Resources/Art",
+  "assets": [
+    {
+      "file": "Lobby.png",
+      "reference": "../gameplay-concepts-v2-dark/01-hotel-lobby.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual Unity fixed-camera 2.5D hotel environment plate, landscape 16:9. Edit target: supplied dark hotel lobby concept. Preserve the camera, room geometry, furniture placement, worn plaster texture, detailed frosted windows, pipes, stairs, dim tungsten pools, muted grey-green and oxidized red palette, sinister fictional state propaganda and state circle/three-bars insignia EXACTLY as closely as possible. Remove all three freestanding living characters (center keeper, scarf guest at reception, cap guest by bench) and reconstruct the empty floor/counter behind them. Preserve the printed leader portraits on the wall and television. Remove ALL UI overlays: upper-left title and location, upper-right date box, bottom-left controls, floating reception button and icon. No replacement UI. Full bleed empty hotel background, with the floor visible and usable for live characters walking. Keep embedded Chinese wall signs and propaganda as part of the environment. Output only one finished game background. Keep the detailed oppressive painterly material quality; do not simplify into primitive 3D blocks."
+    },
+    {
+      "file": "GuestRoom.png",
+      "reference": "../gameplay-concepts-v2-dark/02-guest-room.png",
+      "prompt": "Use case: precise-object-edit. Asset type: actual Unity fixed-camera 2.5D environment background, landscape 16:9. Edit target: supplied dark guest room concept. Preserve the entire composition, orthographic oblique camera, wardrobe left, desk center under frosted window, small iron bed right, suitcase near lower right, sink and near-side door, aged material detail, grey-green paint, dim pool of desk lamp, political poster and telescreen. Remove only the black living keeper standing by the desk and reconstruct the hidden desk/floor naturally. Close the desk drawer so it does not protrude into the path. Remove ALL interface overlays: top-left title and room heading, top-right date and time, floating item button, white hotspot dot, bottom searching text and rules. Keep in-world wall signage and circle-with-three-bars state insignia. Remove the number 203 on the foreground door plate, leaving a blank plate for runtime room number. No living people. Do not brighten; match the oppressive low-key painterly textured mood. Output one finished full-bleed environment only, no UI."
+    },
+    {
+      "file": "Office.png",
+      "references": ["../gameplay-concepts-v2-dark/01-hotel-lobby.png", "../gameplay-concepts-v2-dark/02-guest-room.png"],
+      "prompt": "Use case: stylized-concept. Asset type: production background for a fixed-camera 2.5D Unity game. Both inputs are STYLE references, not layout. Create one matching 16:9 dark hotel keeper's office, same detailed painterly surfaces, northern totalitarian world, grey-green peeling plaster, exposed pipes, frosted window on left, tungsten desk lamp. Fixed orthographic oblique camera from the open front-right of the room looking down at about 35 degrees, identical visual scale to referenced guest room. Back wall occupies top half; navigable empty floor occupies the lower half. A substantial dark wooden writing desk stands across the rear center at image x=600..1120 y=410..640, facing viewer, with old typewriter, ink pot, telephone, closed folders and desk lamp. Leave a clear path in front of desk at y=690..850. Left wall has frosted window and radiator; filing cabinets clustered against far right wall, a small guest chair next to desk. Large muted red political poster with anonymous black symbolic leader, circle containing three bars, exact text '秩序即安宁' on rear wall; dark CRT telescreen at upper right. Old coat hook beside partially visible entrance at bottom left. Slightly worn tiled floor. No living people. No UI, no overlay labels, no title, no watermark. Dark, oppressive, subtle warm desk pool, low saturation. Full-bleed interior, not a tiny floating dollhouse, retain the reference level of rich material detail."
+    },
+    {
+      "file": "Counter.png",
+      "reference": "../gameplay-concepts-v2-dark/05-check-in-review.png",
+      "prompt": "Use case: precise-object-edit. Asset type: production Unity game counter background plate, 16:9. Edit target: supplied flat front-desk review concept. Preserve detailed gloomy wall, frost window, lamp, red propaganda, framed in-world Chinese sign, CRT and key rack. Remove the central living scarf character and the distant cap character, reconstruct wall behind them. Remove the title/date header at top and reconstruct continuous wall. Remove ALL documents, form panels, ruled book, numbered keys on desktop, comparison plaque, bottom buttons and any interface overlays. The entire lower 58 percent should become a beautifully textured dark worn grey-green wooden/leather reception counter surface, unobstructed and reasonably uniform for live paper UI to be drawn on top. Retain a small physical tarnished desk bell at far left edge and two stamp handles at far right bottom edge only, not in central content. Top 42 percent shows the original oppressive reception wall from straight-on view. No living people. No UI words, no floating labels, no title. Preserve fictional state graphics printed on wall props. Keep subtle desk light, painterly matte texture, no increase in brightness."
+    },
+    {
+      "file": "Paper.png",
+      "reference": "../gameplay-concepts-v2-dark/04-object-inspection.png",
+      "transparent_background": true,
+      "prompt": "Use case: background-extraction. Asset type: a single reusable blank paper UI sprite for Unity. Reference supplies paper material style only. Generate one large rectangular aged bureaucratic paper sheet, straight flat frontal scan, portrait aspect 4:5, alone centered on genuinely transparent background. Entire canvas square with paper filling 90 percent height and 75 percent width. Muted grey-beige faded paper, fine mottled fibers, slightly torn chipped edges, top right tiny folded corner, very faint horizontal center fold, subtle uneven darkened margins. Bright enough for dark ink to read but subdued, neutral grey-beige not yellow/sepia. Absolutely NO text, NO letters, NO lines, NO seals, NO symbols, NO objects, NO desk or environment. Blank empty broad writing area. Match the tactile matte painterly style of supplied reference. True alpha transparency outside paper, no baked checkerboard."
+    }
+  ],
+  "character_scale": {
+    "canvas": [1600, 900],
+    "keeper_projected_height_pixels": {"lobby": 160, "guest_room": 295, "office": 245},
+    "lobby_guest_projected_height_pixels": 178,
+    "method": "Each fixed-camera plate is calibrated against furniture; size stays constant inside a room. No screen-y scaling."
+  }
+}

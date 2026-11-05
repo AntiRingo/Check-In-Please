@@ -1,0 +1,271 @@
+{
+    "version": 1,
+    "day": 3,
+    "money": 74,
+    "rations": 7,
+    "trust": 6,
+    "heat": 0,
+    "actions": 2,
+    "phase": 0,
+    "ending": "",
+    "guests": [
+        {
+            "id": "A-017",
+            "name": "伊莲娜",
+            "occupation": "纺织工",
+            "purpose": "探望妹妹",
+            "permitId": "A-017",
+            "statement": "她住在北区医院。我只待一夜。信封里的东西……是家事。",
+            "day": 1,
+            "expires": 4,
+            "room": 201,
+            "portrait": 1,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 1,
+            "items": [
+                "配给申请回执|申请：儿童退烧药。审批结果：暂缓。申请人 A-017。",
+                "未寄出的信|‘如果委员会不批准，我会从旧车站想办法。不要告诉旅店的人。’"
+            ]
+        },
+        {
+            "id": "B-042",
+            "name": "维克托",
+            "occupation": "锅炉工",
+            "purpose": "设备检修",
+            "permitId": "B-024",
+            "statement": "登记员把数字写反了。锅炉停了，整条街都会挨冻。",
+            "day": 1,
+            "expires": 5,
+            "room": 0,
+            "portrait": 2,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 2,
+            "items": [
+                "维修清单|北区供热管道裂损。采购被以‘指标正常’为由驳回。",
+                "手绘管道图|图中标出未上报的地下通道。落款 B-042。"
+            ]
+        },
+        {
+            "id": "C-109",
+            "name": "帕维尔",
+            "occupation": "档案员",
+            "purpose": "公务",
+            "permitId": "C-109",
+            "statement": "不要为我安排临街的房间。广播总是吵得人无法入睡。",
+            "day": 1,
+            "expires": 3,
+            "room": 202,
+            "portrait": 0,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 1,
+            "items": [
+                "工作便笺|销毁目录第 41 至 53 页。不得保留副本。",
+                "夹层照片|一张旧合影。背面有几个被反复划掉的名字。"
+            ]
+        },
+        {
+            "id": "D-031",
+            "name": "米拉",
+            "occupation": "教师",
+            "purpose": "寻找工作",
+            "permitId": "D-031",
+            "statement": "新的许可要在工作单位开，可他们又让我先找到工作。",
+            "day": 2,
+            "expires": 5,
+            "room": 0,
+            "portrait": 1,
+            "workPermit": false,
+            "visitor": false,
+            "decision": 2,
+            "items": [
+                "退回的申请|任职许可：缺少单位推荐信。",
+                "儿童习作|‘我希望广播有一天会停下来。’红笔批注：请家长到校。"
+            ]
+        },
+        {
+            "id": "E-066",
+            "name": "列夫",
+            "occupation": "电工",
+            "purpose": "设备检修",
+            "permitId": "E-066",
+            "statement": "大厅的电幕线路不稳定。我只是来检查线路。",
+            "day": 2,
+            "expires": 5,
+            "room": 201,
+            "portrait": 2,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 1,
+            "items": [
+                "检修工单|电幕录音装置换新；旧元件须统一回收。",
+                "藏起的接线图|一个可以切断麦克风、却保留指示灯的接线方案。"
+            ]
+        },
+        {
+            "id": "F-204",
+            "name": "安东",
+            "occupation": "文书",
+            "purpose": "公务",
+            "permitId": "F-204",
+            "statement": "我来时证件还有效。铁路停运不该算在我头上。",
+            "day": 2,
+            "expires": 1,
+            "room": 0,
+            "portrait": 0,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 2,
+            "items": [
+                "铁路停运通知|因安全审查，北线暂停三日。",
+                "申诉材料|请求撤销对家人的劳动调配。附件：三份被退回的申诉。"
+            ]
+        },
+        {
+            "id": "G-008",
+            "name": "索菲娅",
+            "occupation": "护士",
+            "purpose": "探亲",
+            "permitId": "G-008",
+            "statement": "弟弟会来拿一件外套。他不会过夜。这也算访客吗？",
+            "day": 3,
+            "expires": 5,
+            "room": 0,
+            "portrait": 1,
+            "workPermit": true,
+            "visitor": true,
+            "decision": 0,
+            "items": [
+                "探视登记|访客：弟弟。时间：宵禁后。物品：冬衣一件。",
+                "外套内袋|几张前往边界的车票。姓名处已被刮去。"
+            ]
+        },
+        {
+            "id": "H-071",
+            "name": "尼古拉",
+            "occupation": "测绘员",
+            "purpose": "公务",
+            "permitId": "H-071",
+            "statement": "请按程序办。我想我们都不需要多余的麻烦。",
+            "day": 3,
+            "expires": 6,
+            "room": 0,
+            "portrait": 2,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 0,
+            "items": [
+                "测绘记录|旅店客房、后门与通风口的精确尺寸。",
+                "密封公函|区域重整名单中包括这家旅店。签发日期：明日。"
+            ]
+        },
+        {
+            "id": "J-115",
+            "name": "奥列格",
+            "occupation": "退休工人",
+            "purpose": "探亲",
+            "permitId": "J-115",
+            "statement": "以前我们在这条街跳舞。你大概不记得了。",
+            "day": 3,
+            "expires": 7,
+            "room": 0,
+            "portrait": 0,
+            "workPermit": true,
+            "visitor": false,
+            "decision": 0,
+            "items": [
+                "旧节目单|一场早已被禁止纪念的街头演出。",
+                "袖珍收音机|旋钮停在未登记的频段。机壳里藏着一张家人的照片。"
+            ]
+        }
+    ],
+    "clues": [
+        {
+            "id": "A-017/0",
+            "guestId": "A-017",
+            "source": "书桌抽屉",
+            "title": "配给申请回执",
+            "text": "申请：儿童退烧药。审批结果：暂缓。申请人 A-017。",
+            "day": 1,
+            "disposition": 1
+        },
+        {
+            "id": "A-017/1",
+            "guestId": "A-017",
+            "source": "行李夹层",
+            "title": "未寄出的信",
+            "text": "‘如果委员会不批准，我会从旧车站想办法。不要告诉旅店的人。’",
+            "day": 1,
+            "disposition": 1
+        },
+        {
+            "id": "C-109/0",
+            "guestId": "C-109",
+            "source": "书桌抽屉",
+            "title": "工作便笺",
+            "text": "销毁目录第 41 至 53 页。不得保留副本。",
+            "day": 1,
+            "disposition": 1
+        },
+        {
+            "id": "C-109/1",
+            "guestId": "C-109",
+            "source": "行李夹层",
+            "title": "夹层照片",
+            "text": "一张旧合影。背面有几个被反复划掉的名字。",
+            "day": 1,
+            "disposition": 1
+        },
+        {
+            "id": "E-066/0",
+            "guestId": "E-066",
+            "source": "书桌抽屉",
+            "title": "检修工单",
+            "text": "电幕录音装置换新；旧元件须统一回收。",
+            "day": 2,
+            "disposition": 2
+        },
+        {
+            "id": "E-066/1",
+            "guestId": "E-066",
+            "source": "行李夹层",
+            "title": "藏起的接线图",
+            "text": "一个可以切断麦克风、却保留指示灯的接线方案。",
+            "day": 2,
+            "disposition": 2
+        }
+    ],
+    "pending": [
+        {
+            "dueDay": 3,
+            "money": 0,
+            "trust": 0,
+            "heat": 0,
+            "text": "管理局回执：列夫 已被带走协助调查。房间空了下来。"
+        }
+    ],
+    "journal": [
+        "第 1 日 · 缴纳营业支出 20；消耗配给 2。",
+        "第 1 日 · 伊莲娜 入住 201，房费 +14。",
+        "第 1 日 · 拒绝 维克托 入住。",
+        "第 1 日 · 帕维尔 入住 202，房费 +14。",
+        "第 1 日 · 宵禁开始。住客前往统一点名，搜查机会为 4 次。",
+        "第 1 日 · 在 201 的书桌抽屉记录了“配给申请回执”。",
+        "第 1 日 · 在 201 的行李夹层记录了“未寄出的信”。",
+        "第 1 日 · 在 202 的书桌抽屉记录了“工作便笺”。",
+        "第 1 日 · 在 202 的行李夹层记录了“夹层照片”。",
+        "第 1 日 · 线索已封存，可以在之后的夜晚重新处理。",
+        "第 1 日 · 线索已封存，可以在之后的夜晚重新处理。",
+        "第 2 日 · 缴纳营业支出 20；消耗配给 2。",
+        "第 2 日 · 拒绝 米拉 入住。",
+        "第 2 日 · 列夫 入住 201，房费 +14。",
+        "第 2 日 · 拒绝 安东 入住。",
+        "第 2 日 · 宵禁开始。住客前往统一点名，搜查机会为 4 次。",
+        "第 2 日 · 在 201 的书桌抽屉记录了“检修工单”。",
+        "第 2 日 · 在 201 的行李夹层记录了“藏起的接线图”。",
+        "第 2 日 · 档案已提交。配给 +3，信任 +1。后续将在次日送达。"
+    ],
+    "news": []
+}

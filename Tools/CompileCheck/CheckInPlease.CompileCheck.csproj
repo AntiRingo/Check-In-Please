@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <UnityManaged>F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\Managed</UnityManaged>
+    <DefineConstants>UNITY_EDITOR;UNITY_STANDALONE_WIN</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../UnityDemo/Assets/CheckInPlease/Scripts/**/*.cs" />
+    <Compile Include="../../UnityDemo/Assets/CheckInPlease/Editor/*.cs" />
+    <Reference Include="$(UnityManaged)/*.dll"><Private>false</Private></Reference>
+    <Reference Include="$(UnityManaged)/UnityEngine/*.dll"><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

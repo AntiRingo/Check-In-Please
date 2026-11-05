@@ -1,0 +1,43 @@
+check in，please — Art direction v2
+Date: 2026-11-04
+Generation: built-in image_gen tool, edit mode
+Artifact: style-board-v2.png
+Input: style-board-v1.png
+Direction: abstract symbolic people; Russian/Nordic cold-climate influences; fictional state that administers all aspects of everyday life.
+Status: concept direction, not production-ready game assets. Character identities, HOTEL 017, and the administrative seal remain visual placeholders.
+
+STYLE REVISION PROMPT
+
+Use case: style-transfer.
+Asset type: edited art direction board, version 02, for original 2D dystopian hotel game "check in，please".
+Input image: the provided local style-board-v1.png is the EDIT TARGET, and the layout / game structure reference.
+
+Edit this existing art-direction board to apply the user's two changes decisively:
+(1) Characters become much more abstract, symbolic black human silhouettes, with dramatically fewer individual facial features.
+(2) The hotel and world become an imaginary cold northern state, with Russian and Nordic material and architectural influences, in a dystopian country where the state administers all aspects of everyday life.
+
+Preserve: the lowercase game title "check in，please"; the single-sheet landscape approximately 3:2 composition; the large side-on two-story hotel cutaway panel; the right-hand three character sprite/portrait pairs; the lower-left front-desk inspection panel; the lower-right palette and lighting studies; the clearly legible labels "旅店剖面", "角色与肖像", "前台审查", "色彩与光". Change subtitle to "美术方向 02". Keep all panels unified and original, illustrative 2D, with a clean cold off-white paper presentation background and generous margins.
+
+CHARACTER CHANGE — the highest priority:
+Replace EVERY recognizable illustrated face in the image, including all portraits, the woman behind the desk, the photograph on the ID, and all in-world figures. The previous image is too anatomically specific and expressive. Use black rounded heads and bold compact body shapes, as abstract as pictograms but slightly irregular and human. Each character has only about 4-6 large shape masses. Heads are solid coal black, with at most two tiny muted ivory short horizontal eye marks. ZERO rendered skin, ZERO facial planes, no nose, mouth, brows, cheekbones, wrinkles, ears, stubble, or individually drawn fingers. No detailed hairstyles, no folds or seams. Do NOT make the portrait column more detailed than the small sprites: enlarged portraits are graphic emblem-like silhouettes using the SAME simple shapes. Differences are entirely in outer contour, height, shoulder width, posture, collar, simple hat or scarf. Three designs: a short round-shouldered clerk with an oval head and one small pale triangular collar; a medium-height angular guest with one scarf shape and a simple hood/head silhouette; a tall narrow guest in a plain winter cap and rectangular coat, remove the glasses. Solid black bodies with at most one graphite secondary mass and one small off-white garment detail. Restrained adult human proportions, not cute, no anime, no mascot eyes or glowing horror eyes. Match identity across sprite, enlarged portrait, scene and ID. Expressions communicated by head tilt, distance and posture. Keep clear black silhouettes on mid-value backgrounds.
+
+ENVIRONMENT CHANGE:
+Transform the existing hotel into a state-administered northern lodging house. Strict orthographic front cutaway with readable continuous corridors and functional stairs, no isometric perspective. An austere early/mid-20th-century industrial civic building: thick plaster and concrete masonry, a plain snow-loaded metal roof, deep double-glazed window reveals with condensation and frost, iron radiators and exposed central-heating pipes, simple dark spruce doors, standardized pale worn wooden furniture, linoleum or bare timber floors, practical ceramic or enamel lamps and institutional grey-green painted lower walls. Architecture and materials evoke northern Russia and Scandinavia but belong to a fictional country. Snow lies on the roof and exterior sills; muted birch/spruce shapes and repetitive housing blocks appear in the distant overcast winter skyline. Cold daylight is very short. No ornamental onion domes, no tourist motifs, no national flags or real political symbols, no cozy chalet aesthetic.
+
+STATE CONTROL AS EVERYDAY INFRASTRUCTURE:
+Replace all invented proper-name hotel signs such as the previous Chinese hotel name with restrained standardized plaques "HOTEL 017" and a small original administrative seal made from a circle enclosing three vertical bars. Repeat this tiny seal consistently on the registry, permits, an official notice and a utility box.
+Add a wired public-address speaker in the corridor; a single sober surveillance camera; a centrally controlled heating valve with a small seal; a locked state-supply cupboard; numbered uniform doors; an official schedules/permit board; an office telephone connected to visible wiring. Keep placement credible and sparse. All guest rooms visibly use the same issued furniture. The clerk's desk feels like a local branch of an administrative system. Oppression comes from repetition, regulation, lack of privacy, controlled warmth and utilities, and the smallness of the people. The building is worn but functioning and orderly, not a ruin.
+
+FRONT-DESK PANEL:
+Preserve close-up inspection gameplay readability: black abstract scarf-wearing guest bust, equally symbolic portrait on old grey-paper ID, travel permit, a ration coupon, ledger, room keys and rubber stamp. Labels remain large and readable: "入住", "核对", "拒绝". Same angular/simple institutional graphic shapes and limited palette. No realistic faces on ANY paper. Replace sepia nostalgia with colder grey-paper and restrained desaturated furniture colors. Give the ration coupon and permit the same invented seal. Human warmth only from a small weak yellow desk lamp.
+
+COLOR AND MATERIALS:
+Shift away from the previous warm sepia brown dominance. Dominant coal black #151A1D, cold slate #4A5961, muted institutional spruce-grey #566158, frost/aged grey-paper #D2D2C5; small diluted tungsten yellow #A48B5D; tiny dark oxide red #783F3B reserved for warning/stamps. Show six plain swatches. The board and hotel feel cold, desaturated, graphic and northern. Keep enough midtones so black people and clickable objects remain readable. All surfaces simplified into flat shapes with restrained print grain; reduce fine texture and decorative detail alongside the abstract characters. Flat graphic illustration, hard shadow shapes, no photorealistic depth, no cinematic realistic faces, no detailed polygonal face art. Lighting studies show cold institutional corridor and a standardized sparse guest room with weak rationed warm light.
+
+Deliver a polished, coherent V2 design sheet that visibly changes the visual philosophy toward more symbolic humans and a colder fully administered society. No new plot, no named characters, no actual national insignia, no graphic violence, no giant evil faces, no cyberpunk, no decorative propaganda clutter, no watermark. Preserve "check in，please" as the title.
+
+FINAL TARGETED CLEANUP PROMPT
+
+Edit the provided "check in，please" art direction 02 board with ONE precise environmental correction only. Preserve the entire composition, all abstract symbolic black characters with tiny eye marks, all portraits, every title and label, palette, signage, furniture, lighting, snow-covered roof, winter skyline, and all three lower/right panels exactly as they are.
+
+In the large upper-left hotel cutaway panel ONLY, remove the inappropriate white snow strips that run along the INSIDE walking floors and cutaway front edges of both storeys. The corridor in front of rooms 201–204 must be a normal continuous clean dark grey indoor floor; the reception and lower hallway floor must also be a normal continuous clean dark floor. No white powder or snow on interior floors, interior floor-slab edges, stair landings, reception desk, or radiator bases. Replace these few white snow strips with the adjacent dark floor / beam material without changing the building structure. Snow stays on the exterior roof, outdoor ground beyond the building, and exterior window ledges. Frost stays on exterior window glass. It is an occupied heated hotel with a winter exterior, not an exposed ruin. Make no other changes.

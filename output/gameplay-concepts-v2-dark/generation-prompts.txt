@@ -1,0 +1,110 @@
+check in，please — Gameplay concepts v2 dark atmosphere
+Date: 2026-11-04
+Tool: built-in image_gen, edit mode
+Inputs: corresponding images in ../gameplay-concepts-v1/
+Change: darker low-key lighting, cooler and more desaturated palette, deeper environment shadows, localized weak practical lights, greyed paper interfaces with retained reading contrast.
+Preserved: approved abstract character designs, fixed oblique exploration camera, flat inspection/review/report UI, spatial layout and sample text.
+Status: six concept images, not implemented game screens or 3D asset files. Previous version retained.
+
+============================================================
+01-hotel-lobby — 灰暗版旅店大厅
+============================================================
+
+Use case: lighting-weather / precise palette edit.
+The supplied local PNG is the EDIT TARGET: an approved concept image from the fictional game "check in，please".
+The user likes the image but finds it far too bright and asks for a distinctly greyer, darker, more oppressive overall atmosphere.
+
+LOCK composition, camera angle, perspective, crop, image aspect ratio, building geometry, prop positions, character identity, silhouette shapes and count, paper layouts, ALL written Chinese/English text, numbers, dates, labels and functional UI. Characters remain the same abstract coal-black symbols with tiny pale eye marks; do not add any facial details or anatomy. No new props or story elements. No change to the fictional three-bar state seal, posters or slogans. This is a controlled atmospheric revision of the existing image.
+
+ART DIRECTION: northern bureaucratic dystopia, heavy overcast, cold institutional grey-green and charcoal, drained and oppressive. Clearly visibly darker than the supplied image at a glance. Reduce saturation strongly, especially orange/brown warmth and red propaganda surfaces. Red becomes dirty desaturated iron-oxide, wood becomes ash-brown, paper becomes greyed and aged. Replace bright diffuse ambient fill with very low cold diffuse light, deeper directional shadow, and only a few small weak practical light pools. Light is scarce and strictly localized. Eliminate polished shiny-floor highlights and cheerful cream-white broad areas. Keep the same inhabited hotel rather than a ruin.
+
+READABILITY: maintain enough local mid-value separation around black character silhouettes, furniture edges, walking paths and interactive objects; use subdued physically motivated floor/window bounce, never bright neon outlines. UI text and document details remain readable with their original hierarchy. Do not make the entire image pitch-black or apply a uniform black veil. No exaggerated vignette, no hazy fog, no horror effects, no new blood/gore, no bright blue neon, no new photorealism, no added film borders or watermark. Preserve the established flat graphic / textured 2.5D art style.
+
+SCREEN-SPECIFIC CHANGES:
+Environment lighting edit. Make lobby ambient illumination roughly 1.5 stops lower in perceived brightness, as a genuinely dim winter morning despite the unchanged clock. Window frost and outdoor snow are dull cold-grey rather than glowing white. The long staircase, upper wall corners and far right corridor recede into deep charcoal shadow. Large wall and floor planes become muted grey-green and graphite. A single weak reception desk lamp and weak vestibule light create small dirty-amber pools, with tight light falloff; ceiling fixtures give only scant dull light. Telescreen has a faint pale-grey image, tiny red indicator unchanged. The propaganda poster and rug become very desaturated dark red, text still legible. Reduce tile sheen. The player clerk and guests must still be recognizable at gameplay scale, readable against mid-dark floor. Keep foreground travel lanes visible and the entire fixed oblique camera composition identical.
+
+============================================================
+02-guest-room — 灰暗版客房搜查
+============================================================
+
+Use case: lighting-weather / precise palette edit.
+The supplied local PNG is the EDIT TARGET: an approved concept image from the fictional game "check in，please".
+The user likes the image but finds it far too bright and asks for a distinctly greyer, darker, more oppressive overall atmosphere.
+
+LOCK composition, camera angle, perspective, crop, image aspect ratio, building geometry, prop positions, character identity, silhouette shapes and count, paper layouts, ALL written Chinese/English text, numbers, dates, labels and functional UI. Characters remain the same abstract coal-black symbols with tiny pale eye marks; do not add any facial details or anatomy. No new props or story elements. No change to the fictional three-bar state seal, posters or slogans. This is a controlled atmospheric revision of the existing image.
+
+ART DIRECTION: northern bureaucratic dystopia, heavy overcast, cold institutional grey-green and charcoal, drained and oppressive. Clearly visibly darker than the supplied image at a glance. Reduce saturation strongly, especially orange/brown warmth and red propaganda surfaces. Red becomes dirty desaturated iron-oxide, wood becomes ash-brown, paper becomes greyed and aged. Replace bright diffuse ambient fill with very low cold diffuse light, deeper directional shadow, and only a few small weak practical light pools. Light is scarce and strictly localized. Eliminate polished shiny-floor highlights and cheerful cream-white broad areas. Keep the same inhabited hotel rather than a ruin.
+
+READABILITY: maintain enough local mid-value separation around black character silhouettes, furniture edges, walking paths and interactive objects; use subdued physically motivated floor/window bounce, never bright neon outlines. UI text and document details remain readable with their original hierarchy. Do not make the entire image pitch-black or apply a uniform black veil. No exaggerated vignette, no hazy fog, no horror effects, no new blood/gore, no bright blue neon, no new photorealism, no added film borders or watermark. Preserve the established flat graphic / textured 2.5D art style.
+
+SCREEN-SPECIFIC CHANGES:
+Environment lighting edit. This is 21:15 in a winter guest room. Make outside the frosted window dark cold-grey and blue-black; frost is dim, never glowing white. Most illumination comes from the SINGLE weak desk lamp, concentrated on the open drawer, letter and a small part of the desk. The wall lamp near sink is extremely dim. Bed, wardrobe and room corners recede into cool shadow. Bedding is smoky grey, not bright white. Leader poster becomes dark old oxide-red and still identifiable. Telescreen emits only a small faint cold grey patch, not a large light source. Strong but nuanced light falloff across floor; matte worn linoleum, not reflective marble. Preserve the letter hotspot "查看信件", clerk silhouette, entire furniture layout and every text. Maintain local contrast for the black clerk's outline and ability to recognize all interactive furniture.
+
+============================================================
+03-character-model-sheet — 灰暗版人物模型设定
+============================================================
+
+Use case: lighting-weather / precise palette edit.
+The supplied local PNG is the EDIT TARGET: an approved concept image from the fictional game "check in，please".
+The user likes the image but finds it far too bright and asks for a distinctly greyer, darker, more oppressive overall atmosphere.
+
+LOCK composition, camera angle, perspective, crop, image aspect ratio, building geometry, prop positions, character identity, silhouette shapes and count, paper layouts, ALL written Chinese/English text, numbers, dates, labels and functional UI. Characters remain the same abstract coal-black symbols with tiny pale eye marks; do not add any facial details or anatomy. No new props or story elements. No change to the fictional three-bar state seal, posters or slogans. This is a controlled atmospheric revision of the existing image.
+
+ART DIRECTION: northern bureaucratic dystopia, heavy overcast, cold institutional grey-green and charcoal, drained and oppressive. Clearly visibly darker than the supplied image at a glance. Reduce saturation strongly, especially orange/brown warmth and red propaganda surfaces. Red becomes dirty desaturated iron-oxide, wood becomes ash-brown, paper becomes greyed and aged. Replace bright diffuse ambient fill with very low cold diffuse light, deeper directional shadow, and only a few small weak practical light pools. Light is scarce and strictly localized. Eliminate polished shiny-floor highlights and cheerful cream-white broad areas. Keep the same inhabited hotel rather than a ruin.
+
+READABILITY: maintain enough local mid-value separation around black character silhouettes, furniture edges, walking paths and interactive objects; use subdued physically motivated floor/window bounce, never bright neon outlines. UI text and document details remain readable with their original hierarchy. Do not make the entire image pitch-black or apply a uniform black veil. No exaggerated vignette, no hazy fog, no horror effects, no new blood/gore, no bright blue neon, no new photorealism, no added film borders or watermark. Preserve the established flat graphic / textured 2.5D art style.
+
+SCREEN-SPECIFIC CHANGES:
+This is a CHARACTER REFERENCE SHEET, not an environment scene. Preserve every model view, character row, pose, shape separation diagram and all labels exactly. Change the bright beige sheet background to a sober medium-dark cold stone-grey background, slightly lighter immediately behind black silhouettes so all contours remain clear. Change the dark headings and dividers to muted light grey where needed for legibility. The figures stay black; DO NOT flatten them into the background. The ivory collar and eyes become dull bone-grey, still visible. Lighting on the small model previews becomes soft low-key cold illumination, no glossy highlights. Keep the reference useful for modeling: front, side and back silhouettes must all remain easy to distinguish. The mood is austere and restrained; no spotlight theatre, no dark vignette, no new narrative props.
+
+============================================================
+04-object-inspection — 灰暗版物品查看
+============================================================
+
+Use case: lighting-weather / precise palette edit.
+The supplied local PNG is the EDIT TARGET: an approved concept image from the fictional game "check in，please".
+The user likes the image but finds it far too bright and asks for a distinctly greyer, darker, more oppressive overall atmosphere.
+
+LOCK composition, camera angle, perspective, crop, image aspect ratio, building geometry, prop positions, character identity, silhouette shapes and count, paper layouts, ALL written Chinese/English text, numbers, dates, labels and functional UI. Characters remain the same abstract coal-black symbols with tiny pale eye marks; do not add any facial details or anatomy. No new props or story elements. No change to the fictional three-bar state seal, posters or slogans. This is a controlled atmospheric revision of the existing image.
+
+ART DIRECTION: northern bureaucratic dystopia, heavy overcast, cold institutional grey-green and charcoal, drained and oppressive. Clearly visibly darker than the supplied image at a glance. Reduce saturation strongly, especially orange/brown warmth and red propaganda surfaces. Red becomes dirty desaturated iron-oxide, wood becomes ash-brown, paper becomes greyed and aged. Replace bright diffuse ambient fill with very low cold diffuse light, deeper directional shadow, and only a few small weak practical light pools. Light is scarce and strictly localized. Eliminate polished shiny-floor highlights and cheerful cream-white broad areas. Keep the same inhabited hotel rather than a ruin.
+
+READABILITY: maintain enough local mid-value separation around black character silhouettes, furniture edges, walking paths and interactive objects; use subdued physically motivated floor/window bounce, never bright neon outlines. UI text and document details remain readable with their original hierarchy. Do not make the entire image pitch-black or apply a uniform black veil. No exaggerated vignette, no hazy fog, no horror effects, no new blood/gore, no bright blue neon, no new photorealism, no added film borders or watermark. Preserve the established flat graphic / textured 2.5D art style.
+
+SCREEN-SPECIFIC CHANGES:
+This is the FLAT OBJECT INSPECTION UI. Preserve every piece of text, envelope, seal detail, annotation, control and layout exactly. Darken the blurred 203-room background almost to charcoal. Panel surface becomes very dark graphite-green. The broad bright beige envelope and notice become subdued grey-khaki aged paper, about one stop darker in perceived brightness, but retain ink readability and paper fibers. A very restrained weak overhead desk-light pool keeps the center of the notice readable while edges are heavier and cooler. Do not cover the page in dramatic cast shadows. All buttons and headings use muted grey-paper contrast, reduce bright creamy borders. Seal and button red become desaturated old oxide. Preserve all four bottom buttons, "观察记录", "物品查看", "返回房间", and the exact document text. Functional material interface, not a black-on-black unusable screen.
+
+============================================================
+05-check-in-review — 灰暗版前台审查
+============================================================
+
+Use case: lighting-weather / precise palette edit.
+The supplied local PNG is the EDIT TARGET: an approved concept image from the fictional game "check in，please".
+The user likes the image but finds it far too bright and asks for a distinctly greyer, darker, more oppressive overall atmosphere.
+
+LOCK composition, camera angle, perspective, crop, image aspect ratio, building geometry, prop positions, character identity, silhouette shapes and count, paper layouts, ALL written Chinese/English text, numbers, dates, labels and functional UI. Characters remain the same abstract coal-black symbols with tiny pale eye marks; do not add any facial details or anatomy. No new props or story elements. No change to the fictional three-bar state seal, posters or slogans. This is a controlled atmospheric revision of the existing image.
+
+ART DIRECTION: northern bureaucratic dystopia, heavy overcast, cold institutional grey-green and charcoal, drained and oppressive. Clearly visibly darker than the supplied image at a glance. Reduce saturation strongly, especially orange/brown warmth and red propaganda surfaces. Red becomes dirty desaturated iron-oxide, wood becomes ash-brown, paper becomes greyed and aged. Replace bright diffuse ambient fill with very low cold diffuse light, deeper directional shadow, and only a few small weak practical light pools. Light is scarce and strictly localized. Eliminate polished shiny-floor highlights and cheerful cream-white broad areas. Keep the same inhabited hotel rather than a ruin.
+
+READABILITY: maintain enough local mid-value separation around black character silhouettes, furniture edges, walking paths and interactive objects; use subdued physically motivated floor/window bounce, never bright neon outlines. UI text and document details remain readable with their original hierarchy. Do not make the entire image pitch-black or apply a uniform black veil. No exaggerated vignette, no hazy fog, no horror effects, no new blood/gore, no bright blue neon, no new photorealism, no added film borders or watermark. Preserve the established flat graphic / textured 2.5D art style.
+
+SCREEN-SPECIFIC CHANGES:
+This is the front-desk review UI. Keep all character shapes, document field numbers A-017 and A-071, room number 203, labels, stamps, layout and text exactly. Make the lobby BEHIND Guest A much darker: shadowy grey-green walls, dim frosted window, subdued poster, faint telescreen. Keep the guest's outline recognizable against slightly lighter surroundings. Only the small desk lamp weakly illuminates the paper work area. The desktop becomes charcoal ash-brown, the three document surfaces become greyed old paper rather than bright cream, the rules booklet similar. Keep the actual ID numbers, comparison underlines and "编号不一致" readable with preserved local contrast. Red reject button and stamp become dull dark oxide-red. The upper broad title band becomes cold grey rather than white. The mood is oppressive late-winter bureaucratic work in rationed light, never warm cozy nostalgia.
+
+============================================================
+06-report-dossier — 灰暗版举报档案
+============================================================
+
+Use case: lighting-weather / precise palette edit.
+The supplied local PNG is the EDIT TARGET: an approved concept image from the fictional game "check in，please".
+The user likes the image but finds it far too bright and asks for a distinctly greyer, darker, more oppressive overall atmosphere.
+
+LOCK composition, camera angle, perspective, crop, image aspect ratio, building geometry, prop positions, character identity, silhouette shapes and count, paper layouts, ALL written Chinese/English text, numbers, dates, labels and functional UI. Characters remain the same abstract coal-black symbols with tiny pale eye marks; do not add any facial details or anatomy. No new props or story elements. No change to the fictional three-bar state seal, posters or slogans. This is a controlled atmospheric revision of the existing image.
+
+ART DIRECTION: northern bureaucratic dystopia, heavy overcast, cold institutional grey-green and charcoal, drained and oppressive. Clearly visibly darker than the supplied image at a glance. Reduce saturation strongly, especially orange/brown warmth and red propaganda surfaces. Red becomes dirty desaturated iron-oxide, wood becomes ash-brown, paper becomes greyed and aged. Replace bright diffuse ambient fill with very low cold diffuse light, deeper directional shadow, and only a few small weak practical light pools. Light is scarce and strictly localized. Eliminate polished shiny-floor highlights and cheerful cream-white broad areas. Keep the same inhabited hotel rather than a ruin.
+
+READABILITY: maintain enough local mid-value separation around black character silhouettes, furniture edges, walking paths and interactive objects; use subdued physically motivated floor/window bounce, never bright neon outlines. UI text and document details remain readable with their original hierarchy. Do not make the entire image pitch-black or apply a uniform black veil. No exaggerated vignette, no hazy fog, no horror effects, no new blood/gore, no bright blue neon, no new photorealism, no added film borders or watermark. Preserve the established flat graphic / textured 2.5D art style.
+
+SCREEN-SPECIFIC CHANGES:
+This is a FLAT REPORT-ASSEMBLY UI. Preserve every card, icon, line, title, label, text, source count, photograph and layout exactly. Put the office walls, poster, loudspeaker and television into deep cold grey shadow. The lamp creates a narrow weak light pool across the central dossier; it must not flood the whole room. Large central dossier and right checklist surfaces become grey-khaki old paper, visibly darker than the original, with readable black printed text. Left source cards slightly dimmer but fully legible. Buttons and header band become dull grey and old oxide instead of bright cream/red. Telescreen very faint, small red status only. Darken telephone and desk edge, reduce shiny highlights. Maintain clear separation between evidence cards, blank attachment slot and paper stack, all information visible and usable. Heavy restrained atmosphere of writing a consequential official report alone at night.
+
