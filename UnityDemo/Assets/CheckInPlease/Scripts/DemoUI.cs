@@ -38,7 +38,7 @@ namespace CheckInPlease
             button.normal.background=button.hover.background=button.active.background=Texture2D.blackTexture;
             button.normal.textColor=button.hover.textColor=button.active.textColor=enabled?textColor:new Color(.55f,.60f,.57f);
             var old=GUI.backgroundColor;GUI.backgroundColor=Color.clear;GUI.enabled=enabled;
-            bool clicked=GUI.Button(r,text,button);GUI.enabled=true;GUI.backgroundColor=old;return clicked;
+            bool clicked=GUI.Button(r,text,button);GUI.enabled=true;GUI.backgroundColor=old;return clicked&&!smoke;
         }
         void Sheet(Rect r,string code)
         {
@@ -72,7 +72,7 @@ namespace CheckInPlease
             if(game==null)return;if(label==null)InitUI();
             float scale=Mathf.Min(Screen.width/1600f,Screen.height/900f);
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1600*scale)/2,(Screen.height-900*scale)/2,0),Quaternion.identity,Vector3.one*scale);
-            if(modal=="review"||modal=="dossier")GUI.DrawTexture(new Rect(0,0,1600,900),counterArt);
+            if(modal=="review")GUI.DrawTexture(new Rect(0,0,1600,900),counterArt);
             Header();
             if(modal=="")WorldHUD();
             else
@@ -115,7 +115,7 @@ namespace CheckInPlease
         {
             Fill(new Rect(80,150,640,610),panel);Emblem(120,192,62,cream);
             L(120,285,550,95,"check in, please",53);L(122,378,520,70,"每个人都需要一间房。\n每间房都有一个秘密。",25);
-            L(122,493,510,85,"三日可玩原型\n固定俯视场景 · 证件审查 · 客房搜查 · 情报处置",18,dim);
+            L(122,493,510,85,"三日可玩原型\n三层剖顶旅馆 · 楼梯通行 · 证件审查 · 电脑举报",18,dim);
             if(B(120,605,245,58,confirmNew?"确认覆盖旧存档":"开始新游戏",true,true))
             {if(System.IO.File.Exists(SavePath)&&!confirmNew)confirmNew=true;else NewGame();}
             if(B(385,605,245,58,"继续游戏",System.IO.File.Exists(SavePath)))Continue();
@@ -135,30 +135,68 @@ namespace CheckInPlease
         }
         void WorldHUD()
         {
-            string area=world.Area=="lobby"?"旅店大厅":world.Area=="office"?"值班办公室":"客房 "+world.Area;
-            L(38,91,300,40,area,28);L(40,134,300,20,"点击地面移动 · 点击标记互动",13,dim);
+            string area=world.CurrentFloor==1?"一楼 · 前台与办公室":world.CurrentFloor==2?"二楼 · 住客客房":"三楼 · 住客客房";
+            L(38,91,350,40,area,world.IsHotelFloor?25:28);L(40,134,340,20,"WASD / 点击地面移动 · 点击标记互动",13,dim);
             if(B(1360,90,205,38,"客房分配 / 地图"))modal="rooms";
             if(B(1360,138,98,34,"日志 [J]"))modal="journal";
             if(B(1468,138,97,34,"暂停"))modal="pause";
+            HotelControls();if(world.IsHotelFloor)FloorControls();
+            var placedLabels=new System.Collections.Generic.List<Rect>();
             foreach(var spot in world.spots.ToArray())
             {
+                if(world.IsTravelling)break;
+                if(!world.SpotVisible(spot))continue;
                 var p=world.Project(spot.point);
                 float width=spot.label.Length>7?205:160;
-                if(B(Mathf.Clamp(p.x-width/2,25,1575-width),p.y-18,width,36,"◇  "+spot.label)) {var target=spot;world.WalkTo(target.approach,()=>Act(target.action));}
+                var rect=new Rect(Mathf.Clamp(p.x-width/2,25,1575-width),p.y-18,width,36);
+                {
+                    for(int attempt=0;attempt<5&&placedLabels.Any(r=>r.Overlaps(new Rect(rect.x-4,rect.y-4,rect.width+8,rect.height+8)));attempt++)rect.y+=42;
+                    placedLabels.Add(rect);
+                }
+                if(B(rect.x,rect.y,width,36,"◇  "+spot.label))
+                {
+                    if(world.IsHotelFloor&&spot.action.StartsWith("search")&&!world.SelectedObservation.doorOpen&&world.PlayerPosition.z<.1f)
+                        Say("摄像头只能观察。打开房门后，才能走近搜查。");
+                    else {var target=spot;world.WalkTo(target.approach,()=>Act(target.action));}
+                }
             }
             string objective=game.State.phase==Shift.Reception?(game.Current!=null?"前往前台审查  "+game.Current.name:"今日来客已处理完毕。开始夜班。"):
                 game.State.phase==Shift.Search?"住客正在统一点名。剩余搜查行动  "+game.State.actions+" / 4":"前往办公室，决定每份档案的去向。";
             Fill(new Rect(28,817,1020,65),new Color(.035f,.045f,.045f,.86f));
             L(44,823,990,27,objective,20);
-            L(44,853,990,24,Time.unscaledTime<toastUntil&&toast!=""?toast:world.Walking?"正在前往目标……":"J 值班日志   /   Esc 暂停",14,dim);
-            if(game.State.phase==Shift.Reception && game.Current==null){if(B(1140,830,425,48,"关闭前台 · 开始夜班",true,true))Night();}
-            else if(game.State.phase==Shift.Search){if(B(1140,830,425,48,"结束搜查 · 前往办公室",true,true))Audit();}
-            else if(game.State.phase==Shift.Audit){if(B(1140,830,425,48,"打开档案",true,true)){Visit("office");Act("dossier");}}
-            if(Event.current.type==EventType.MouseDown && Event.current.button==0)
+            L(44,853,990,24,Time.unscaledTime<toastUntil&&toast!=""?toast:world.IsTravelling?"正在通过楼梯前往 "+world.TravelDestination+" 楼……":world.ManualMoving?"WASD 移动中":world.Walking?"正在前往目标……":"WASD 移动   /   J 值班日志   /   Esc 暂停",14,dim);
+            if(game.State.phase==Shift.Reception && game.Current==null){if(B(1140,830,425,48,"关闭前台 · 开始夜班",!world.IsTravelling,true))Night();}
+            else if(game.State.phase==Shift.Search){if(B(1140,830,425,48,"返回一楼 · 使用举报电脑",!world.IsTravelling,true))Audit();}
+            else if(game.State.phase==Shift.Audit){if(B(1140,830,425,48,"前往办公室电脑",!world.IsTravelling,true))Audit();}
+            if(!smoke&&Event.current.type==EventType.MouseDown && Event.current.button==0)
             {
                 var p=Event.current.mousePosition;
                 if(p.y>175&&p.y<815){world.GroundClick(p);Event.current.Use();}
             }
+        }
+        void HotelControls()
+        {
+            for(int floor=1;floor<=3;floor++)
+                if(B(40+(floor-1)*110,174,100,32,(world.CurrentFloor==floor?"● ":"")+floor+" 楼",!world.IsTravelling))TravelToFloor(floor);
+            L(385,180,870,26,world.IsTravelling?"楼梯通行中  ·  目的地 "+world.TravelDestination+" 楼":
+                world.CurrentFloor==1?"前台审查来客  /  办公室电脑举报住户  /  西侧楼梯通往客房":"黑暗 = 当前不可见  /  家具不遮挡视野  /  西侧楼梯连接各层",14,dim);
+            if(world.CurrentFloor!=1)return;
+            L(395,96,830,28,"一楼营业区  ·  前台登记 / 办公室 / 楼梯间",20,cream);
+            if(B(395,138,200,34,"前往前台",!world.IsTravelling))Visit("lobby");
+            if(B(610,138,240,34,"前往办公室电脑",!world.IsTravelling))Visit("office");
+        }
+        void FloorControls()
+        {
+            foreach(int n in HotelLayout.RoomsOn(world.CurrentFloor))if(B(395+(n%100-1)*105,90,95,36,(world.SelectedRoom==n?"● ":"")+n,!world.IsTravelling))world.SelectRoom(n);
+            var s=world.SelectedObservation;
+            L(720,96,600,26,s.cameraInstalled?"监控已连接  ·  "+world.MountLabel+"  ·  朝向 "+s.yaw.ToString("0")+"°  /  视角 "+s.fieldOfView.ToString("0")+"°":"未安装摄像头  ·  开门后可从走廊观察",17,cream);
+            if(B(395,138,125,34,s.doorOpen?"关闭房门":"打开房门",!world.IsTravelling))FloorDoor();
+            if(B(530,138,145,34,s.cameraInstalled?"拆除摄像头":"安装摄像头",!world.IsTravelling))FloorCamera(0);
+            if(B(685,138,145,34,"切换安装位置",s.cameraInstalled&&!world.IsTravelling))FloorCamera(1);
+            if(B(840,138,110,34,"左转 15°",s.cameraInstalled&&!world.IsTravelling))FloorCamera(-15);
+            if(B(960,138,110,34,"右转 15°",s.cameraInstalled&&!world.IsTravelling))FloorCamera(15);
+            if(B(1080,138,145,34,"视角 "+s.fieldOfView.ToString("0")+"°",s.cameraInstalled&&!world.IsTravelling))FloorCamera(2);
+
         }
         void Review()
         {
@@ -184,8 +222,9 @@ namespace CheckInPlease
             L(432,735,720,42,comparison,20,comparison.Contains("未发现")?cream:new Color(.83f,.64f,.54f));
             if(B(130,801,280,58,"询 问 住 客"))Say(g.statement);
             L(430,811,80,34,"房间",18);
-            for(int n=201;n<=203;n++)
-            {bool free=game.InRoom(n)==null;if(B(505+(n-201)*110,801,100,58,(roomChoice==n?"● ":"")+n,free))roomChoice=n;}
+            L(508,779,345,20,"二楼客房                    三楼客房",13,cream);
+            for(int i=0;i<HotelLayout.Rooms.Length;i++)
+            {int n=HotelLayout.Rooms[i];bool free=game.InRoom(n)==null;if(B(505+i*58,801,54,58,n.ToString(),free,roomChoice==n))roomChoice=n;}
             if(B(875,801,300,58,"准 予 入 住  /  +14"))Decision(true);
             if(B(1205,801,310,58,"拒 绝 入 住",true,true))Decision(false);
         }
@@ -213,8 +252,9 @@ namespace CheckInPlease
         }
         void Dossier()
         {
+            Fill(new Rect(0,70,1600,830),new Color(.025f,.055f,.045f,1));
             Fill(new Rect(38,101,1524,70),new Color(.03f,.045f,.045f,.8f));
-            L(70,113,900,50,"住客报告   /   夜间档案",34);Close();
+            L(70,113,900,50,"住户举报终端   /   办公室电脑",34);Close();
             Fill(new Rect(70,202,330,572),panel);Edge(new Rect(77,209,316,558),line);
             L(99,226,265,40,"线 索 索 引",27);
             var ids=game.State.clues.Where(CanUse).Select(c=>c.guestId).Distinct().ToArray();
@@ -224,7 +264,7 @@ namespace CheckInPlease
             {var g=game.State.guests.First(x=>x.id==ids[i]);if(B(0,i*65,250,55,(subject==g.id?"● ":"")+g.name+" / "+g.room)){subject=g.id;selected.Clear();}}
             GUI.EndScrollView();
             PaperBase(new Rect(432,214,635,567));PaperBase(new Rect(425,202,635,567));
-            L(466,230,545,50,"举 报 档 案",32,ink);Fill(new Rect(466,285,552,1),ink);
+            L(466,230,545,50,"住 户 举 报",32,ink);Fill(new Rect(466,285,552,1),ink);
             var guest=game.State.guests.FirstOrDefault(g=>g.id==subject);
             if(guest!=null)
             {Portrait(new Rect(466,309,105,125),guest.portrait,true);L(601,319,395,95,guest.name+"  /  "+guest.id+"\n房间  "+guest.room,25,ink);}
@@ -237,9 +277,9 @@ namespace CheckInPlease
                 L(481,y+9,445,27,"来源："+c.source+" / 第 "+c.day+" 日",15,ink);L(481,y+42,430,44,c.title,23,ink);
                 if(B(938,y+28,59,47,check?"✓":"＋")){if(check)selected.Remove(c.id);else selected.Add(c.id);}
             }
-            Sheet(new Rect(1090,230,440,540),"第 17 区   /   档案流转单");L(1125,290,370,50,"提 交 检 查",31,ink);
+            Sheet(new Rect(1090,230,440,540),"第 17 区   /   终端已连接");L(1125,290,370,50,"提 交 检 查",31,ink);
             int count=list.Count(c=>selected.Contains(c.id));L(1125,355,370,66,"已选 "+count+" 份材料\n举报至少需要 2 个独立来源",20,ink);
-            if(B(1120,443,380,53,"提交管理局 / 配给 +3",count>=2,true))Resolve(Disposition.Reported);
+            if(B(1120,443,380,53,"电脑提交举报 / 配给 +3",count>=2,true))Resolve(Disposition.Reported);
             if(B(1120,511,380,53,"交给地下联络人 / 现金 +18",count>0))Resolve(Disposition.Leaked);
             if(B(1120,579,180,47,"封存材料",count>0))Resolve(Disposition.Withheld);
             if(B(1320,579,180,47,"销毁材料",count>0))Resolve(Disposition.Destroyed);
@@ -248,14 +288,16 @@ namespace CheckInPlease
         }
         void Rooms()
         {
-            Title("HOTEL PLAN  /  ROOM REGISTER","旅店区域","点击区域切换固定摄像头。夜间可进入已入住的客房。");Close();
-            if(B(80,300,690,80,"一层大厅  /  前台接待"))Visit("lobby");
-            if(B(810,300,710,80,"值班办公室  /  情报档案"))Visit("office");
-            for(int n=201;n<=203;n++)
+            Title("HOTEL PLAN  /  THREE STOREYS","三层旅馆","一楼接待与电脑举报；二、三楼入住。选择目的地后，人物会沿楼梯上下楼。");Close();
+            if(B(80,285,690,70,"一楼前台  /  前往审查来客"))Visit("lobby");
+            if(B(810,285,710,70,"一楼办公室  /  前往举报电脑"))Visit("office");
+            for(int i=0;i<HotelLayout.Rooms.Length;i++)
             {
-                float x=80+(n-201)*490;var g=game.InRoom(n);Fill(new Rect(x,430,460,300),panel);
-                L(x+28,458,400,55,n.ToString(),40);L(x+28,533,400,90,g==null?"空房\n尚未分配":g.name+"\n"+g.occupation,23,dim);
-                if(B(x+28,650,404,50,"进入客房",g!=null&&game.State.phase==Shift.Search))Visit(n.ToString());
+                int n=HotelLayout.Rooms[i];float x=80+(i%3)*490,y=395+(i/3)*202;var g=game.InRoom(n);
+                Fill(new Rect(x,y,460,180),panel);L(x+22,y+12,130,48,n.ToString(),32);
+                L(x+165,y+15,270,56,g==null?"空房 · 可分配":g.name+" / "+g.occupation,19,cream);
+                L(x+22,y+66,410,30,(n/100)+" 楼  ·  "+(game.Observation(n).cameraInstalled?"已安装摄像头":"未安装摄像头"),16,dim);
+                if(B(x+22,y+112,416,46,"沿楼梯前往 "+n))Visit(n.ToString());
             }
         }
         void Journal()
@@ -270,7 +312,7 @@ namespace CheckInPlease
         void Help()
         {
             Title("KEEPER'S HANDBOOK","值班操作","这是一个可以完整走过三个营业日的玩法原型。");
-            L(100,300,1350,390,"01  点击地面移动；点击场景标签，主角会走近并互动。\n\n02  前台：查看身份证、通行证与今日条例。询问住客，再批准或拒绝。\n\n03  接待完毕后进入夜班。地图进入客房，检查书桌与行李。每夜 4 次搜查。\n\n04  办公室：选择同一人的两份材料，可举报；也可以封存、销毁或外泄。\n\n05  完成审计进入次日。三日后根据现金、信任与暴露获得结局。\n\nJ 打开日志 · Esc 返回或暂停 · 每次重要操作自动保存。",23);
+            L(100,300,1350,390,"01  WASD 按画面方向移动，或点击地面寻路；点击场景标签走近互动。\n\n02  前台：查看身份证、通行证与今日条例。询问住客，再批准或拒绝。\n\n03  始终只显示当前楼层；点击楼梯或楼层按钮上下楼。二、三楼共六间客房。\n\n04  夜间开门搜查，每夜 4 次；回一楼电脑前，选择同一人的两份材料举报。\n\n05  完成审计进入次日。三日后根据现金、信任与暴露获得结局。\n\nWASD 可接管鼠标寻路 · J 日志 · Esc 暂停 · 每次重要操作自动保存。",23);
             if(B(1090,730,430,60,"返回",true,true))modal=game.State.phase==Shift.Morning?"menu":"";
         }
         void Pause()

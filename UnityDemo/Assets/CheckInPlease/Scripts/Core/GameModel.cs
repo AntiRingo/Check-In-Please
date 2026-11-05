@@ -37,13 +37,35 @@ namespace CheckInPlease
         public List<Consequence> pending = new List<Consequence>();
         public List<string> journal = new List<string>();
         public List<string> news = new List<string>();
+        public List<RoomObservation> rooms = new List<RoomObservation>();
+        public int keeperFloor = 1;
+        public float keeperX = -1.2f, keeperZ = -1.8f;
     }
 
     // Pure C# rules: UI, saves and automated tests all use this same model.
     public sealed class GameModel
     {
         public GameState State { get; private set; }
-        public GameModel(GameState state = null) { State = state ?? NewState(); }
+        public GameModel(GameState state = null)
+        {
+            State = state ?? NewState();
+            // Older v1 saves did not contain observation settings.
+            if (State.rooms == null) State.rooms = new List<RoomObservation>();
+            foreach (int room in HotelLayout.Rooms)
+            {
+                var observation = State.rooms.Find(r => r != null && r.room == room);
+                if (observation == null)
+                {
+                    observation = new RoomObservation { room = room, cameraInstalled = room == 201 };
+                    State.rooms.Add(observation);
+                }
+                observation.Normalize();
+            }
+            if(State.keeperFloor<1||State.keeperFloor>3)State.keeperFloor=1;
+            if(float.IsNaN(State.keeperX)||float.IsInfinity(State.keeperX)||Math.Abs(State.keeperX)>14)State.keeperX=-1.2f;
+            if(float.IsNaN(State.keeperZ)||float.IsInfinity(State.keeperZ)||State.keeperZ< -3.2f||State.keeperZ>6.5f)State.keeperZ=-1.8f;
+        }
+        public RoomObservation Observation(int room) { return State.rooms.Find(r => r != null && r.room == room); }
         static Guest G(int day, string id, string name, string job, string purpose, string permit,
             int expires, bool work, bool visitor, int portrait, string statement, params string[] items)
         {
@@ -135,7 +157,7 @@ namespace CheckInPlease
         {
             var g = Current;
             if (State.phase != Shift.Reception || g == null) return "当前没有待审查住客。";
-            if (admit && (room < 201 || room > 203 || InRoom(room) != null)) return "请选择空房间。";
+            if (admit && (!HotelLayout.IsRoom(room) || InRoom(room) != null)) return "请选择二楼或三楼的空房间。";
             var violation = Violation(g);
             g.decision = admit ? Decision.Admitted : Decision.Rejected;
             if (admit)

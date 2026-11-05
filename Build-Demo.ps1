@@ -25,7 +25,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $built 'build-success.json'))) { thr
 $published = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'Builds\Windows'))
 if (-not $published.StartsWith($PSScriptRoot + '\Builds\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe build destination' }
 if ((Test-Path -LiteralPath $published) -and ((Get-Item -LiteralPath $published).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Build destination must not be a link' }
-$syncOutput = & robocopy.exe $built $published /MIR /R:1 /W:1 /NFL /NDL /NJH /NJS /NP
+$syncOutput = & robocopy.exe $built $published /MIR /XD Validation /XF '*.log' /R:1 /W:1 /NFL /NDL /NJH /NJS /NP
 if ($LASTEXITCODE -ge 8) { throw ('Unable to publish completed build: ' + ($syncOutput -join [Environment]::NewLine)) }
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'Docs\QuickStart.zh-CN.txt') -Destination (Join-Path $published 'README.txt') -Force
 Write-Output (Join-Path $PSScriptRoot 'Builds\Windows\CheckInPlease.exe')

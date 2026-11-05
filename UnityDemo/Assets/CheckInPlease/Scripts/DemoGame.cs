@@ -20,7 +20,7 @@ namespace CheckInPlease
         Vector2 journalScroll;
         readonly HashSet<string> selected=new HashSet<string>();
         AudioSource ambience;
-        bool smoke;
+        bool smoke, floorSmoke;
         bool navigationPassed = true;
         bool visualsPassed = true, saveRoundtripPassed = true;
         bool artPassed = true;
@@ -29,16 +29,17 @@ namespace CheckInPlease
         void Awake()
         {
             Application.targetFrameRate=60;Application.runInBackground=true;
-            smoke=Environment.GetCommandLineArgs().Contains("-demoSmokeTest");
+            floorSmoke=Environment.GetCommandLineArgs().Contains("-floorSmokeTest")||Environment.GetCommandLineArgs().Contains("-hotelSmokeTest");
+            smoke=floorSmoke||Environment.GetCommandLineArgs().Contains("-demoSmokeTest");
             if(smoke)Application.logMessageReceived+=RecordError;
             font=Resources.Load<Font>("HotelFont");
             if(font==null)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},24);
             game=new GameModel();world=gameObject.AddComponent<WorldView>();world.Setup(font);world.Build("lobby",game);
             MakeAudio();
-            if(smoke)StartCoroutine(SmokeTest());
+            if(floorSmoke)StartCoroutine(FloorSmokeTest());else if(smoke)StartCoroutine(SmokeTest());
         }
         void RecordError(string message,string stack,LogType type)
-        {if(type==LogType.Exception||type==LogType.Error||type==LogType.Assert)runtimeErrors.Add(message);}
+        {if(type==LogType.Exception||type==LogType.Error||type==LogType.Assert)runtimeErrors.Add(message);if(smoke&&type==LogType.Exception)Application.Quit(1);}
         void OnDestroy(){if(smoke)Application.logMessageReceived-=RecordError;}
         void MakeAudio()
         {
@@ -50,17 +51,24 @@ namespace CheckInPlease
         }
         void Update()
         {
-            world.Tick(modal!="");
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(!smoke&&Input.GetKeyDown(KeyCode.Escape))
             {
                 if(modal=="")modal="pause";
                 else if(modal=="pause"||modal=="review"||modal=="item"||modal=="journal"||modal=="help"||modal=="dossier"||modal=="rooms")LeaveModal();
             }
-            if(Input.GetKeyDown(KeyCode.J) && modal=="")modal="journal";
+            if(!smoke&&Input.GetKeyDown(KeyCode.J) && modal=="")modal="journal";
+            Vector2 movement=smoke?validationMovement:Application.isFocused?new Vector2(
+                (Input.GetKey(KeyCode.D)?1:0)-(Input.GetKey(KeyCode.A)?1:0),
+                (Input.GetKey(KeyCode.W)?1:0)-(Input.GetKey(KeyCode.S)?1:0)):Vector2.zero;
+            bool wasManual=world.ManualMoving;
+            world.Tick(modal!="",movement);
+            if(smoke)singleFloorPassed&=world.VisibleFloorCount==1;
+            else if(wasManual&&!world.ManualMoving)Save();
         }
         void Say(string message) {toast=message;toastUntil=Time.unscaledTime+6;}
         void Save()
         {
+            world.StoreLocation(game.State);
             if(smoke)return;
             try
             {
@@ -78,14 +86,13 @@ namespace CheckInPlease
                 var s=JsonUtility.FromJson<GameState>(File.ReadAllText(SavePath));
                 if(s==null||s.version!=1||s.guests==null||s.guests.Count!=9||s.day<1||s.day>3)
                     throw new InvalidDataException("存档格式不匹配");
-                game=new GameModel(s);world.Build("lobby",game);RestoreModal();
+                game=new GameModel(s);world.Build("saved",game);RestoreModal();
             }
             catch(Exception e){Say("无法读取存档："+e.Message);}
         }
         void RestoreModal()
         {
             modal=game.State.phase==Shift.Morning?"brief":game.State.phase==Shift.Finished?"ending":"";
-            if(game.State.phase==Shift.Audit)world.Build("office",game);
         }
         void LeaveModal() {modal=game.State.phase==Shift.Finished?"ending":game.State.phase==Shift.Morning?"menu":"";}
         void NewGame()
@@ -94,53 +101,89 @@ namespace CheckInPlease
         {Say(game.StartDay());world.Build("lobby",game);modal=game.State.phase==Shift.Finished?"ending":game.State.news.Count>0?"dispatch":"";Save();}
         void Visit(string area)
         {
-            if(area!="lobby" && area!="office" && game.State.phase!=Shift.Search)
-            {Say("住客仍在房间里。宵禁点名后才能搜查。");return;}
-            if(int.TryParse(area,out int n)&&game.InRoom(n)==null){Say(n+" 房目前无人入住。");return;}
-            modal="";world.Build(area,game);
+            if(world.IsTravelling){Say("正在沿楼梯前往目标楼层。");return;}
+            int room=int.TryParse(area,out int parsed)&&HotelLayout.IsRoom(parsed)?parsed:0;
+            int floor=room==0?1:HotelLayout.RoomFloor(room);modal="";
+            world.NavigateToFloor(floor,()=>
+            {
+                if(room!=0)world.SelectRoom(room);
+                Vector3 destination=room!=0?world.DoorApproach(room):area=="office"?WorldView.ComputerApproach:WorldView.ReceptionApproach;
+                if(!world.WalkTo(destination,Save))Say("通路受阻，请先打开房门。");
+            });
+        }
+        void TravelToFloor(int floor)
+        {
+            modal="";if(!world.NavigateToFloor(floor,Save))Say("正在前往楼层，请稍候。");
         }
         void Act(string action)
         {
             if(action=="review")
             {
+                if(!world.AtReception){Say("请走到一楼前台审查来客。");return;}
                 if(game.State.phase!=Shift.Reception){Say("当前不在接待时段。");return;}
                 if(game.Current==null){Say("今天的来客已经处理完毕，可以开始夜班。");return;}
-                toast="";comparison="";roomChoice=Enumerable.Range(201,3).FirstOrDefault(n=>game.InRoom(n)==null);modal="review";
+                toast="";comparison="";roomChoice=HotelLayout.Rooms.FirstOrDefault(n=>game.InRoom(n)==null);modal="review";
             }
             else if(action=="dossier")
             {
+                if(!world.AtComputer){Say("请到一楼办公室的电脑前办理举报。");return;}
                 if(game.State.phase==Shift.Search){Say(game.BeginAudit());Save();}
                 if(game.State.phase!=Shift.Audit){Say("档案处置在夜间审计时进行。");return;}
                 toast="";selected.Clear();subject=game.State.clues.FirstOrDefault(c=>CanUse(c))?.guestId??"";modal="dossier";
             }
+            else if(action.StartsWith("stairs")&&int.TryParse(action.Substring(6),out int floor))TravelToFloor(floor);
+            else if(action.StartsWith("room")&&int.TryParse(action.Substring(4),out int selectedRoom))world.SelectRoom(selectedRoom);
             else if(action.StartsWith("search"))
             {
                 if(!int.TryParse(world.Area,out int n))return;
+                if(world.IsHotelFloor)
+                {
+                    var spot=world.spots.FirstOrDefault(s=>s.action==action);
+                    if(spot==null||!world.SpotVisible(spot)){Say("当前看不到这件物品。");return;}
+                    if(Vector3.Distance(world.PlayerPosition,spot.approach)>.8f){Say("请先打开房门，走近物品再搜查。");return;}
+                }
                 inspecting=game.FindClue(n,action=="search0"?0:1,out var error);
                 if(inspecting==null){Say(error);return;}
                 toast="";flipped=false;modal="item";Save();
             }
-            else if(action=="rooms")modal="rooms";
+            else if(action=="rooms")Visit("201");
             else Visit(action);
         }
         static bool CanUse(Clue c) {return c.disposition==Disposition.Unresolved||c.disposition==Disposition.Withheld;}
         void Decision(bool admit)
-        {Say(game.Decide(admit,roomChoice));comparison="";modal="";Save();world.Build("lobby",game);}
+        {Say(game.Decide(admit,roomChoice));comparison="";modal="";world.RefreshResidents();Save();}
         void Night()
-        {Say(game.BeginNight());modal="";world.Build("lobby",game);Save();}
-        void Audit()
-        {Say(game.BeginAudit());Visit("office");Act("dossier");Save();}
-        void EndDay()
-        {Say(game.EndDay());Save();world.Build("lobby",game);RestoreModal();}
-        void Resolve(Disposition d)
-        {Say(game.Resolve(subject,d,selected));selected.RemoveWhere(id=>!game.State.clues.Any(c=>c.id==id&&CanUse(c)));Save();}
-        IEnumerator Capture(string name)
+        {Say(game.BeginNight());modal="";world.RefreshResidents();Save();}
+        void FloorDoor()
         {
-            artPassed &= world.ArtReady && world.ReachableHotspots==world.spots.Count;
-            float expectedHeight=world.Area=="lobby"?160:world.Area=="office"?245:295;
-            artPassed &= Mathf.Abs(world.CharacterHeightPixels-expectedHeight)<1;
+            if(game.State.phase!=Shift.Search){Say("宵禁点名后才能打开客房门。");return;}
+            int room=world.SelectedRoom;
+            world.WalkTo(world.DoorApproach(room),()=>{world.SelectRoom(room);world.ToggleDoor();Save();});
+        }
+        void FloorCamera(int change)
+        {
+            if((change==0||change==1)&&game.State.phase!=Shift.Search){Say("宵禁点名后才能安装、拆除或移动摄像头。");return;}
+            world.ChangeCamera(change);Save();
+        }
+        void Audit()
+        {
+            if(world.IsTravelling)return;
+            if(game.State.phase!=Shift.Search&&game.State.phase!=Shift.Audit){Say("夜间搜查后，可在办公室电脑上举报住户。");return;}
+            modal="";world.NavigateToFloor(1,()=>world.WalkTo(WorldView.ComputerApproach,()=>{Act("dossier");Save();}));
+        }
+        void EndDay()
+        {Say(game.EndDay());world.Build("lobby",game);Save();RestoreModal();}
+        void Resolve(Disposition d)
+        {
+            if(!world.AtComputer){Say("请在办公室电脑前提交。");return;}
+            Say(game.Resolve(subject,d,selected));selected.RemoveWhere(id=>!game.State.clues.Any(c=>c.id==id&&CanUse(c)));Save();
+        }
+        IEnumerator Capture(string name,float settle=.8f)
+        {
+            artPassed &= world.ArtReady && world.CheckHotspotReachability();
+            artPassed &= world.CharacterHeightPixels>45&&world.CharacterHeightPixels<90;
             Debug.Log("ART_SCALE "+world.Area+" keeperHeight="+world.CharacterHeightPixels.ToString("F1")+"px reachable="+world.ReachableHotspots+"/"+world.spots.Count);
-            yield return new WaitForSeconds(.8f);yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(settle);yield return new WaitForEndOfFrame();
             var folder=Path.Combine(Application.dataPath,"..","Validation");Directory.CreateDirectory(folder);
             var frame=ScreenCapture.CaptureScreenshotAsTexture();
             if(frame==null){visualsPassed=false;yield break;}
@@ -157,35 +200,27 @@ namespace CheckInPlease
             for(int d=1;d<=3;d++)
             {
                 StartDay();modal="";
-                if(d==1)
-                {
-                    bool reached=false;world.WalkTo(world.spots.First(s=>s.action=="review").approach,()=>reached=true);
-                    float deadline=Time.realtimeSinceStartup+12;
-                    while(!reached&&Time.realtimeSinceStartup<deadline)yield return null;
-                    navigationPassed &= reached;
-                    yield return Capture("02-lobby");
-                }
+                yield return WalkDuringTest(WorldView.ReceptionApproach);
+                if(d==1)yield return Capture("02-lobby");
                 while(game.Current!=null)
                 {
                     Act("review");if(d==1&&game.Current.id=="A-017")yield return Capture("03-review");
-                    bool admit=game.Violation(game.Current)=="";Decision(admit);
+                    bool admit=game.Violation(game.Current)=="";
+                    roomChoice=game.Today.Any(g=>g.decision==CheckInPlease.Decision.Admitted)?301:201;Decision(admit);
                 }
                 Night();var occupied=game.Today.Where(g=>g.decision==CheckInPlease.Decision.Admitted).ToArray();
                 foreach(var g in occupied.Take(2))
                 {
-                    Visit(g.room.ToString());
-                    if(d==1)
-                    {
-                        bool reached=false;world.WalkTo(world.spots.First(s=>s.action=="search0").approach,()=>reached=true);
-                        float deadline=Time.realtimeSinceStartup+12;
-                        while(!reached&&Time.realtimeSinceStartup<deadline)yield return null;
-                        navigationPassed &= reached;
-                        yield return Capture("04-room-"+g.room);
-                    }
+                    yield return TravelDuringTest(g.room.ToString());
+                    world.SelectedObservation.doorOpen=true;
+                    yield return WalkDuringTest(world.spots.First(s=>s.action=="search0").approach);
+                    if(d==1)yield return Capture("04-room-"+g.room);
                     Act("search0");if(d==1)yield return Capture("05-inspection-"+g.room);modal="";
+                    yield return WalkDuringTest(world.spots.First(s=>s.action=="search1").approach);
                     Act("search1");modal="";
                 }
-                Audit();
+                Audit();yield return WaitForMovement();
+                navigationPassed &= world.AtComputer && modal=="dossier";
                 if(d==1)
                 {
                     modal="";yield return Capture("06-office");modal="dossier";

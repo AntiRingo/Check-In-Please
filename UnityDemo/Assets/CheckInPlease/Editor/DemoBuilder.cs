@@ -17,7 +17,7 @@ public static class DemoBuilder
         EditorSceneManager.SaveScene(scene,"Assets/CheckInPlease/Scenes/Hotel.unity");
         EditorBuildSettings.scenes=new[]{new EditorBuildSettingsScene("Assets/CheckInPlease/Scenes/Hotel.unity",true)};
         PlayerSettings.companyName="Northern District";PlayerSettings.productName="Check In Please";
-        PlayerSettings.bundleVersion="0.2.0";PlayerSettings.defaultScreenWidth=1600;PlayerSettings.defaultScreenHeight=900;
+        PlayerSettings.bundleVersion="0.4.1";PlayerSettings.defaultScreenWidth=1600;PlayerSettings.defaultScreenHeight=900;
         PlayerSettings.fullScreenMode=FullScreenMode.Windowed;PlayerSettings.resizableWindow=true;
         PlayerSettings.runInBackground=true;PlayerSettings.colorSpace=ColorSpace.Linear;
         PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);
@@ -50,7 +50,7 @@ public static class DemoBuilder
                 target=BuildTarget.StandaloneWindows64,options=BuildOptions.None });
             Debug.Log("BUILD_RESULT "+report.summary.result+" bytes="+report.summary.totalSize);
             if(report.summary.result!=BuildResult.Succeeded)throw new Exception("Build failed: "+report.summary.result);
-            File.WriteAllText(Path.Combine(output,"build-success.json"),"{\"version\":\"0.2.0\",\"unity\":\""+Application.unityVersion+"\",\"bytes\":"+report.summary.totalSize+"}");
+            File.WriteAllText(Path.Combine(output,"build-success.json"),"{\"version\":\"0.4.1\",\"unity\":\""+Application.unityVersion+"\",\"bytes\":"+report.summary.totalSize+"}");
             if(Application.isBatchMode)EditorApplication.Exit(0);
         }
         catch(Exception e){Debug.LogException(e);if(Application.isBatchMode)EditorApplication.Exit(1);else throw;}

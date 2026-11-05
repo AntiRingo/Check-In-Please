@@ -56,7 +56,7 @@
             "statement": "不要为我安排临街的房间。广播总是吵得人无法入睡。",
             "day": 1,
             "expires": 3,
-            "room": 202,
+            "room": 301,
             "portrait": 0,
             "workPermit": true,
             "visitor": false,
@@ -250,12 +250,12 @@
         "第 1 日 · 缴纳营业支出 20；消耗配给 2。",
         "第 1 日 · 伊莲娜 入住 201，房费 +14。",
         "第 1 日 · 拒绝 维克托 入住。",
-        "第 1 日 · 帕维尔 入住 202，房费 +14。",
+        "第 1 日 · 帕维尔 入住 301，房费 +14。",
         "第 1 日 · 宵禁开始。住客前往统一点名，搜查机会为 4 次。",
         "第 1 日 · 在 201 的书桌抽屉记录了“配给申请回执”。",
         "第 1 日 · 在 201 的行李夹层记录了“未寄出的信”。",
-        "第 1 日 · 在 202 的书桌抽屉记录了“工作便笺”。",
-        "第 1 日 · 在 202 的行李夹层记录了“夹层照片”。",
+        "第 1 日 · 在 301 的书桌抽屉记录了“工作便笺”。",
+        "第 1 日 · 在 301 的行李夹层记录了“夹层照片”。",
         "第 1 日 · 线索已封存，可以在之后的夜晚重新处理。",
         "第 1 日 · 线索已封存，可以在之后的夜晚重新处理。",
         "第 2 日 · 缴纳营业支出 20；消耗配给 2。",
@@ -267,5 +267,58 @@
         "第 2 日 · 在 201 的行李夹层记录了“藏起的接线图”。",
         "第 2 日 · 档案已提交。配给 +3，信任 +1。后续将在次日送达。"
     ],
-    "news": []
+    "news": [],
+    "rooms": [
+        {
+            "room": 201,
+            "mount": 0,
+            "cameraInstalled": true,
+            "doorOpen": true,
+            "yaw": 135.0,
+            "fieldOfView": 60.0
+        },
+        {
+            "room": 202,
+            "mount": 0,
+            "cameraInstalled": false,
+            "doorOpen": false,
+            "yaw": 135.0,
+            "fieldOfView": 60.0
+        },
+        {
+            "room": 203,
+            "mount": 0,
+            "cameraInstalled": false,
+            "doorOpen": false,
+            "yaw": 135.0,
+            "fieldOfView": 60.0
+        },
+        {
+            "room": 301,
+            "mount": 0,
+            "cameraInstalled": false,
+            "doorOpen": true,
+            "yaw": 135.0,
+            "fieldOfView": 60.0
+        },
+        {
+            "room": 302,
+            "mount": 0,
+            "cameraInstalled": false,
+            "doorOpen": false,
+            "yaw": 135.0,
+            "fieldOfView": 60.0
+        },
+        {
+            "room": 303,
+            "mount": 0,
+            "cameraInstalled": false,
+            "doorOpen": false,
+            "yaw": 135.0,
+            "fieldOfView": 60.0
+        }
+    ],
+    "keeperFloor": 1,
+    "keeperX": -1.2000000476837159,
+    "keeperZ": -1.7999999523162842
 }

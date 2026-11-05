@@ -11,21 +11,19 @@ namespace CheckInPlease
         public Vector3 point,approach;
         public Hotspot(string l,string a,Vector3 p,Vector3 goal){label=l;action=a;point=p;approach=goal;}
     }
-    // Painted environments with real-time characters. Art, UI and walk masks share a 1600x900 canvas.
-    public sealed class WorldView : MonoBehaviour
+    // One three-storey hotel, viewed through a fixed side-overhead camera. UI uses a 1600x900 canvas.
+    public sealed partial class WorldView : MonoBehaviour
     {
         public readonly List<Hotspot> spots=new List<Hotspot>();
         readonly Queue<Vector3> path=new Queue<Vector3>();
-        readonly List<Vector2[]> blocked=new List<Vector2[]>();
-        readonly Dictionary<string,Texture2D> backgrounds=new Dictionary<string,Texture2D>();
         readonly RenderTexture[] portraits=new RenderTexture[3];
-        Vector2[] walkMask;
         Transform roomRoot,actor,legA,legB,body;
         Camera view;
-        Material black,cloth,paper,iron,plateMat,shadowMat;
+        Material black,cloth,paper,iron,shadowMat;
         Action arrived;
         public string Area {get;private set;}
-        public bool Walking {get{return path.Count>0;}}
+        public bool Walking {get{return ManualMoving||path.Count>0||IsTravelling;}}
+        public bool ManualMoving {get;private set;}
         public bool ArtReady {get;private set;}
         public int ReachableHotspots {get;private set;}
         public float CharacterHeightPixels {get;private set;}
@@ -43,12 +41,6 @@ namespace CheckInPlease
             view.backgroundColor=C("#0b1011");view.clearFlags=CameraClearFlags.SolidColor;
             view.transform.position=new Vector3(10,15,-21);view.transform.LookAt(Vector3.zero);
             view.cullingMask=~(1<<30);cameraObject.AddComponent<AudioListener>();FrameCamera();
-            var quad=GameObject.CreatePrimitive(PrimitiveType.Quad);quad.name="Painted environment plate";
-            Destroy(quad.GetComponent<Collider>());quad.transform.SetParent(view.transform,false);
-            quad.transform.localPosition=new Vector3(0,0,70);quad.transform.localScale=new Vector3(22.4f,12.6f,1);
-            plateMat=new Material(Resources.Load<Shader>("HotelPlate"));quad.GetComponent<Renderer>().sharedMaterial=plateMat;
-            foreach(var key in new[]{"Lobby","GuestRoom","Office"})
-            {var tex=Resources.Load<Texture2D>("Art/"+key);if(tex==null)throw new InvalidOperationException("Missing environment: "+key);backgrounds.Add(key,tex);}
             ArtReady=true;
             RenderSettings.ambientMode=AmbientMode.Flat;RenderSettings.ambientLight=C("#a5adab");RenderSettings.fog=false;
             var lightObject=new GameObject("Northern character light");lightObject.transform.SetParent(transform);
@@ -67,57 +59,14 @@ namespace CheckInPlease
             else{float h=actual/target;view.rect=new Rect(0,(1-h)/2,1,h);}
         }
         public Texture PortraitTexture(int variant){return portraits[Mathf.Clamp(variant,0,2)];}
-        public Texture Background {get{return plateMat.mainTexture;}}
         Vector3 At(float x,float y)
-        {var ray=view.ViewportPointToRay(new Vector3(x/1600,1-y/900,0));new Plane(Vector3.up,Vector3.zero).Raycast(ray,out float d);return ray.GetPoint(d);}
+        {var ray=view.ViewportPointToRay(new Vector3(x/1600,1-y/900,0));new Plane(Vector3.up,new Vector3(0,HotelLayout.Height(CurrentFloor),0)).Raycast(ray,out float d);return ray.GetPoint(d);}
         public Vector2 Project(Vector3 p)
         {var v=view.WorldToViewportPoint(p);return new Vector2(v.x*1600,(1-v.y)*900);}
-        static Vector2[] Poly(params float[] xy)
-        {var p=new Vector2[xy.Length/2];for(int i=0;i<p.Length;i++)p[i]=new Vector2(xy[i*2],xy[i*2+1]);return p;}
-        static bool Inside(Vector2 p,Vector2[] polygon)
-        {
-            bool inside=false;
-            for(int i=0,j=polygon.Length-1;i<polygon.Length;j=i++)
-            {var a=polygon[i];var b=polygon[j];if(((a.y>p.y)!=(b.y>p.y))&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)inside=!inside;}
-            return inside;
-        }
-        bool Clear(Vector2 p)
-        {if(!Inside(p,walkMask))return false;foreach(var b in blocked)if(Inside(p,b))return false;return true;}
-        void Spot(string label,string action,float x,float y,float ax,float ay)
-        {spots.Add(new Hotspot(label,action,At(x,y),At(ax,ay)));}
-        float ScaleForHeight(float pixels)
-        {float height=Mathf.Abs(Project(Vector3.up*1.89f).y-Project(Vector3.zero).y);return pixels/height;}
         public void Build(string area,GameModel game)
         {
-            if(roomRoot!=null){roomRoot.gameObject.SetActive(false);Destroy(roomRoot.gameObject);}
-            roomRoot=new GameObject("Scene: "+area).transform;roomRoot.SetParent(transform);
-            Area=area;spots.Clear();path.Clear();blocked.Clear();arrived=null;
-            plateMat.mainTexture=backgrounds[area=="lobby"?"Lobby":area=="office"?"Office":"GuestRoom"];
-            Vector2 start;
-            if(area=="lobby")
-            {
-                walkMask=Poly(465,495,570,455,1080,555,1160,490,1490,500,1530,570,1370,635,1280,600,1190,712,970,765,930,860,490,860,505,655);
-                Spot("前台 · 审查住客","review",930,385,800,600);Spot("办公室","office",610,310,550,500);Spot("客房走廊","rooms",1465,390,1390,555);
-                start=new Vector2(700,740);
-                if(game.Current!=null&&game.State.phase==Shift.Reception)
-                {Person(At(1070,635),game.Current.portrait,false,roomRoot,ScaleForHeight(178));blocked.Add(Poly(1020,612,1120,612,1120,665,1020,665));}
-            }
-            else if(area=="office")
-            {
-                walkMask=Poly(320,590,430,530,460,565,1030,625,1100,590,1230,605,1270,555,1480,585,1400,855,390,850,300,790);
-                Spot("整理档案 / 举报","dossier",790,443,800,700);Spot("返回大厅","lobby",285,682,395,760);start=new Vector2(600,760);
-            }
-            else
-            {
-                walkMask=Poly(390,610,500,585,540,660,780,690,805,650,990,610,1055,650,1000,715,995,825,1160,855,1080,880,425,880);
-                Spot("书桌 · 搜查","search0",825,385,635,735);Spot("行李 · 搜查","search1",1110,760,940,805);Spot("返回大厅","lobby",305,690,465,800);
-                start=new Vector2(570,800);
-            }
-            // Each background has its own camera distance. Match the keeper to furniture, not screen percentage globally.
-            float desiredHeight=area=="lobby"?160:area=="office"?245:295;
-            actor=Person(At(start.x,start.y),0,true,roomRoot,ScaleForHeight(desiredHeight));actor.rotation=Quaternion.Euler(0,-20,0);
-            CharacterHeightPixels=Mathf.Abs(Project(actor.position+Vector3.up*1.89f*actor.localScale.y).y-Project(actor.position).y);
-            ReachableHotspots=0;foreach(var spot in spots)if(FindPath(actor.position,spot.approach)!=null)ReachableHotspots++;
+            if(buildingRoot!=null){buildingRoot.gameObject.SetActive(false);Destroy(buildingRoot.gameObject);}
+            ReleaseFloor();path.Clear();arrived=null;ManualMoving=false;spots.Clear();BuildHotel(area,game);
         }
         GameObject Primitive(string name,PrimitiveType type,Vector3 p,Vector3 size,Material m,Transform parent)
         {
@@ -187,39 +136,62 @@ namespace CheckInPlease
             }
             camera.targetTexture=null;
         }
-        const int Columns=80,Rows=45;
-        Vector2 Cell(int index){return new Vector2(index%Columns*20+10,index/Columns*20+10);}
-        int Nearest(Vector2 p)
-        {int best=-1;float distance=float.MaxValue;for(int i=0;i<Columns*Rows;i++)if(Clear(Cell(i))){float d=(Cell(i)-p).sqrMagnitude;if(d<distance){best=i;distance=d;}}return best;}
-        List<Vector3> FindPath(Vector3 from,Vector3 to)
+        List<Vector3> FindPath(Vector3 from,Vector3 to){return FloorPath(from,to);}
+        public bool WalkTo(Vector3 destination,Action onArrival=null)
         {
-            int start=Nearest(Project(from)),goal=Nearest(Project(to));if(start<0||goal<0)return null;
-            var previous=new int[Columns*Rows];for(int i=0;i<previous.Length;i++)previous[i]=-1;
-            var queue=new Queue<int>();queue.Enqueue(start);previous[start]=start;
-            while(queue.Count>0&&previous[goal]<0)
-            {
-                int v=queue.Dequeue();foreach(int delta in new[]{-Columns,Columns,-1,1})
-                {int n=v+delta;if(n<0||n>=previous.Length||Math.Abs(n%Columns-v%Columns)>1||previous[n]>=0||!Clear(Cell(n)))continue;previous[n]=v;queue.Enqueue(n);}
-            }
-            if(previous[goal]<0)return null;
-            var result=new List<Vector3>();for(int n=goal;n!=start;n=previous[n]){var p=Cell(n);result.Add(At(p.x,p.y));}result.Reverse();return result;
-        }
-        public void WalkTo(Vector3 destination,Action onArrival=null)
-        {
-            var route=FindPath(actor.position,destination);if(route==null)return;path.Clear();foreach(var p in route)path.Enqueue(p);arrived=onArrival;
+            if(Climbing)return false;
+            var route=FindPath(actor.position,destination);if(route==null)return false;
+            path.Clear();foreach(var p in route)path.Enqueue(p);arrived=onArrival;
             if(path.Count==0){var callback=arrived;arrived=null;callback?.Invoke();}
+            return true;
         }
-        public void GroundClick(Vector2 canvas){if(Clear(canvas))WalkTo(At(canvas.x,canvas.y));}
-        public void Tick(bool paused)
+        public void GroundClick(Vector2 canvas)
         {
-            FrameCamera();if(actor==null||paused)return;
-            if(path.Count==0){actor.rotation=Quaternion.Slerp(actor.rotation,Quaternion.Euler(0,-20,0),Time.deltaTime*5);return;}
-            var target=path.Peek();var direction=target-actor.position;actor.position=Vector3.MoveTowards(actor.position,target,3.5f*Time.deltaTime);
-            if(direction.sqrMagnitude>.001f)actor.rotation=Quaternion.Slerp(actor.rotation,Quaternion.LookRotation(-direction),Time.deltaTime*12);
-            float swing=Mathf.Sin(Time.time*12);legA.localRotation=Quaternion.Euler(swing*17,0,0);legB.localRotation=Quaternion.Euler(-swing*17,0,0);body.localPosition=Vector3.up*Mathf.Abs(swing)*.018f;
-            if((target-actor.position).sqrMagnitude<.002f)
-            {path.Dequeue();if(path.Count==0){legA.localRotation=legB.localRotation=Quaternion.identity;body.localPosition=Vector3.zero;var callback=arrived;arrived=null;callback?.Invoke();}}
+            if(IsTravelling)return;
+            var p=At(canvas.x,canvas.y);if(FloorClear(p))WalkTo(p);
         }
-        void OnDestroy(){foreach(var rt in portraits)if(rt!=null){rt.Release();Destroy(rt);}}
+        void AnimateWalking(Vector3 direction)
+        {
+            var facing=new Vector3(-direction.x,0,-direction.z);
+            if(facing.sqrMagnitude>.001f)actor.rotation=Quaternion.Slerp(actor.rotation,Quaternion.LookRotation(facing),Time.deltaTime*12);
+            float swing=Mathf.Sin(Time.time*12);legA.localRotation=Quaternion.Euler(swing*17,0,0);legB.localRotation=Quaternion.Euler(-swing*17,0,0);body.localPosition=Vector3.up*Mathf.Abs(swing)*.018f;
+        }
+        void RestPose(){legA.localRotation=legB.localRotation=Quaternion.identity;body.localPosition=Vector3.zero;}
+        void MoveByKeyboard(Vector2 input)
+        {
+            // Use camera-relative ground axes, so W always moves toward the top of the picture.
+            var right=Vector3.ProjectOnPlane(view.transform.right,Vector3.up).normalized;
+            var forward=Vector3.ProjectOnPlane(view.transform.forward,Vector3.up).normalized;
+            input=Vector2.ClampMagnitude(input,1);
+            var delta=(right*input.x+forward*input.y)*(3.5f*Mathf.Min(Time.deltaTime,.1f));
+            var start=actor.position;
+            // Sweep small steps through the same walkable geometry used by mouse navigation.
+            int steps=Mathf.Max(1,Mathf.CeilToInt(delta.magnitude/.06f));var step=delta/steps;
+            for(int i=0;i<steps;i++)
+            {
+                var next=actor.position+step;
+                if(FloorClear(next)){actor.position=next;continue;}
+                next=actor.position+new Vector3(step.x,0,0);if(FloorClear(next))actor.position=next;
+                next=actor.position+new Vector3(0,0,step.z);if(FloorClear(next))actor.position=next;
+            }
+            ManualMoving=(actor.position-start).sqrMagnitude>.000001f;
+            if(ManualMoving)AnimateWalking(actor.position-start);else RestPose();
+        }
+        public void Tick(bool paused,Vector2 movement=default(Vector2))
+        {
+            ManualMoving=false;
+            FrameCamera();TickFloor();UpdateHotelCamera();if(actor==null)return;
+            if(paused){RestPose();return;}
+            if(movement.sqrMagnitude>.001f&&!Climbing)
+            {
+                path.Clear();arrived=null;CancelFloorTravel();MoveByKeyboard(movement);return;
+            }
+            if(path.Count==0){RestPose();actor.rotation=Quaternion.Slerp(actor.rotation,Quaternion.Euler(0,-20,0),Time.deltaTime*5);return;}
+            var target=path.Peek();var direction=target-actor.position;actor.position=Vector3.MoveTowards(actor.position,target,3.5f*Time.deltaTime);
+            AnimateWalking(direction);
+            if((target-actor.position).sqrMagnitude<.002f)
+            {path.Dequeue();if(path.Count==0){RestPose();var callback=arrived;arrived=null;callback?.Invoke();}}
+        }
+        void OnDestroy(){ReleaseFloor();foreach(var rt in portraits)if(rt!=null){rt.Release();Destroy(rt);}}
     }
 }

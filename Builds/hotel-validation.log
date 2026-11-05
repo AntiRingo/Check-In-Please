@@ -1,0 +1,70 @@
+Mono path[0] = 'C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/Managed'
+Mono config path = 'C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/MonoBleedingEdge/etc'
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.28f1 (8f082d2fe476)
+[Subsystems] Discovering subsystems at path C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/UnitySubsystems
+[D3D12 Device Filter] Vendor Name: Intel
+[D3D12 Device Filter] Device Name: Intel(R) HD Graphics 630
+[D3D12 Device Filter] Driver Version: 31.0.101.2115
+[D3D12 Device Filter] Feature Level: 12.1
+[D3D12 Device Filter] Graphics Memory: 4039 MB
+[D3D12 Device Filter] Processor Count: 4
+[D3D12 Device Filter] Device Type: Integrated
+[D3D12 Device Filter] D3D12 API denied by user filter: {"Processor Count Comparator": Less Than Or Equal To"Processor Count": "4", "Device Type:": Do Not Care}
+GfxDevice: creating device client; kGfxThreadingModeClientWorkerJobs
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 630 (ID=0x5912)
+    Vendor:   Intel
+    VRAM:     4039 MB
+    Driver:   31.0.101.2115
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.205 seconds
+- Finished resetting the current domain, in  0.005 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+UnloadTime: 7.909700 ms
+KEYBOARD_CHECK PASS screen direction (0.00, 1.00)
+KEYBOARD_CHECK PASS screen direction (0.00, -1.00)
+KEYBOARD_CHECK PASS screen direction (-1.00, 0.00)
+KEYBOARD_CHECK PASS screen direction (1.00, 0.00)
+KEYBOARD_CHECK PASS diagonal speed equals straight speed
+KEYBOARD_CHECK PASS modal blocks movement
+KEYBOARD_CHECK PASS keyboard cancels mouse path and pending interaction
+HOTEL_TRAVEL 1 -> 3
+KEYBOARD_CHECK PASS keyboard cancels approach to stairs
+KEYBOARD_CHECK PASS cannot leave floor edge
+KEYBOARD_CHECK PASS reception furniture blocks movement
+KEYBOARD_CHECK PASS office wall blocks movement
+ART_SCALE lobby keeperHeight=57.8px reachable=3/3
+ART_SCALE lobby keeperHeight=57.8px reachable=3/3
+HOTEL_TRAVEL 1 -> 3
+KEYBOARD_CHECK PASS stair flight remains automatic
+ART_SCALE lobby keeperHeight=57.8px reachable=0/3
+ART_SCALE 301 keeperHeight=57.8px reachable=4/6
+ART_SCALE 301 keeperHeight=57.8px reachable=4/6
+HOTEL_BLACK_ROOM 0
+ART_SCALE 301 keeperHeight=57.8px reachable=4/6
+HOTEL_TRAVEL 3 -> 3
+KEYBOARD_CHECK PASS closed guest door blocks keyboard movement
+ART_SCALE 302 keeperHeight=57.8px reachable=6/6
+HOTEL_TRAVEL 3 -> 2
+ART_SCALE 203 keeperHeight=57.8px reachable=5/7
+HOTEL_TRAVEL 2 -> 1
+ART_SCALE office keeperHeight=57.8px reachable=3/3
+ART_SCALE office keeperHeight=57.8px reachable=3/3
+HOTEL_SMOKE_TEST PASS
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
