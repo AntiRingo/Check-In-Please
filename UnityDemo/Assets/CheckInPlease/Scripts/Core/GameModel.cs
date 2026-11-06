@@ -40,6 +40,9 @@ namespace CheckInPlease
         public List<RoomObservation> rooms = new List<RoomObservation>();
         public int keeperFloor = 1;
         public float keeperX = -1.2f, keeperZ = -1.8f;
+        public float keeperY;
+        public bool keeperOnStairs;
+        public int keeperLayout;
     }
 
     // Pure C# rules: UI, saves and automated tests all use this same model.
@@ -62,8 +65,20 @@ namespace CheckInPlease
                 observation.Normalize();
             }
             if(State.keeperFloor<1||State.keeperFloor>3)State.keeperFloor=1;
-            if(float.IsNaN(State.keeperX)||float.IsInfinity(State.keeperX)||Math.Abs(State.keeperX)>14)State.keeperX=-1.2f;
-            if(float.IsNaN(State.keeperZ)||float.IsInfinity(State.keeperZ)||State.keeperZ< -3.2f||State.keeperZ>6.5f)State.keeperZ=-1.8f;
+            if(State.keeperLayout<2)
+            {
+                if(State.keeperOnStairs||State.keeperX< -9.42f)State.keeperX+=HotelLayout.StairOffset;
+                else if(State.keeperFloor>1)
+                {
+                    State.keeperX*=SuiteLayout.Width/6.4f;
+                    if(State.keeperZ>0)State.keeperZ*=SuiteLayout.Depth/6.6f;
+                }
+                State.keeperLayout=2;
+            }
+            if(float.IsNaN(State.keeperX)||float.IsInfinity(State.keeperX)||State.keeperX<HotelLayout.West-.1f||State.keeperX>HotelLayout.HalfWidth)State.keeperX=-1.2f;
+            if(float.IsNaN(State.keeperZ)||float.IsInfinity(State.keeperZ)||State.keeperZ<HotelLayout.Front||State.keeperZ>SuiteLayout.Depth)State.keeperZ=-1.8f;
+            if(float.IsNaN(State.keeperY)||float.IsInfinity(State.keeperY)||State.keeperY<0||State.keeperY>HotelLayout.Height(3))
+            {State.keeperY=HotelLayout.Height(State.keeperFloor);State.keeperOnStairs=false;}
         }
         public RoomObservation Observation(int room) { return State.rooms.Find(r => r != null && r.room == room); }
         static Guest G(int day, string id, string name, string job, string purpose, string permit,

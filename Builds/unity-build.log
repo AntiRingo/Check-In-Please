@@ -1,13 +1,13 @@
-VBCSCompilerServerWatchdog: watching VBCSCompiler (PID 24208)
+VBCSCompilerServerWatchdog: watching VBCSCompiler (PID 21700)
 Built from '6000.3/respin/6000.3.28f1-21f78c3e21d1' branch; Version is '6000.3.28f1 (8f082d2fe476) revision 9373741'; Using compiler version '194234433'; Build Type 'Release'
-[Licensing::Module] Trying to connect to existing licensing client channel...
 OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'zh' Physical Memory: 8078 MB
+[Licensing::Module] Trying to connect to existing licensing client channel...
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-11-05T08:39:44Z
+Date: 2026-11-06T08:13:46Z
 [Licensing::IpcConnector] Channel LicenseClient-Administrator doesn't exist
-[Licensing::Module] Successfully launched the LicensingClient (PId: 24104)
+[Licensing::Module] Successfully launched the LicensingClient (PId: 4956)
 
 COMMAND LINE ARGUMENTS:
 F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Unity.exe
@@ -57,35 +57,39 @@ F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
     "memorysetup-temp-allocator-size-cloud-worker=32768"
-Player connection [25504]  Target information:
+Player connection [15444]  Target information:
 
-Player connection [25504]  * "[IP] 192.168.1.105 [Port] 55504 [Flags] 2 [Guid] 3906008872 [EditorId] 3906008872 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15444]  * "[IP] 192.168.1.105 [Port] 55504 [Flags] 2 [Guid] 2006766901 [EditorId] 2006766901 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25504]  * "[IP] 172.24.128.1 [Port] 55504 [Flags] 2 [Guid] 3906008872 [EditorId] 3906008872 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15444]  * "[IP] 172.24.128.1 [Port] 55504 [Flags] 2 [Guid] 2006766901 [EditorId] 2006766901 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25504]  * "[IP] 192.168.47.1 [Port] 55504 [Flags] 2 [Guid] 3906008872 [EditorId] 3906008872 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15444]  * "[IP] 192.168.47.1 [Port] 55504 [Flags] 2 [Guid] 2006766901 [EditorId] 2006766901 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25504]  * "[IP] 192.168.127.1 [Port] 55504 [Flags] 2 [Guid] 3906008872 [EditorId] 3906008872 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15444]  * "[IP] 192.168.127.1 [Port] 55504 [Flags] 2 [Guid] 2006766901 [EditorId] 2006766901 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25504]  * "[IP] 172.19.0.1 [Port] 55504 [Flags] 2 [Guid] 3906008872 [EditorId] 3906008872 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [15444]  * "[IP] 172.27.144.1 [Port] 55504 [Flags] 2 [Guid] 2006766901 [EditorId] 2006766901 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25504] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [25504] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [15444]  * "[IP] 172.19.0.1 [Port] 55504 [Flags] 2 [Guid] 2006766901 [EditorId] 2006766901 [Version] 1048832 [Id] WindowsEditor(7,SD-YJH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [15444] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [15444] Host joined alternative multi-casting on [225.0.0.222:34997]...
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Administrator" at "2026-11-05T08:39:45.5978592Z"
-[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 24104, path: "F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Administrator" at "2026-11-06T08:13:46.9086028Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 4956, path: "F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
 [Licensing::Module] LicensingClient has failed validation; ignoring
+[Package Manager] Connected to IPC stream "Upm-12868" after 0.8 seconds.
+[Licensing::Module] Licensing is not yet initialized.
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.19.0+4cc3dda
-  Session Id:              b84deef7a7974cad9ddeae54ec50744b
-  Correlation Id:          1f7295bd780551030fccb57ce2d59885
-  External correlation Id: 6603893288287504688
+  Session Id:              6775070359374cad9f02dbbc04d649b2
+  Correlation Id:          682a8640b0a4f938a478249b307804f1
+  External correlation Id: 6875987394657283141
   Machine Id:              BRlb6bHdQ4RYDbgBYfla3fgf9qE=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-Administrator" (connect: 0.86s, validation: 0.06s, handshake: 0.19s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Administrator-notifications" at "2026-11-05T08:39:45.8465811Z"
-[Licensing::Module] Connected to LicensingClient (PId: 24104, launch time: 0.01, total connection time: 1.11s)
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-Administrator" (connect: 0.60s, validation: 0.19s, handshake: 0.24s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-Administrator-notifications" at "2026-11-06T08:13:47.337524Z"
+[Licensing::Module] Connected to LicensingClient (PId: 4956, launch time: 0.00, total connection time: 1.03s)
 [Licensing::Module] Error: Access token is unavailable; failed to update
 [Licensing::Client] Successfully resolved entitlement details
 [Licensing::Module] License group:
@@ -95,8 +99,8 @@ Input System module state changed to: Initialized.
   Expiration: Unlimited
 [Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
 [Licensing::Client] Successfully resolved entitlement details
-[Licensing::Module] Licensing Background thread has ended after 1.31s
-[Package Manager] Connected to IPC stream "Upm-7772" after 1.8 seconds.
+[Licensing::Module] Licensing Background thread has ended after 1.07s
+[Licensing::Module] Licensing is initialized (took 0.08s).
 [Licensing::Client] Successfully resolved entitlement details
 Library Redirect Path: Library/
 [Physics::Module] Selected backend.
@@ -121,7 +125,7 @@ Initialize mono
 Mono path[0] = 'F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/Managed'
 Mono path[1] = 'F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56772
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56868
 Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
 Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
 ImportWorker Server TCP listen port: 0
@@ -129,43 +133,43 @@ AcceleratorClientConnectionCallback - disconnected - :0
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.048589 seconds.
-- Loaded All Assemblies, in  1.994 seconds
+Registered in 0.001401 seconds.
+- Loaded All Assemblies, in  0.611 seconds
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.255 seconds
-Domain Reload Profiling: 4273ms
-	BeginReloadAssembly (1009ms)
+- Finished resetting the current domain, in  1.019 seconds
+Domain Reload Profiling: 1630ms
+	BeginReloadAssembly (203ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (79ms)
-	RebuildCommonClasses (159ms)
-	RebuildNativeTypeToScriptingClass (28ms)
-	initialDomainReloadingComplete (207ms)
-	LoadAllAssembliesAndSetupDomain (589ms)
-		LoadAssemblies (863ms)
+		CreateAndSetChildDomain (4ms)
+	RebuildCommonClasses (56ms)
+	RebuildNativeTypeToScriptingClass (22ms)
+	initialDomainReloadingComplete (66ms)
+	LoadAllAssembliesAndSetupDomain (263ms)
+		LoadAssemblies (198ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (569ms)
-			TypeCache.Refresh (541ms)
-				TypeCache.ScanAssembly (465ms)
+		AnalyzeDomain (259ms)
+			TypeCache.Refresh (257ms)
+				TypeCache.ScanAssembly (237ms)
 			BuildScriptInfoCaches (0ms)
-			ResolveRequiredComponents (26ms)
-	FinalizeReload (2281ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (1020ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (2156ms)
+		SetupLoadedEditorAssemblies (962ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (158ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (191ms)
-			ProcessInitializeOnLoadAttributes (459ms)
-			ProcessInitializeOnLoadMethodAttributes (1328ms)
+			InitializePlatformSupportModulesInManaged (64ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (135ms)
+			ProcessInitializeOnLoadAttributes (205ms)
+			ProcessInitializeOnLoadMethodAttributes (553ms)
 			AfterProcessingInitializeOnLoad (0ms)
-			EditorAssembliesLoaded (13ms)
+			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (0ms)
 [Licensing::Client] Successfully resolved entitlement details
@@ -182,222 +186,187 @@ Application.AssetDatabase Initial Refresh Start
     com.unity.modules.ui@1.0.0 (location: F:\CheckInPleaseTools\BuildWorkspace\UnityDemo\Library\PackageCache\com.unity.modules.ui)
     com.unity.modules.imageconversion@1.0.0 (location: F:\CheckInPleaseTools\BuildWorkspace\UnityDemo\Library\PackageCache\com.unity.modules.imageconversion)
 [Subsystems] No new subsystems found in resolved package list.
-[Package Manager] Done registering packages in 0.02 seconds
+[Package Manager] Done registering packages in 0.00 seconds
 [ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
 Starting: F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
 WorkingDir: F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
 DisplayProgressbar: Compiling Scripts
-ExitCode: 0 Duration: 5s611ms
-[149/155    4s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+ExitCode: 0 Duration: 2s79ms
+[149/155    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
 [150/155    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
 [151/155    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
-[152/155    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[152/155    0s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
 [153/155    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
 [154/155    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
-*** Tundra build success (5.48 seconds), 6 items updated, 155 evaluated
+*** Tundra build success (2.02 seconds), 6 items updated, 155 evaluated
 Total cache size 0
-Total cache size after purge 0, took 00:00:00.0092192
-AssetDatabase: script compilation time: 7.521066s
+Total cache size after purge 0, took 00:00:00.0076182
+AssetDatabase: script compilation time: 2.703617s
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.539 seconds
-Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '2a4d617b34668957e0ba75c4655cf760') in 0.2584886 seconds
+- Loaded All Assemblies, in  0.410 seconds
+Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: 'f99ef7b150443d6a2e311ccbb26ff4f1') in 0.0259048 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Native extension for WindowsStandalone target not found
 ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.784 seconds
-Domain Reload Profiling: 1323ms
-	BeginReloadAssembly (408ms)
+- Finished resetting the current domain, in  0.642 seconds
+Domain Reload Profiling: 1052ms
+	BeginReloadAssembly (295ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (70ms)
+		DisableScriptedObjects (27ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (67ms)
-	RebuildCommonClasses (56ms)
-	RebuildNativeTypeToScriptingClass (24ms)
-	initialDomainReloadingComplete (29ms)
-	LoadAllAssembliesAndSetupDomain (21ms)
-		LoadAssemblies (176ms)
+		CreateAndSetChildDomain (47ms)
+	RebuildCommonClasses (52ms)
+	RebuildNativeTypeToScriptingClass (19ms)
+	initialDomainReloadingComplete (28ms)
+	LoadAllAssembliesAndSetupDomain (16ms)
+		LoadAssemblies (163ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (14ms)
+		AnalyzeDomain (12ms)
 			TypeCache.Refresh (7ms)
 				TypeCache.ScanAssembly (1ms)
 			BuildScriptInfoCaches (1ms)
-			ResolveRequiredComponents (1ms)
-	FinalizeReload (785ms)
+			ResolveRequiredComponents (2ms)
+	FinalizeReload (643ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (553ms)
+		SetupLoadedEditorAssemblies (440ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (36ms)
-			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (183ms)
-			ProcessInitializeOnLoadAttributes (220ms)
-			ProcessInitializeOnLoadMethodAttributes (104ms)
-			AfterProcessingInitializeOnLoad (4ms)
-			EditorAssembliesLoaded (1ms)
+			InitializePlatformSupportModulesInManaged (30ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (152ms)
+			ProcessInitializeOnLoadAttributes (162ms)
+			ProcessInitializeOnLoadMethodAttributes (86ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (42ms)
-Start importing Assets/CheckInPlease/Scenes/Hotel.unity using Guid(463d4d22f80b4e83898bb76a9e58dd02) (DefaultImporter) -> (artifact id: 'fb485f427df584a9fcec1b19fe798e53') in 0.037954 seconds
-Start importing Assets/CheckInPlease/Resources/Art/RoomSurfaces.png using Guid(36520794613d4aa291d01a06328ad80d) (TextureImporter) -> (artifact id: 'e23e0874d3e488c2728a75ba8885040e') in 0.5110514 seconds
+		AwakeInstancesAfterBackupRestoration (35ms)
+Start importing Assets/CheckInPlease/Scenes/Hotel.unity using Guid(463d4d22f80b4e83898bb76a9e58dd02) (DefaultImporter) -> (artifact id: 'fb485f427df584a9fcec1b19fe798e53') in 0.0007752 seconds
+Start importing Assets/CheckInPlease/Resources/Art/RoomSurfaces.png using Guid(36520794613d4aa291d01a06328ad80d) (TextureImporter) -> (artifact id: 'e23e0874d3e488c2728a75ba8885040e') in 0.3501151 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=a5b224494484a01468b5306706a271ca): Total: 10.534 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+Asset Pipeline Refresh (id=74a693ff5b7a27341972ab4619dd9675): Total: 4.415 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
 	Summary:
 		Imports: total=3 (actual=3, local cache=0, cache server=0)
-		Asset DB Process Time: managed=87 ms, native=1948 ms
-		Asset DB Callback time: managed=159 ms, native=271 ms
-		Scripting: domain reloads=1, domain reload time=539 ms, compile time=7524 ms, other=4 ms
-		Project Asset Count: scripts=42, non-scripts=20
-		Asset File Changes: new=0, changed=9, moved=0, deleted=0
+		Asset DB Process Time: managed=10 ms, native=1147 ms
+		Asset DB Callback time: managed=108 ms, native=28 ms
+		Scripting: domain reloads=1, domain reload time=410 ms, compile time=2706 ms, other=3 ms
+		Project Asset Count: scripts=42, non-scripts=21
+		Asset File Changes: new=0, changed=6, moved=0, deleted=0
 		Scan Filter Count: 0
-	InvokeCustomDependenciesCallbacks: 0.006ms
-	InvokePackagesCallback: 77.879ms
-	ApplyChangesToAssetFolders: 0.225ms
-	Scan: 158.113ms
-	OnSourceAssetsModified: 1.655ms
-	CategorizeAssetsWithTransientArtifact: 4.528ms
-	ProcessAssetsWithTransientArtifactChanges: 33.704ms
-	CategorizeAssets: 1.220ms
-	ImportOutOfDateAssets: 1632.651ms (-6737.718ms without children)
-		ImportManagerImport: 818.333ms (6.235ms without children)
-			ImportInProcess: 812.057ms
-			UpdateCategorizedAssets: 0.041ms
-		CompileScripts: 7523.829ms
+	InvokeCustomDependenciesCallbacks: 0.002ms
+	InvokePackagesCallback: 19.593ms
+	ApplyChangesToAssetFolders: 0.262ms
+	Scan: 21.490ms
+	OnSourceAssetsModified: 1.040ms
+	CategorizeAssetsWithTransientArtifact: 0.177ms
+	ProcessAssetsWithTransientArtifactChanges: 0.951ms
+	CategorizeAssets: 0.635ms
+	ImportOutOfDateAssets: 1027.594ms (-2062.549ms without children)
+		ImportManagerImport: 383.652ms (6.270ms without children)
+			ImportInProcess: 377.344ms
+			UpdateCategorizedAssets: 0.038ms
+		CompileScripts: 2705.955ms
 		ReloadNativeAssets: 0.001ms
-		UnloadImportedAssets: 0.159ms
+		UnloadImportedAssets: 0.112ms
 		ReloadImportedAssets: 0.000ms
-		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.027ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.024ms
 		InitializingProgressBar: 0.007ms
 		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
-		OnDemandSchedulerStart: 28.012ms
-	PostProcessAllAssets: 335.155ms
-	Hotreload: 20.132ms
-	GatherAllCurrentPrimaryArtifactRevisions: 0.220ms
-	UnloadStreamsBegin: 1.825ms
-	PersistCurrentRevisions: 0.059ms
-	UnloadStreamsEnd: 0.004ms
+		OnDemandSchedulerStart: 0.391ms
+	PostProcessAllAssets: 118.772ms
+	Hotreload: 0.701ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.009ms
+	UnloadStreamsBegin: 1.879ms
+	PersistCurrentRevisions: 0.030ms
+	UnloadStreamsEnd: 0.002ms
 	GenerateScriptTypeHashes: 0.001ms
-	Untracked: 8266.698ms
+	Untracked: 3221.581ms
 
 Application.AssetDatabase Initial Refresh End
-Scanning for USB devices : 0.348ms
+Scanning for USB devices : 0.282ms
 Initializing Unity extensions:
 [MODES] ModeService[none].Initialize
 [MODES] ModeService[none].LoadModes
 [MODES] Loading mode Default (0) for mode-current-id-Check In Please
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 24 unused Assets / (500.9 KB). Loaded Objects now: 652.
-Memory consumption went from 89.1 MB to 88.6 MB.
-Total: 283.921500 ms (FindLiveObjects: 0.053900 ms CreateObjectMapping: 0.005400 ms MarkObjects: 283.585100 ms  DeleteObjects: 0.275200 ms)
+Unloading 33 unused Assets / (506.6 KB). Loaded Objects now: 662.
+Memory consumption went from 89.2 MB to 88.7 MB.
+Total: 6.344400 ms (FindLiveObjects: 0.090300 ms CreateObjectMapping: 0.012500 ms MarkObjects: 5.953000 ms  DeleteObjects: 0.286900 ms)
 
-Start importing Assets/CheckInPlease/Resources/Art/Counter.png using Guid(ab3bafbc07964e809261cb06446e2393) (TextureImporter) -> (artifact id: 'c86ef68d689f7478dd45ee3846204cd8') in 0.1097324 seconds
+Start importing Assets/CheckInPlease/Resources/Art/Counter.png using Guid(ab3bafbc07964e809261cb06446e2393) (TextureImporter) -> (artifact id: 'c86ef68d689f7478dd45ee3846204cd8') in 0.0963208 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=f97abdb8c719e334c86b68641aae047e): Total: 0.202 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Start importing Assets/CheckInPlease/Resources/Art/GuestRoom.png using Guid(113d93feb05e49d883c3956e6cbe160c) (TextureImporter) -> (artifact id: '6077720a057b2aa7adfdc01a28dbb3bb') in 0.0804206 seconds
+Asset Pipeline Refresh (id=396ec0789bdd0304c93ded65b5516a19): Total: 0.133 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/CheckInPlease/Resources/Art/GuestRoom.png using Guid(113d93feb05e49d883c3956e6cbe160c) (TextureImporter) -> (artifact id: '6077720a057b2aa7adfdc01a28dbb3bb') in 0.0858496 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=57c9dcd4d69b3144ca63a197b6106baf): Total: 0.099 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Start importing Assets/CheckInPlease/Resources/Art/Lobby.png using Guid(cc927d25eb8d4864a5129df961d43138) (TextureImporter) -> (artifact id: '049d490ae0136ca64d5d907ecf771b51') in 0.0691233 seconds
+Asset Pipeline Refresh (id=46f2034e932ff6d4d848f797b991ae1b): Total: 0.094 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/CheckInPlease/Resources/Art/Lobby.png using Guid(cc927d25eb8d4864a5129df961d43138) (TextureImporter) -> (artifact id: '049d490ae0136ca64d5d907ecf771b51') in 0.09718 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=c59f951fc33ef974f9d3f64eb4f3cc34): Total: 0.088 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Start importing Assets/CheckInPlease/Resources/Art/Office.png using Guid(b63acc3c9b8b43a2897d2a214e46a17b) (TextureImporter) -> (artifact id: 'c404b4fc3448a58a5100fc79c20cfe42') in 0.07165 seconds
+Asset Pipeline Refresh (id=ad2d555aa1b4c4543b12b8773c86f1ca): Total: 0.239 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/CheckInPlease/Resources/Art/Office.png using Guid(b63acc3c9b8b43a2897d2a214e46a17b) (TextureImporter) -> (artifact id: 'c404b4fc3448a58a5100fc79c20cfe42') in 0.0652121 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=02d1ca615ec741447a6734fcbf24f2ed): Total: 0.096 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Start importing Assets/CheckInPlease/Resources/Art/Paper.png using Guid(ed23b7d18f5f46c1b885b92749c598f9) (TextureImporter) -> (artifact id: 'e738111492fe22c0540ad19343ef161f') in 0.0734438 seconds
+Asset Pipeline Refresh (id=342f45cc2b30a8149a02d512ff31e3f5): Total: 0.085 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/CheckInPlease/Resources/Art/Paper.png using Guid(ed23b7d18f5f46c1b885b92749c598f9) (TextureImporter) -> (artifact id: 'e738111492fe22c0540ad19343ef161f') in 0.0697775 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=138858c1a1d5de84e9404861f12e2bf6): Total: 0.094 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Start importing Assets/CheckInPlease/Resources/Art/RoomSurfaces.png using Guid(36520794613d4aa291d01a06328ad80d) (TextureImporter) -> (artifact id: '5e16b31ebae3f9026e1275664bb8618b') in 0.2321271 seconds
+Asset Pipeline Refresh (id=1096c102b3e3f534e8c5ad445ef446a7): Total: 0.079 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/CheckInPlease/Resources/Art/RoomSurfaces.png using Guid(36520794613d4aa291d01a06328ad80d) (TextureImporter) -> (artifact id: '5e16b31ebae3f9026e1275664bb8618b') in 0.2227093 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=8b2b5a63bfe50ff45b7aba0c13e77440): Total: 0.318 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-	Summary:
-		Imports: total=1 (actual=1, local cache=0, cache server=0)
-		Asset DB Process Time: managed=0 ms, native=315 ms
-		Asset DB Callback time: managed=1 ms, native=0 ms
-		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
-		Project Asset Count: scripts=42, non-scripts=20
-		Asset File Changes: new=0, changed=1, moved=0, deleted=0
-		Scan Filter Count: 5
-	InvokeCustomDependenciesCallbacks: 0.001ms
-	InvokePackagesCallback: 0.001ms
-	ApplyChangesToAssetFolders: 0.039ms
-	Scan: 6.393ms
-	OnSourceAssetsModified: 0.951ms
-	CategorizeAssetsWithTransientArtifact: 0.009ms
-	ProcessAssetsWithTransientArtifactChanges: 0.005ms
-	CategorizeAssets: 0.096ms
-	ImportOutOfDateAssets: 258.292ms (-22.284ms without children)
-		ImportManagerImport: 255.075ms (22.716ms without children)
-			ImportInProcess: 232.324ms
-			UpdateCategorizedAssets: 0.035ms
-		ReloadNativeAssets: 0.000ms
-		UnloadImportedAssets: 0.253ms
-		ReloadImportedAssets: 22.432ms
-		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.009ms
-		InitializingProgressBar: 0.006ms
-		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
-		OnDemandSchedulerStart: 2.801ms
-	PostProcessAllAssets: 1.051ms
-	Hotreload: 0.151ms
-	GatherAllCurrentPrimaryArtifactRevisions: 0.007ms
-	UnloadStreamsBegin: 0.027ms
-	PersistCurrentRevisions: 0.088ms
-	UnloadStreamsEnd: 0.002ms
-	Untracked: 51.190ms
-
+Asset Pipeline Refresh (id=cde67567dc1ea204b95ee7b5d41534ba): Total: 0.248 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
 Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7 unused Assets / (3.9 KB). Loaded Objects now: 652.
-Memory consumption went from 86.6 MB to 86.6 MB.
-Total: 6.320800 ms (FindLiveObjects: 0.056000 ms CreateObjectMapping: 0.005600 ms MarkObjects: 6.231000 ms  DeleteObjects: 0.026800 ms)
+Unloading 7 unused Assets / (3.9 KB). Loaded Objects now: 662.
+Memory consumption went from 86.7 MB to 86.7 MB.
+Total: 7.540400 ms (FindLiveObjects: 0.075800 ms CreateObjectMapping: 0.008600 ms MarkObjects: 7.393200 ms  DeleteObjects: 0.060000 ms)
 
-Start importing Assets/CheckInPlease/Scenes/Hotel.unity using Guid(463d4d22f80b4e83898bb76a9e58dd02) (DefaultImporter) -> (artifact id: 'b6653c91de4c5ab6e349a7aa31227bbb') in 0.0019674 seconds
+Start importing Assets/CheckInPlease/Scenes/Hotel.unity using Guid(463d4d22f80b4e83898bb76a9e58dd02) (DefaultImporter) -> (artifact id: '5f1a8a4debbb24d9ff581843df512227') in 0.0010397 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=95dadd31d5662b34cbed30f7db420948): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '2a4d617b34668957e0ba75c4655cf760') in 0.0012201 seconds
+Asset Pipeline Refresh (id=5155d668cc2be4348af186c97e66c5b6): Total: 0.010 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: 'd908e67b0098d861d2bc21e942c184b1') in 0.0023035 seconds
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Asset Pipeline Refresh (id=349921cf0bcfe534f885a1611820d7e3): Total: 0.007 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.27 seconds
+Asset Pipeline Refresh (id=f4405871a1b975346b1a8f38d3e6a3ed): Total: 0.008 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.15 seconds
 Starting: F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aESkipCompile.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssembliesAndTypeDB
 WorkingDir: F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
-ExitCode: 0 Duration: 1s626ms
-[2/3        1s] BuildPlayerDataGenerator Library/BuildPlayerData/Editor/TypeDb-All.json
-*** Tundra build success (1.24 seconds), 1 items updated, 3 evaluated
+ExitCode: 0 Duration: 0s636ms
+[2/3        0s] BuildPlayerDataGenerator Library/BuildPlayerData/Editor/TypeDb-All.json
+*** Tundra build success (0.58 seconds), 1 items updated, 3 evaluated
 Total cache size 0
-Total cache size after purge 0, took 00:00:00.0043932
-Asset Pipeline Refresh (id=e8fff394ecac3654f9ea5cf2f83c0db9): Total: 0.006 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Total cache size after purge 0, took 00:00:00.0054035
+Asset Pipeline Refresh (id=ad55b4f6e1a24e9429f6604966b43bd2): Total: 0.005 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
 [ScriptCompilation] Requested script compilation because: Recompiling scripts for player build.
 BuildPlayer: start building target 19
 Starting: F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aP.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssembliesAndTypeDB
 WorkingDir: F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
 Total cache size 0
-Total cache size after purge 0, took 00:00:00.0010123
-ExitCode: 0 Duration: 1s531ms
+Total cache size after purge 0, took 00:00:00.0008032
+ExitCode: 0 Duration: 1s55ms
 [56/61      0s] Csc Library/Bee/artifacts/1900b0aP.dag/Assembly-CSharp.dll (+2 others)
 [57/61      0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Assembly-CSharp.pdb
 [58/61      0s] CopyFiles Library/Bee/PlayerScriptAssemblies/Assembly-CSharp.dll
 [60/61      0s] BuildPlayerDataGenerator Library/BuildPlayerData/Player/RuntimeInitializeOnLoads.json (+1 other)
-*** Tundra build success (1.48 seconds), 4 items updated, 61 evaluated
+*** Tundra build success (1.01 seconds), 4 items updated, 61 evaluated
 Rebuilding Data files because Assets/CheckInPlease/Scenes/Hotel.unity is dirty (hash)
 Opening scene 'Assets/CheckInPlease/Scenes/Hotel.unity'
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
 Loaded scene 'Assets/CheckInPlease/Scenes/Hotel.unity'
-	Deserialize:            30.418 ms
-	Integration:            44.068 ms
-	Integration of assets:  0.007 ms
-	Thread Wait Time:       0.017 ms
-	Total Operation Time:   74.510 ms
-Unloading 33 unused Assets / (1.1 MB). Loaded Objects now: 667.
-Memory consumption went from 91.3 MB to 90.2 MB.
-Total: 9.815800 ms (FindLiveObjects: 0.147100 ms CreateObjectMapping: 0.014200 ms MarkObjects: 8.927200 ms  DeleteObjects: 0.725400 ms)
+	Deserialize:            0.496 ms
+	Integration:            6.419 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.013 ms
+	Total Operation Time:   6.929 ms
+Unloading 33 unused Assets / (1.1 MB). Loaded Objects now: 677.
+Memory consumption went from 91.5 MB to 90.4 MB.
+Total: 8.663800 ms (FindLiveObjects: 0.099900 ms CreateObjectMapping: 0.014600 ms MarkObjects: 7.826500 ms  DeleteObjects: 0.721600 ms)
 
-Created GICache directory at C:/Users/Administrator/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.021s, timestamps: [28.469 - 28.490]
+Created GICache directory at C:/Users/Administrator/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.013s, timestamps: [11.455 - 11.468]
 
 
 Mono dependencies included in the build
@@ -687,20 +656,41 @@ Dependency assembly - System.Windows.Forms.dll
 Dependency assembly - System.Json.Microsoft.dll
 
 Unloading 8 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 34 unused Assets / (1.1 MB). Loaded Objects now: 671.
-Memory consumption went from 132.9 MB to 131.8 MB.
-Total: 8.314300 ms (FindLiveObjects: 0.068000 ms CreateObjectMapping: 0.007600 ms MarkObjects: 7.298800 ms  DeleteObjects: 0.936500 ms)
+Unloading 34 unused Assets / (1.1 MB). Loaded Objects now: 681.
+Memory consumption went from 133.0 MB to 131.9 MB.
+Total: 7.963300 ms (FindLiveObjects: 0.072500 ms CreateObjectMapping: 0.010400 ms MarkObjects: 7.337100 ms  DeleteObjects: 0.541800 ms)
 
 Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 0 unused Assets / (0 B). Loaded Objects now: 671.
-Memory consumption went from 131.8 MB to 131.8 MB.
-Total: 6.521000 ms (FindLiveObjects: 0.074700 ms CreateObjectMapping: 0.009800 ms MarkObjects: 6.429100 ms  DeleteObjects: 0.005400 ms)
+Unloading 0 unused Assets / (0 B). Loaded Objects now: 681.
+Memory consumption went from 131.9 MB to 131.9 MB.
+Total: 6.455400 ms (FindLiveObjects: 0.065800 ms CreateObjectMapping: 0.005200 ms MarkObjects: 6.377400 ms  DeleteObjects: 0.005500 ms)
 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 186 unused Assets / (150.3 MB). Loaded Objects now: 671.
-Memory consumption went from 282.2 MB to 131.9 MB.
-Total: 32.929500 ms (FindLiveObjects: 0.095600 ms CreateObjectMapping: 0.092100 ms MarkObjects: 6.449900 ms  DeleteObjects: 26.289700 ms)
+Unloading 186 unused Assets / (150.3 MB). Loaded Objects now: 681.
+Memory consumption went from 282.3 MB to 132.0 MB.
+Total: 35.346500 ms (FindLiveObjects: 0.060600 ms CreateObjectMapping: 0.012500 ms MarkObjects: 5.706300 ms  DeleteObjects: 29.565400 ms)
 
+Compiling shader "CheckInPlease/StoreyTransition"
+  Pass "" (vp)
+    Target graphics API: d3d11
+    Full variant space:         1
+    After settings filtering:   1
+    After built-in stripping:   1
+    After scriptable stripping: 1
+    Processed in 0.01 seconds
+  Pass "" (fp)
+    Target graphics API: d3d11
+    Full variant space:         1
+    After settings filtering:   1
+    After built-in stripping:   1
+    After scriptable stripping: 1
+    Processed in 0.00 seconds
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+Serialized binary data for shader CheckInPlease/StoreyTransition in 0.00s
+    d3d11 (total internal programs: 2, unique: 2)
 Compiling shader "CheckInPlease/Matte"
   Pass "FORWARD" (vp)
     Target graphics API: d3d11
@@ -708,7 +698,7 @@ Compiling shader "CheckInPlease/Matte"
     After settings filtering:   664
     After built-in stripping:   8
     After scriptable stripping: 8
-    Processed in 0.02 seconds
+    Processed in 0.00 seconds
   Pass "FORWARD" (fp)
     Target graphics API: d3d11
     Full variant space:         504
@@ -744,17 +734,17 @@ Compiling shader "CheckInPlease/Matte"
     After built-in stripping:   4
     After scriptable stripping: 4
     Processed in 0.00 seconds
-  Pass FORWARD (vp, d3d11) finished in 0.06 seconds. Local cache hits 8 (0.19s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (vp, d3d11) finished in 0.03 seconds. Local cache hits 8 (0.10s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass FORWARD (fp, d3d11) finished in 0.08 seconds. Local cache hits 4 (0.11s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (fp, d3d11) finished in 0.05 seconds. Local cache hits 4 (0.09s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass FORWARD (vp, d3d11) finished in 0.09 seconds. Local cache hits 13 (0.10s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (vp, d3d11) finished in 0.06 seconds. Local cache hits 13 (0.07s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass FORWARD (fp, d3d11) finished in 0.10 seconds. Local cache hits 13 (0.26s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (fp, d3d11) finished in 0.04 seconds. Local cache hits 13 (0.14s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass DEFERRED (vp, d3d11) finished in 0.10 seconds. Local cache hits 4 (0.09s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass DEFERRED (vp, d3d11) finished in 0.07 seconds. Local cache hits 4 (0.05s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass DEFERRED (fp, d3d11) finished in 0.03 seconds. Local cache hits 4 (0.03s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass DEFERRED (fp, d3d11) finished in 0.04 seconds. Local cache hits 4 (0.06s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader CheckInPlease/Matte in 0.00s
     d3d11 (total internal programs: 46, unique: 46)
@@ -773,9 +763,9 @@ Compiling shader "CheckInPlease/PaintedPlate"
     After built-in stripping:   1
     After scriptable stripping: 1
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader CheckInPlease/PaintedPlate in 0.00s
     d3d11 (total internal programs: 2, unique: 2)
@@ -815,9 +805,9 @@ Compiling shader "CheckInPlease/WorldText"
     After built-in stripping:   1
     After scriptable stripping: 1
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.03 seconds. Local cache hits 1 (0.03s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader CheckInPlease/WorldText in 0.00s
     d3d11 (total internal programs: 2, unique: 2)
@@ -857,9 +847,9 @@ Compiling shader "Skybox/Procedural"
     After built-in stripping:   3
     After scriptable stripping: 3
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 3 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 3 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.03 seconds. Local cache hits 3 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 3 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Skybox/Procedural in 0.00s
     d3d11 (total internal programs: 6, unique: 6)
@@ -906,7 +896,7 @@ Compiling shader "Legacy Shaders/VertexLit"
     After built-in stripping:   2
     After scriptable stripping: 2
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 3 (0.03s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.03 seconds. Local cache hits 3 (0.09s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 3 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
@@ -965,15 +955,15 @@ Compiling shader "Legacy Shaders/Diffuse"
     Processed in 0.00 seconds
   Pass FORWARD (vp, d3d11) finished in 0.01 seconds. Local cache hits 8 (0.05s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass FORWARD (fp, d3d11) finished in 0.03 seconds. Local cache hits 4 (0.06s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (fp, d3d11) finished in 0.04 seconds. Local cache hits 4 (0.07s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass FORWARD (vp, d3d11) finished in 0.03 seconds. Local cache hits 5 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (vp, d3d11) finished in 0.04 seconds. Local cache hits 5 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass FORWARD (fp, d3d11) finished in 0.02 seconds. Local cache hits 5 (0.03s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass FORWARD (fp, d3d11) finished in 0.02 seconds. Local cache hits 5 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass DEFERRED (vp, d3d11) finished in 0.03 seconds. Local cache hits 4 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass DEFERRED (vp, d3d11) finished in 0.04 seconds. Local cache hits 4 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass DEFERRED (fp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass DEFERRED (fp, d3d11) finished in 0.02 seconds. Local cache hits 4 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Legacy Shaders/Diffuse in 0.00s
     d3d11 (total internal programs: 30, unique: 30)
@@ -1145,39 +1135,39 @@ Compiling shader "Hidden/Internal-DepthNormalsTexture"
     Prepared data for serialisation in 0.00s
   Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
   Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
-    Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (fp, d3d11) finished in 0.03 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+    Prepared data for serialisation in 0.00s
+  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Hidden/Internal-DepthNormalsTexture in 0.00s
     d3d11 (total internal programs: 20, unique: 17)
@@ -1244,15 +1234,15 @@ Compiling shader "Hidden/Internal-ScreenSpaceShadows"
     Prepared data for serialisation in 0.00s
   Pass  (vp, d3d11) finished in 0.04 seconds. Local cache hits 4 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.03 seconds. Local cache hits 4 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.04 seconds. Local cache hits 4 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.05 seconds. Local cache hits 4 (0.06s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.03 seconds. Local cache hits 4 (0.03s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.02 seconds. Local cache hits 4 (0.04s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.03s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Hidden/Internal-ScreenSpaceShadows in 0.00s
     d3d11 (total internal programs: 32, unique: 20)
@@ -1313,7 +1303,7 @@ Compiling shader "Hidden/BlitCopyDepth"
     After built-in stripping:   1
     After scriptable stripping: 1
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
@@ -1369,11 +1359,11 @@ Compiling shader "Hidden/Internal-DeferredShading"
     After built-in stripping:   1
     After scriptable stripping: 1
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.06 seconds. Local cache hits 26 (0.22s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.13 seconds. Local cache hits 26 (0.49s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.07 seconds. Local cache hits 26 (0.26s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.08 seconds. Local cache hits 26 (0.26s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.07 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.08 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
@@ -1408,13 +1398,13 @@ Compiling shader "Hidden/Internal-DeferredReflections"
     After built-in stripping:   2
     After scriptable stripping: 2
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.02 seconds. Local cache hits 2 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 2 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 2 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Hidden/Internal-DeferredReflections in 0.00s
     d3d11 (total internal programs: 6, unique: 6)
@@ -1765,13 +1755,13 @@ Compiling shader "Hidden/Internal-GUITexture"
     After built-in stripping:   1
     After scriptable stripping: 1
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Hidden/Internal-GUITexture in 0.00s
     d3d11 (total internal programs: 4, unique: 2)
@@ -1804,11 +1794,11 @@ Compiling shader "Hidden/Internal-GUITextureBlit"
     After built-in stripping:   1
     After scriptable stripping: 1
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
@@ -1907,9 +1897,9 @@ Compiling shader "Hidden/Internal-UIRDefault"
     After built-in stripping:   40
     After scriptable stripping: 40
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.11 seconds. Local cache hits 40 (0.36s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.11 seconds. Local cache hits 40 (0.41s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.10 seconds. Local cache hits 40 (0.30s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.08 seconds. Local cache hits 40 (0.29s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Hidden/Internal-UIRDefault in 0.00s
     d3d11 (total internal programs: 80, unique: 80)
@@ -1970,9 +1960,9 @@ Compiling shader "Sprites/Mask"
     After built-in stripping:   4
     After scriptable stripping: 4
     Processed in 0.00 seconds
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 4 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 4 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader Sprites/Mask in 0.00s
     d3d11 (total internal programs: 8, unique: 8)
@@ -1993,7 +1983,7 @@ Compiling shader "UI/Default"
     Processed in 0.00 seconds
   Pass Default (vp, d3d11) finished in 0.00 seconds. Local cache hits 4 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Default (fp, d3d11) finished in 0.01 seconds. Local cache hits 4 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Default (fp, d3d11) finished in 0.00 seconds. Local cache hits 4 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
 Serialized binary data for shader UI/Default in 0.00s
     d3d11 (total internal programs: 8, unique: 8)
@@ -2305,21 +2295,21 @@ Compiling shader "Hidden/Internal-ODSWorldTexture"
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass  (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass  (fp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass  (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
@@ -2554,23 +2544,23 @@ Compiling shader "Hidden/VideoDecode"
     Prepared data for serialisation in 0.00s
   Pass YCbCrA_To_RGBA (fp, d3d11) finished in 0.02 seconds. Local cache hits 2 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_RGBA_To_RGBA (vp, d3d11) finished in 0.02 seconds. Local cache hits 2 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_RGBA_To_RGBA (vp, d3d11) finished in 0.07 seconds. Local cache hits 2 (0.07s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_RGBA_To_RGBA (fp, d3d11) finished in 0.02 seconds. Local cache hits 2 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_RGBA_To_RGBA (fp, d3d11) finished in 0.07 seconds. Local cache hits 2 (0.02s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_RGBASplit_To_RGBA (vp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_RGBASplit_To_RGBA (vp, d3d11) finished in 0.06 seconds. Local cache hits 2 (0.06s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_RGBASplit_To_RGBA (fp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_RGBASplit_To_RGBA (fp, d3d11) finished in 0.07 seconds. Local cache hits 2 (0.07s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass Flip_NV12_To_RGB1 (vp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_NV12_To_RGB1 (fp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_NV12_To_RGB1 (fp, d3d11) finished in 0.00 seconds. Local cache hits 2 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_NV12_To_RGBA (vp, d3d11) finished in 0.00 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_NV12_To_RGBA (vp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_NV12_To_RGBA (fp, d3d11) finished in 0.00 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_NV12_To_RGBA (fp, d3d11) finished in 0.01 seconds. Local cache hits 2 (0.01s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
-  Pass Flip_P010_To_RGB1 (vp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
+  Pass Flip_P010_To_RGB1 (vp, d3d11) finished in 0.01 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
   Pass Flip_P010_To_RGB1 (fp, d3d11) finished in 0.00 seconds. Local cache hits 1 (0.00s CPU time), remote cache hits 0 (0.00s CPU time), compiled 0 variants (0.00s CPU time), skipped 0 variants.
     Prepared data for serialisation in 0.00s
@@ -2706,15 +2696,15 @@ SpriteAtlasDatabase::Cleanup
 Starting: F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --dagfile="Library/Bee/Player99c62157.dag" --profile="Library/Bee/backend1.traceevents" Player
 WorkingDir: F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
 DisplayProgressbar: Incremental Player Build
-ExitCode: 4 Duration: 3s468ms
+ExitCode: 4 Duration: 2s733ms
 Starting: F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\netcorerun\netcorerun.exe "F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\WinPlayerBuildProgram.exe" "F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/Bee;F:/CheckInPleaseTools/Unity/6000.3.28f1/Editor/Data/Tools/BuildPipeline" "Library/Bee/Player99c62157.dag.json" "Library/Bee/Player99c62157-inputdata.json" "Library\Bee\buildprogram0.traceevents"
 WorkingDir: F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
-ExitCode: 0 Duration: 0s996ms
+ExitCode: 0 Duration: 0s463ms
 Starting: F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --dagfile="Library/Bee/Player99c62157.dag" --dagfilejson="Library\Bee\Player99c62157.dag.json" --profile="Library/Bee/backend2.traceevents" Player
 WorkingDir: F:/CheckInPleaseTools/BuildWorkspace/UnityDemo
-ExitCode: 0 Duration: 0s110ms
+ExitCode: 0 Duration: 0s86ms
 Total cache size 0
-Total cache size after purge 0, took 00:00:00.0008097
+Total cache size after purge 0, took 00:00:00.0009475
 Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 
@@ -2725,10 +2715,10 @@ Textures               45.2 mb	 99.9%
 Meshes                 0.0 kb	 0.0% 
 Animations             0.0 kb	 0.0% 
 Sounds                 0.0 kb	 0.0% 
-Shaders                45.4 kb	 0.1% 
+Shaders                51.2 kb	 0.1% 
 Other Assets           1.4 kb	 0.0% 
 Levels                 1.1 kb	 0.0% 
-File headers           1.5 kb	 0.0% 
+File headers           1.6 kb	 0.0% 
 Total User Assets      45.2 mb	 100.0% 
 Complete build size    127.5 mb
 Used Assets and files from the Resources folder, sorted by uncompressed size:
@@ -2741,37 +2731,41 @@ Used Assets and files from the Resources folder, sorted by uncompressed size:
  2.7 mb	 2.1% Built-in Texture2D: Splash Screen Unity Logo
  519.6 kb	 0.4% Resources/unity_builtin_extra
  20.7 kb	 0.0% Assets/CheckInPlease/Resources/HotelMatte.shader
- 7.4 kb	 0.0% Assets/CheckInPlease/Resources/HotelRoom.shader
+ 9.3 kb	 0.0% Assets/CheckInPlease/Resources/HotelRoom.shader
+ 3.9 kb	 0.0% Assets/CheckInPlease/Resources/HotelStoreyBlend.shader
  3.6 kb	 0.0% Assets/CheckInPlease/Resources/HotelText.shader
  3.5 kb	 0.0% Assets/CheckInPlease/Resources/HotelPlate.shader
  3.5 kb	 0.0% Assets/CheckInPlease/Resources/HotelOverlay.shader
  0.4 kb	 0.0% Built-in Sprite: 
+ 0.1 kb	 0.0% Assets/CheckInPlease/Scripts/StoreyTransitionEffect.cs
+ 0.1 kb	 0.0% Assets/CheckInPlease/Scripts/Core/StairTransition.cs
  0.1 kb	 0.0% Assets/CheckInPlease/Scripts/Core/RoomObservation.cs
  0.1 kb	 0.0% Assets/CheckInPlease/Scripts/WorldView.cs
+ 0.1 kb	 0.0% Assets/CheckInPlease/Scripts/Core/SuiteLayout.cs
  0.1 kb	 0.0% Assets/CheckInPlease/Scripts/Core/HotelLayout.cs
  0.1 kb	 0.0% Assets/CheckInPlease/Scripts/Core/GameModel.cs
  0.1 kb	 0.0% Assets/CheckInPlease/Scripts/DemoGame.cs
 -------------------------------------------------------------------------------
 Unloading 10 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 32 unused Assets / (1.1 MB). Loaded Objects now: 679.
-Memory consumption went from 111.9 MB to 110.8 MB.
-Total: 10.187900 ms (FindLiveObjects: 0.058000 ms CreateObjectMapping: 0.009500 ms MarkObjects: 8.907900 ms  DeleteObjects: 1.209900 ms)
+Unloading 32 unused Assets / (1.1 MB). Loaded Objects now: 689.
+Memory consumption went from 112.0 MB to 110.9 MB.
+Total: 9.480100 ms (FindLiveObjects: 0.136900 ms CreateObjectMapping: 0.010700 ms MarkObjects: 8.702300 ms  DeleteObjects: 0.627800 ms)
 
 DisplayProgressNotification: Build Successful
 Build Finished, Result: Success.
-##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793868022547,"processId":7772,"steps":[{"description":"Preprocess Player","duration":14},{"description":"Prepare For Build","duration":14},{"description":"ProducePlayerScriptAssemblies","duration":3548},{"description":"Verify Build setup","duration":48},{"description":"Prepare assets for target platform","duration":11},{"description":"Prepare splash screen","duration":80},{"description":"Building scenes","duration":1112},{"description":"Build scripts DLLs","duration":18},{"description":"Build GlobalGameManagers file","duration":1347},{"description":"Writing asset files","duration":550},{"description":"Building Resources/unity_builtin_extra","duration":781},{"description":"Write data build dirty tracking information","duration":338},{"description":"Postprocess built player","duration":5007}],"duration":12868}
+##utp:{"type":"PlayerBuildInfo","version":2,"phase":"Immediate","time":1793952844402,"processId":12868,"steps":[{"description":"Preprocess Player","duration":11},{"description":"Prepare For Build","duration":13},{"description":"ProducePlayerScriptAssemblies","duration":1940},{"description":"Verify Build setup","duration":42},{"description":"Prepare assets for target platform","duration":1},{"description":"Prepare splash screen","duration":0},{"description":"Building scenes","duration":431},{"description":"Build scripts DLLs","duration":17},{"description":"Build GlobalGameManagers file","duration":1272},{"description":"Writing asset files","duration":375},{"description":"Building Resources/unity_builtin_extra","duration":855},{"description":"Write data build dirty tracking information","duration":11},{"description":"Postprocess built player","duration":3512}],"duration":8480}
 Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
 Loaded scene 'Temp/__Backupscenes/0.backup'
-	Deserialize:            6.171 ms
-	Integration:            8.134 ms
-	Integration of assets:  0.003 ms
-	Thread Wait Time:       0.034 ms
-	Total Operation Time:   14.342 ms
-Unloading 0 unused Assets / (0 B). Loaded Objects now: 675.
-Memory consumption went from 109.6 MB to 109.6 MB.
-Total: 6.729800 ms (FindLiveObjects: 0.149200 ms CreateObjectMapping: 0.008900 ms MarkObjects: 6.557200 ms  DeleteObjects: 0.011900 ms)
+	Deserialize:            0.989 ms
+	Integration:            5.488 ms
+	Integration of assets:  0.007 ms
+	Thread Wait Time:       0.041 ms
+	Total Operation Time:   6.525 ms
+Unloading 0 unused Assets / (0 B). Loaded Objects now: 685.
+Memory consumption went from 109.7 MB to 109.7 MB.
+Total: 5.895800 ms (FindLiveObjects: 0.051800 ms CreateObjectMapping: 0.004800 ms MarkObjects: 5.828800 ms  DeleteObjects: 0.008300 ms)
 
-BUILD_RESULT Succeeded bytes=133652583
+BUILD_RESULT Succeeded bytes=133694487
 UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
@@ -2794,4 +2788,4 @@ Cleanup mono
 Checking for leaked weakptr:
   Found no leaked weakptrs.
 [Package Manager] Server process was shutdown
-##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1793868027830,"processId":7772,"allocatedMemory":10034884,"memoryLabels":[{"Default":29313},{"Permanent":15236},{"NewDelete":69747},{"Thread":4230344},{"Manager":18333},{"VertexData":8},{"Geometry":816},{"Texture":160},{"Shader":79369},{"Material":24},{"GfxDevice":55880},{"Animation":392},{"Audio":3040},{"FreeType":8},{"FontEngine":736},{"Physics":1970},{"Physics2D":16},{"Serialization":616},{"Input":14984},{"JobScheduler":33024},{"TextLib":280},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1620208},{"Resource":1336},{"Renderer":3000},{"Transform":4685},{"File":3937},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":41755},{"DynamicArray":78875},{"HashMap":61228},{"Utility":2659190},{"Curl":2675},{"PoolAlloc":2056},{"AI":80},{"TypeTree":11341},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7792},{"Director":8240},{"CloudService":14824},{"WebRequest":552},{"VR":48034},{"SceneManager":504},{"Video":64},{"LazyScriptCache":32},{"Camera":17},{"Secure":2377},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":464},{"Hierarchy":608},{"CoreStats":13112},{"Identifiers":6480},{"Gui":96},{"EditorUtility":80946},{"VersionControl":4},{"Undo":947},{"AssetDatabase":242200},{"EditorGi":328},{"UnityConnect":29208},{"Upm":1896},{"AssetCompliance":64},{"DrivenProperties":72},{"LocalIPC":219},{"ProfilerEditor":9746},{"CoreBusinessMetrics":3534},{"Licensing":1264},{"AssetReference":32},{"IPCStream":32}]}
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1793952845853,"processId":12868,"allocatedMemory":10031179,"memoryLabels":[{"Default":29313},{"Permanent":15236},{"NewDelete":69747},{"Thread":4230344},{"Manager":18333},{"VertexData":8},{"Geometry":816},{"Texture":160},{"Shader":79369},{"Material":24},{"GfxDevice":55880},{"Animation":392},{"Audio":3040},{"FreeType":8},{"FontEngine":736},{"Physics":1970},{"Physics2D":16},{"Serialization":616},{"Input":14984},{"JobScheduler":33024},{"TextLib":280},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1620208},{"Resource":1336},{"Renderer":3000},{"Transform":4685},{"File":3937},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":38713},{"DynamicArray":78932},{"HashMap":61228},{"Utility":2659190},{"Curl":2675},{"PoolAlloc":2056},{"AI":80},{"TypeTree":11341},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7792},{"Director":8240},{"CloudService":14104},{"WebRequest":552},{"VR":48034},{"SceneManager":504},{"Video":64},{"LazyScriptCache":32},{"Camera":17},{"Secure":2377},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":464},{"Hierarchy":608},{"CoreStats":13112},{"Identifiers":6480},{"Gui":96},{"EditorUtility":80946},{"VersionControl":4},{"Undo":947},{"AssetDatabase":242200},{"EditorGi":328},{"UnityConnect":29208},{"Upm":1896},{"AssetCompliance":64},{"DrivenProperties":72},{"LocalIPC":219},{"ProfilerEditor":9746},{"CoreBusinessMetrics":3534},{"Licensing":1264},{"AssetReference":32},{"IPCStream":32}]}

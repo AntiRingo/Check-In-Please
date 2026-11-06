@@ -24,7 +24,8 @@ Shader "CheckInPlease/ObservedRoom"
             fixed4 _Color;
             sampler2D _SurfaceAtlas;
             float _Pattern, _RoomCenter, _Floor;
-            float4 _Camera, _Sight, _Observer;
+            float4 _Camera, _Sight, _Observer, _RoomSize;
+            float4 _Partitions[6];
             struct appdata { float4 vertex:POSITION; float3 normal:NORMAL; float2 uv:TEXCOORD0; };
             struct v2f { float4 vertex:SV_POSITION; float3 world:TEXCOORD0; float3 normal:TEXCOORD1; float2 uv:TEXCOORD2; };
             v2f vert(appdata v)
@@ -38,18 +39,36 @@ Shader "CheckInPlease/ObservedRoom"
                 float2 i=floor(p),f=frac(p); f=f*f*(3-2*f);
                 return lerp(lerp(hash(i),hash(i+float2(1,0)),f.x),lerp(hash(i+float2(0,1)),hash(i+1),f.x),f.y);
             }
+            float cross2(float2 a,float2 b){return a.x*b.y-a.y*b.x;}
+            float partitionSight(float2 origin,float2 destination)
+            {
+                origin.x-=_RoomCenter;destination.x-=_RoomCenter;
+                float2 ray=destination-origin;float visibility=1;
+                [unroll] for(int i=0;i<6;i++)
+                {
+                    float2 wall=_Partitions[i].zw-_Partitions[i].xy;
+                    float den=cross2(ray,wall);
+                    if(abs(den)<.00001)continue;
+                    float2 offset=_Partitions[i].xy-origin;
+                    float t=cross2(offset,wall)/den,u=cross2(offset,ray)/den;
+                    if(t<=.002||t>=.995)continue;
+                    float edge=max(-u,u-1)*length(wall);
+                    visibility=min(visibility,smoothstep(-.06,.22,edge));
+                }
+                return visibility;
+            }
             float cameraSight(float2 p)
             {
                 float2 delta=p-_Camera.xy; float d=length(delta);
                 float dotAngle=dot(delta/max(.001,d),float2(sin(_Camera.z),cos(_Camera.z)));
-                return _Camera.w*smoothstep(_Sight.x,_Sight.y,dotAngle)*(1-smoothstep(_Sight.z-.8,_Sight.z,d));
+                return _Camera.w*smoothstep(_Sight.x,_Sight.y,dotAngle)*(1-smoothstep(_Sight.z-.8,_Sight.z,d))*partitionSight(_Camera.xy,p);
             }
             float directSight(float2 p)
             {
                 if(abs(_Observer.z-_Floor)>.1)return 0;
                 float2 observer=_Observer.xy; float d=distance(p,observer);
-                float range=1-smoothstep(7.2,8.2,d);
-                if(abs(observer.x-_RoomCenter)<3.02 && observer.y>.18 && observer.y<6.6) return range;
+                float range=(1-smoothstep(7.2,8.2,d))*partitionSight(observer,p);
+                if(abs(observer.x-_RoomCenter)<_RoomSize.x-.18 && observer.y>.18 && observer.y<_RoomSize.y) return range;
                 if(_Sight.w<.5 || observer.y>=.18 || observer.y< -3.5 || p.y<=0) return 0;
                 float t=-observer.y/max(.001,p.y-observer.y);
                 float crossing=lerp(observer.x,p.x,t)-_RoomCenter;
@@ -97,8 +116,8 @@ Shader "CheckInPlease/ObservedRoom"
                 }
                 float lighting=.47+.45*saturate(dot(n,normalize(float3(-.45,.85,-.4))));
                 float3 color=_Color.rgb*textureShade*lighting;
-                float cx=_RoomCenter< -50 ? round(i.world.x/6.4)*6.4 : _RoomCenter;
-                float warm=exp(-distance(i.world.xz,float2(cx+1.6,5.4))*1.25)*.17;
+                float cx=_RoomCenter< -50 ? round(i.world.x/10.2)*10.2 : _RoomCenter;
+                float warm=exp(-distance(i.world.xz,float2(cx+3.25,6.4))*1.25)*.17;
                 warm+=exp(-distance(i.world.xz,float2(cx,-.6))*1.25)*.12;
                 color+=_Color.rgb*float3(1,.66,.31)*warm;
                 if(_RoomCenter> -50)

@@ -9,7 +9,9 @@ namespace CheckInPlease
     {
         public string label,action;
         public Vector3 point,approach;
-        public Hotspot(string l,string a,Vector3 p,Vector3 goal){label=l;action=a;point=p;approach=goal;}
+        public int room;
+        public string Id {get{return action+":"+room;}}
+        public Hotspot(string l,string a,Vector3 p,Vector3 goal,int roomNumber=0){label=l;action=a;point=p;approach=goal;room=roomNumber;}
     }
     // One three-storey hotel, viewed through a fixed side-overhead camera. UI uses a 1600x900 canvas.
     public sealed partial class WorldView : MonoBehaviour
@@ -28,6 +30,8 @@ namespace CheckInPlease
         public int ReachableHotspots {get;private set;}
         public float CharacterHeightPixels {get;private set;}
         public Vector3 PlayerPosition {get{return actor==null?Vector3.zero:actor.position;}}
+        public Vector3 PlayerFacing {get{return actor==null?Vector3.back:-actor.forward;}}
+        public const float InteractionRange=1.35f;
         static Color C(string h){ColorUtility.TryParseHtmlString(h,out var c);return c;}
         Material Mat(string name,string hex)
         {var m=new Material(Resources.Load<Shader>("HotelMatte"));m.name=name;m.color=C(hex);return m;}
@@ -40,7 +44,8 @@ namespace CheckInPlease
             view.orthographicSize=6.3f;view.nearClipPlane=.1f;view.farClipPlane=100;
             view.backgroundColor=C("#0b1011");view.clearFlags=CameraClearFlags.SolidColor;
             view.transform.position=new Vector3(10,15,-21);view.transform.LookAt(Vector3.zero);
-            view.cullingMask=~(1<<30);cameraObject.AddComponent<AudioListener>();FrameCamera();
+            view.cullingMask=~((1<<30)|(1<<StoreyTransitionEffect.StairwellLayer));cameraObject.AddComponent<AudioListener>();FrameCamera();
+            cameraObject.AddComponent<StoreyTransitionEffect>().Setup(this);
             ArtReady=true;
             RenderSettings.ambientMode=AmbientMode.Flat;RenderSettings.ambientLight=C("#a5adab");RenderSettings.fog=false;
             var lightObject=new GameObject("Northern character light");lightObject.transform.SetParent(transform);
@@ -59,8 +64,6 @@ namespace CheckInPlease
             else{float h=actual/target;view.rect=new Rect(0,(1-h)/2,1,h);}
         }
         public Texture PortraitTexture(int variant){return portraits[Mathf.Clamp(variant,0,2)];}
-        Vector3 At(float x,float y)
-        {var ray=view.ViewportPointToRay(new Vector3(x/1600,1-y/900,0));new Plane(Vector3.up,new Vector3(0,HotelLayout.Height(CurrentFloor),0)).Raycast(ray,out float d);return ray.GetPoint(d);}
         public Vector2 Project(Vector3 p)
         {var v=view.WorldToViewportPoint(p);return new Vector2(v.x*1600,(1-v.y)*900);}
         public void Build(string area,GameModel game)
@@ -118,7 +121,9 @@ namespace CheckInPlease
             if(player){legA=a;legB=b;body=coat;}else root.rotation=Quaternion.Euler(0,-18,0);
             var shadow=GameObject.CreatePrimitive(PrimitiveType.Quad);shadow.name="Contact shadow";Destroy(shadow.GetComponent<Collider>());
             shadow.transform.SetParent(root,false);shadow.transform.localPosition=new Vector3(0,.008f,0);shadow.transform.localRotation=Quaternion.Euler(90,0,0);shadow.transform.localScale=new Vector3(1.6f,1.2f,1);
-            shadow.GetComponent<Renderer>().sharedMaterial=shadowMat;return root;
+            shadow.GetComponent<Renderer>().sharedMaterial=shadowMat;
+            if(player)SetBranchLayer(root,StoreyTransitionEffect.PlayerLayer);
+            return root;
         }
         void CreatePortraits()
         {
@@ -136,27 +141,30 @@ namespace CheckInPlease
             }
             camera.targetTexture=null;
         }
-        List<Vector3> FindPath(Vector3 from,Vector3 to){return FloorPath(from,to);}
+        List<Vector3> FindPath(Vector3 from,Vector3 to){return HotelPath(from,to);}
         public bool WalkTo(Vector3 destination,Action onArrival=null)
         {
-            if(Climbing)return false;
             var route=FindPath(actor.position,destination);if(route==null)return false;
+            CancelFloorTravel();
             path.Clear();foreach(var p in route)path.Enqueue(p);arrived=onArrival;
             if(path.Count==0){var callback=arrived;arrived=null;callback?.Invoke();}
             return true;
         }
         public void GroundClick(Vector2 canvas)
         {
-            if(IsTravelling)return;
-            var p=At(canvas.x,canvas.y);if(FloorClear(p))WalkTo(p);
+            if(PickWalkSurface(canvas,out var point))WalkTo(point);
         }
         void AnimateWalking(Vector3 direction)
         {
             var facing=new Vector3(-direction.x,0,-direction.z);
-            if(facing.sqrMagnitude>.001f)actor.rotation=Quaternion.Slerp(actor.rotation,Quaternion.LookRotation(facing),Time.deltaTime*12);
+            if(facing.sqrMagnitude>.000001f)actor.rotation=Quaternion.LookRotation(facing);
             float swing=Mathf.Sin(Time.time*12);legA.localRotation=Quaternion.Euler(swing*17,0,0);legB.localRotation=Quaternion.Euler(-swing*17,0,0);body.localPosition=Vector3.up*Mathf.Abs(swing)*.018f;
         }
         void RestPose(){legA.localRotation=legB.localRotation=Quaternion.identity;body.localPosition=Vector3.zero;}
+        public void StopWalking()
+        {
+            path.Clear();arrived=null;ManualMoving=false;CancelFloorTravel();RestPose();
+        }
         void MoveByKeyboard(Vector2 input)
         {
             // Use camera-relative ground axes, so W always moves toward the top of the picture.
@@ -170,9 +178,9 @@ namespace CheckInPlease
             for(int i=0;i<steps;i++)
             {
                 var next=actor.position+step;
-                if(FloorClear(next)){actor.position=next;continue;}
-                next=actor.position+new Vector3(step.x,0,0);if(FloorClear(next))actor.position=next;
-                next=actor.position+new Vector3(0,0,step.z);if(FloorClear(next))actor.position=next;
+                if(StepOnWalkSurface(next,out var surface)){actor.position=surface;continue;}
+                next=actor.position+new Vector3(step.x,0,0);if(StepOnWalkSurface(next,out surface))actor.position=surface;
+                next=actor.position+new Vector3(0,0,step.z);if(StepOnWalkSurface(next,out surface))actor.position=surface;
             }
             ManualMoving=(actor.position-start).sqrMagnitude>.000001f;
             if(ManualMoving)AnimateWalking(actor.position-start);else RestPose();
@@ -180,16 +188,17 @@ namespace CheckInPlease
         public void Tick(bool paused,Vector2 movement=default(Vector2))
         {
             ManualMoving=false;
-            FrameCamera();TickFloor();UpdateHotelCamera();if(actor==null)return;
-            if(paused){RestPose();return;}
-            if(movement.sqrMagnitude>.001f&&!Climbing)
+            FrameCamera();TickFloor();if(actor==null)return;
+            if(paused){RestPose();UpdateHotelCamera();return;}
+            if(movement.sqrMagnitude>.001f)
             {
-                path.Clear();arrived=null;CancelFloorTravel();MoveByKeyboard(movement);return;
+                path.Clear();arrived=null;CancelFloorTravel();MoveByKeyboard(movement);UpdateStairPosition();UpdateHotelCamera();return;
             }
-            if(path.Count==0){RestPose();actor.rotation=Quaternion.Slerp(actor.rotation,Quaternion.Euler(0,-20,0),Time.deltaTime*5);return;}
+            if(path.Count==0){RestPose();UpdateHotelCamera();return;}
             var target=path.Peek();var direction=target-actor.position;actor.position=Vector3.MoveTowards(actor.position,target,3.5f*Time.deltaTime);
             AnimateWalking(direction);
-            if((target-actor.position).sqrMagnitude<.002f)
+            UpdateStairPosition();UpdateHotelCamera();
+            if((target-actor.position).sqrMagnitude<.000001f)
             {path.Dequeue();if(path.Count==0){RestPose();var callback=arrived;arrived=null;callback?.Invoke();}}
         }
         void OnDestroy(){ReleaseFloor();foreach(var rt in portraits)if(rt!=null){rt.Release();Destroy(rt);}}

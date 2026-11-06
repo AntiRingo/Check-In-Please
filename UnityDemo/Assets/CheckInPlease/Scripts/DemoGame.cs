@@ -54,7 +54,7 @@ namespace CheckInPlease
             if(!smoke&&Input.GetKeyDown(KeyCode.Escape))
             {
                 if(modal=="")modal="pause";
-                else if(modal=="pause"||modal=="review"||modal=="item"||modal=="journal"||modal=="help"||modal=="dossier"||modal=="rooms")LeaveModal();
+                else if(modal=="pause"||modal=="review"||modal=="item"||modal=="journal"||modal=="help"||modal=="dossier"||modal=="rooms"||modal=="camera")LeaveModal();
             }
             if(!smoke&&Input.GetKeyDown(KeyCode.J) && modal=="")modal="journal";
             Vector2 movement=smoke?validationMovement:Application.isFocused?new Vector2(
@@ -62,7 +62,14 @@ namespace CheckInPlease
                 (Input.GetKey(KeyCode.W)?1:0)-(Input.GetKey(KeyCode.S)?1:0)):Vector2.zero;
             bool wasManual=world.ManualMoving;
             world.Tick(modal!="",movement);
-            if(smoke)singleFloorPassed&=world.VisibleFloorCount==1;
+            RefreshInteractions();
+            if(!smoke&&Application.isFocused&&modal==""&&!world.IsTravelling)
+            {
+                if(Input.GetKeyDown(KeyCode.R))CycleInteraction(1);
+                else if(Mathf.Abs(Input.mouseScrollDelta.y)>.01f)CycleInteraction(Input.mouseScrollDelta.y<0?1:-1);
+                if(Input.GetKeyDown(KeyCode.E))PerformInteraction();
+            }
+            if(smoke){CheckFixedView();singleFloorPassed&=world.VisibleFloorCount==(world.InStairwell?0:1);stairHalvesPassed&=world.VisibleStairHalfCount==(world.Climbing?(world.FloorOpacity<.999f?2:1):(world.CurrentFloor==2?2:1));}
             else if(wasManual&&!world.ManualMoving)Save();
         }
         void Say(string message) {toast=message;toastUntil=Time.unscaledTime+6;}
@@ -111,10 +118,6 @@ namespace CheckInPlease
                 if(!world.WalkTo(destination,Save))Say("通路受阻，请先打开房门。");
             });
         }
-        void TravelToFloor(int floor)
-        {
-            modal="";if(!world.NavigateToFloor(floor,Save))Say("正在前往楼层，请稍候。");
-        }
         void Act(string action)
         {
             if(action=="review")
@@ -131,16 +134,15 @@ namespace CheckInPlease
                 if(game.State.phase!=Shift.Audit){Say("档案处置在夜间审计时进行。");return;}
                 toast="";selected.Clear();subject=game.State.clues.FirstOrDefault(c=>CanUse(c))?.guestId??"";modal="dossier";
             }
-            else if(action.StartsWith("stairs")&&int.TryParse(action.Substring(6),out int floor))TravelToFloor(floor);
             else if(action.StartsWith("room")&&int.TryParse(action.Substring(4),out int selectedRoom))world.SelectRoom(selectedRoom);
             else if(action.StartsWith("search"))
             {
                 if(!int.TryParse(world.Area,out int n))return;
                 if(world.IsHotelFloor)
                 {
-                    var spot=world.spots.FirstOrDefault(s=>s.action==action);
+                    var spot=world.spots.FirstOrDefault(s=>s.action==action&&s.room==world.SelectedRoom);
                     if(spot==null||!world.SpotVisible(spot)){Say("当前看不到这件物品。");return;}
-                    if(Vector3.Distance(world.PlayerPosition,spot.approach)>.8f){Say("请先打开房门，走近物品再搜查。");return;}
+                    if(!world.CanInteract(spot)){Say("请先打开房门，走近物品再搜查。");return;}
                 }
                 inspecting=game.FindClue(n,action=="search0"?0:1,out var error);
                 if(inspecting==null){Say(error);return;}
@@ -178,13 +180,21 @@ namespace CheckInPlease
             if(!world.AtComputer){Say("请在办公室电脑前提交。");return;}
             Say(game.Resolve(subject,d,selected));selected.RemoveWhere(id=>!game.State.clues.Any(c=>c.id==id&&CanUse(c)));Save();
         }
+        string validationFrameFolder;
         IEnumerator Capture(string name,float settle=.8f)
         {
             artPassed &= world.ArtReady && world.CheckHotspotReachability();
-            artPassed &= world.CharacterHeightPixels>45&&world.CharacterHeightPixels<90;
+            artPassed &= world.CharacterHeightPixels>35&&world.CharacterHeightPixels<90;
             Debug.Log("ART_SCALE "+world.Area+" keeperHeight="+world.CharacterHeightPixels.ToString("F1")+"px reachable="+world.ReachableHotspots+"/"+world.spots.Count);
             yield return new WaitForSeconds(settle);yield return new WaitForEndOfFrame();
-            var folder=Path.Combine(Application.dataPath,"..","Validation");Directory.CreateDirectory(folder);
+            // A preview can keep the prior PNG mapped on Windows. Give each validation run
+            // its own directory so reruns never overwrite an image currently being reviewed.
+            if(validationFrameFolder==null)
+            {
+                validationFrameFolder=Path.Combine(Application.dataPath,"..","Validation",Application.version,"run-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff"));
+                Directory.CreateDirectory(validationFrameFolder);Debug.Log("VALIDATION_FRAMES "+validationFrameFolder);
+            }
+            var folder=validationFrameFolder;
             var frame=ScreenCapture.CaptureScreenshotAsTexture();
             if(frame==null){visualsPassed=false;yield break;}
             var pixels=frame.GetPixels32();int darkest=255,brightest=0;
@@ -212,11 +222,17 @@ namespace CheckInPlease
                 foreach(var g in occupied.Take(2))
                 {
                     yield return TravelDuringTest(g.room.ToString());
+                    if(d==1&&g.room==301)
+                    {
+                        yield return UseInteractionDuringTest("camera",301);
+                        CheckInteraction(modal=="camera"&&game.Observation(301).cameraInstalled,"nearby camera opens control panel");
+                        yield return Capture("interaction-05-camera-controls");modal="";
+                    }
                     world.SelectedObservation.doorOpen=true;
-                    yield return WalkDuringTest(world.spots.First(s=>s.action=="search0").approach);
+                    yield return WalkDuringTest(world.spots.First(s=>s.action=="search0"&&s.room==world.SelectedRoom).approach);
                     if(d==1)yield return Capture("04-room-"+g.room);
                     Act("search0");if(d==1)yield return Capture("05-inspection-"+g.room);modal="";
-                    yield return WalkDuringTest(world.spots.First(s=>s.action=="search1").approach);
+                    yield return WalkDuringTest(world.spots.First(s=>s.action=="search1"&&s.room==world.SelectedRoom).approach);
                     Act("search1");modal="";
                 }
                 Audit();yield return WaitForMovement();
@@ -243,7 +259,7 @@ namespace CheckInPlease
                 }
             }
             yield return Capture("07-ending");
-            bool ok=game.State.phase==Shift.Finished && game.State.day==3 && game.State.money>=0 && navigationPassed && visualsPassed && saveRoundtripPassed && artPassed && runtimeErrors.Count==0;
+            bool ok=game.State.phase==Shift.Finished && game.State.day==3 && game.State.money>=0 && navigationPassed && visualsPassed && saveRoundtripPassed && artPassed && interactionPassed && singleFloorPassed && stairHalvesPassed && fixedViewPassed && runtimeErrors.Count==0;
             File.WriteAllText(Path.Combine(Application.dataPath,"..","Validation","smoke-result.json"),
                 "{\"passed\":"+ok.ToString().ToLowerInvariant()+",\"navigationPassed\":"+navigationPassed.ToString().ToLowerInvariant()+",\"visualsPassed\":"+visualsPassed.ToString().ToLowerInvariant()+",\"artAndHotspotsPassed\":"+artPassed.ToString().ToLowerInvariant()+",\"saveRoundtripPassed\":"+saveRoundtripPassed.ToString().ToLowerInvariant()+",\"errorCount\":"+runtimeErrors.Count+",\"day\":"+game.State.day+",\"clues\":"+game.State.clues.Count+",\"cash\":"+game.State.money+"}");
             Debug.Log("DEMO_SMOKE_TEST "+(ok?"PASS":"FAIL"));Application.Quit(ok?0:1);

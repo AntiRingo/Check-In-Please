@@ -1,4 +1,4 @@
-param([string]$UnityPath = 'F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Unity.exe')
+param([string]$UnityPath = 'F:\CheckInPleaseTools\Unity\6000.3.28f1\Editor\Unity.exe', [switch]$SkipPublish)
 $ErrorActionPreference = 'Stop'
 if (-not (Test-Path -LiteralPath $UnityPath)) { throw "Unity Editor not found: $UnityPath" }
 $sourceProject = Join-Path $PSScriptRoot 'UnityDemo'
@@ -22,6 +22,7 @@ $p = Start-Process -FilePath $UnityPath -ArgumentList $argsList -WindowStyle Hid
 if ($p.ExitCode -ne 0) { throw "Unity build failed ($($p.ExitCode)). See $log for the specific cause." }
 $built = Join-Path $stagingRoot 'Builds\Windows'
 if (-not (Test-Path -LiteralPath (Join-Path $built 'build-success.json'))) { throw 'Build did not produce a success marker' }
+if ($SkipPublish) { Write-Output (Join-Path $built 'CheckInPlease.exe'); return }
 $published = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'Builds\Windows'))
 if (-not $published.StartsWith($PSScriptRoot + '\Builds\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe build destination' }
 if ((Test-Path -LiteralPath $published) -and ((Get-Item -LiteralPath $published).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Build destination must not be a link' }

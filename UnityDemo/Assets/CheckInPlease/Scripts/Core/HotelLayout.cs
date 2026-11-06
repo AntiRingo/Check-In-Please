@@ -7,6 +7,8 @@ namespace CheckInPlease
     {
         public const int FloorCount = 3;
         public const float StoreyHeight = 4.4f;
+        public const float BuildingWidth=SuiteLayout.Width*3,HalfWidth=BuildingWidth/2;
+        public const float Front=-4.2f,StairOffset=9.6f-HalfWidth,West=-13.82f+StairOffset;
         public static readonly int[] Rooms = {201,202,203,301,302,303};
         public static bool IsRoom(int room) { return (room / 100 == 2 || room / 100 == 3) && room % 100 >= 1 && room % 100 <= 3; }
         public static int RoomFloor(int room) { return IsRoom(room) ? room / 100 : 1; }

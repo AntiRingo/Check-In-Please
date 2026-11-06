@@ -1,0 +1,154 @@
+Mono path[0] = 'C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/Managed'
+Mono config path = 'C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/MonoBleedingEdge/etc'
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.28f1 (8f082d2fe476)
+[Subsystems] Discovering subsystems at path C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/UnitySubsystems
+Forcing GfxDevice: Direct3D 11
+GfxDevice: creating device client; kGfxThreadingModeClientWorkerJobs
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 630 (ID=0x5912)
+    Vendor:   Intel
+    VRAM:     4039 MB
+    Driver:   31.0.101.2115
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.319 seconds
+- Finished resetting the current domain, in  0.013 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+UnloadTime: 14.889400 ms
+KEYBOARD_CHECK PASS screen direction (0.00, 1.00)
+INTERACTION_CHECK PASS faces movement direction
+INTERACTION_CHECK PASS idle preserves facing
+KEYBOARD_CHECK PASS screen direction (0.00, -1.00)
+INTERACTION_CHECK PASS faces movement direction
+INTERACTION_CHECK PASS idle preserves facing
+KEYBOARD_CHECK PASS screen direction (-1.00, 0.00)
+INTERACTION_CHECK PASS faces movement direction
+INTERACTION_CHECK PASS idle preserves facing
+KEYBOARD_CHECK PASS screen direction (1.00, 0.00)
+INTERACTION_CHECK PASS faces movement direction
+INTERACTION_CHECK PASS idle preserves facing
+KEYBOARD_CHECK PASS diagonal speed equals straight speed
+KEYBOARD_CHECK PASS modal blocks movement
+KEYBOARD_CHECK PASS keyboard cancels mouse path and pending interaction
+HOTEL_TRAVEL 1 -> 3
+KEYBOARD_CHECK PASS keyboard cancels approach to stairs
+KEYBOARD_CHECK PASS cannot leave floor edge
+KEYBOARD_CHECK PASS reception furniture blocks movement
+KEYBOARD_CHECK PASS office wall blocks movement
+INTERACTION_CHECK PASS no distant labels or actions
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+VALIDATION_FRAMES C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data\..\Validation\0.4.6\run-20261106-083930-639
+INTERACTION_CHECK PASS front desk works along counter
+INTERACTION_CHECK PASS reception action
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+INTERACTION_CHECK PASS nearby review:0
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+INTERACTION_CHECK PASS nearby review:0
+INTERACTION_CHECK PASS nearby review:0
+INTERACTION_CHECK PASS nearby review:0
+INTERACTION_CHECK PASS front desk starts night shift
+FREE_STAIRS PASS stairs need no interaction button
+FREE_STAIRS PASS walk directly onto lower flight and show lower floor
+FREE_STAIRS PASS release movement stops on a tread
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+FREE_STAIRS PASS reverse midway without completing the flight
+FREE_STAIRS PASS stair side rail prevents leaving the flight
+FREE_STAIRS PASS mouse picks actual walking height (-16.70, 1.65, 2.30)
+STAIR_TRANSITION PASS old storey fades before the platform
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+STAIR_TRANSITION PASS rendered storey is partially faded, not abruptly removed
+TRANSITION_BRIGHTNESS full=0.4145882 faded=0.300549
+STAIR_TRANSITION PASS turning back restores the outgoing storey
+STAIR_TRANSITION PASS independent stairwell hides all storeys
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+STAIR_TRANSITION PASS hidden floor renders as background
+STAIR_TRANSITION PASS hidden storey cannot be clicked through the stairwell
+STAIR_TRANSITION PASS pause preserves the intermediate scene
+STAIR_TRANSITION PASS save reload restores the hidden-floor transition
+FREE_STAIRS PASS keyboard reaches (-16.70, 2.20, 3.80)
+FREE_STAIRS PASS platform displays both connected halves without a storey
+ART_SCALE lobby keeperHeight=40.4px reachable=2/2
+STAIR_TRANSITION PASS keeper and stairs remain continuous across the floor boundary
+ART_SCALE 201 keeperHeight=40.4px reachable=6/12
+FREE_STAIRS PASS keyboard reaches (-18.70, 3.19, 1.50)
+FREE_STAIRS PASS upper storey fades in with the upper flight
+ART_SCALE 201 keeperHeight=40.4px reachable=6/12
+FREE_STAIRS PASS reload preserves height and stair viewpoint
+FREE_STAIRS PASS can reverse on upper half after reload
+FREE_STAIRS PASS keyboard reaches (-18.70, 4.40, -1.20)
+FREE_STAIRS PASS walk off stairs into second storey
+HOTEL_TRAVEL 2 -> 3
+FREE_STAIRS PASS WASD takes over a map route on a slope
+FREE_STAIRS PASS keyboard reaches (-16.70, 6.60, 3.80)
+FREE_STAIRS PASS keyboard reaches (-18.70, 6.60, 3.80)
+FREE_STAIRS PASS keyboard reaches (-18.70, 8.80, -1.20)
+FREE_STAIRS PASS manual movement reaches third storey without old callback
+ART_SCALE 301 keeperHeight=40.4px reachable=6/12
+ART_SCALE 301 keeperHeight=40.4px reachable=6/12
+SUITE_CHECK PASS GPU and CPU both conceal study behind bedroom wall
+HOTEL_BLACK_ROOM 0
+ART_SCALE 301 keeperHeight=40.4px reachable=6/12
+HOTEL_TRAVEL 3 -> 3
+KEYBOARD_CHECK PASS closed guest door blocks keyboard movement
+INTERACTION_CHECK PASS overlapping door and camera
+INTERACTION_CHECK PASS R cycles target
+ART_SCALE 302 keeperHeight=40.4px reachable=6/12
+INTERACTION_CHECK PASS wheel reverses selection
+ART_SCALE 302 keeperHeight=40.4px reachable=6/12
+INTERACTION_CHECK PASS modal suppresses interaction
+INTERACTION_CHECK PASS nearby room302:302
+ART_SCALE 302 keeperHeight=40.4px reachable=7/12
+SUITE_CHECK PASS solid partition blocks walking out of living room
+SUITE_CHECK PASS direct sight cannot pass through solid partition
+SUITE_CHECK PASS bedroom reached through its doorway
+ART_SCALE 302 keeperHeight=40.4px reachable=6/12
+SUITE_CHECK PASS study reached through a separate doorway
+SUITE_CHECK PASS bathroom stays hidden behind partition
+ART_SCALE 302 keeperHeight=40.4px reachable=8/12
+SUITE_CHECK PASS bathroom accessible through internal passage
+ART_SCALE 302 keeperHeight=40.4px reachable=6/12
+INTERACTION_CHECK PASS nearby search0:302
+INTERACTION_CHECK PASS search uses nearby room
+INTERACTION_CHECK PASS nearby search1:302
+INTERACTION_CHECK PASS nearby room302:302
+INTERACTION_CHECK PASS close door from inside
+INTERACTION_CHECK PASS nearby room302:302
+INTERACTION_CHECK PASS open door from inside
+HOTEL_TRAVEL 3 -> 2
+ART_SCALE 203 keeperHeight=40.4px reachable=6/12
+INTERACTION_CHECK PASS stair landing has no interaction prompts
+ART_SCALE 203 keeperHeight=40.4px reachable=6/12
+FREE_STAIRS PASS mouse picks actual walking height (-18.70, 3.47, 1.00)
+FREE_STAIRS PASS descending upper half retains upper floor
+FREE_STAIRS PASS mouse picks actual walking height (-17.70, 2.20, 3.80)
+FREE_STAIRS PASS mouse reaches turning platform
+FREE_STAIRS PASS mouse picks actual walking height (-16.70, 2.20, 3.80)
+FREE_STAIRS PASS crossing platform changes floor logically while the stairwell stays visible
+FREE_STAIRS PASS mouse picks actual walking height (-16.70, 1.43, 1.90)
+STAIR_TRANSITION PASS descending arrival fades the lower storey in
+FREE_STAIRS PASS mouse picks actual walking height (-16.70, 0.94, 1.00)
+FREE_STAIRS PASS descending lower half shows lower floor
+FREE_STAIRS PASS mouse picks actual walking height (-16.70, 0.00, -1.40)
+FREE_STAIRS PASS mouse exits stairs onto first storey
+ART_SCALE office keeperHeight=40.4px reachable=2/2
+INTERACTION_CHECK PASS nearby dossier:0
+ART_SCALE office keeperHeight=40.4px reachable=2/2
+ART_SCALE office keeperHeight=40.4px reachable=2/2
+HOTEL_SMOKE_TEST PASS
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.

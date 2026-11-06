@@ -40,20 +40,34 @@ finalAudit.BeginNight();finalAudit.BeginAudit();int before=finalAudit.State.mone
 Check(finalAudit.State.money==before-10&&finalAudit.State.trust==3,"Final license review settles last-day violations");
 Console.WriteLine($"{count} model checks passed.");
 var vision=new RoomObservation{room=201,cameraInstalled=true};
-Check(RoomSight.Visibility(vision,0,3.3f,0,-1.5f)>.99f,"Camera reveals objects in its directional footprint");
-Check(RoomSight.Visibility(vision,-2.7f,6.4f,0,-1.5f)==0,"Camera does not reveal the entire room");
+Check(RoomSight.Visibility(vision,-3.2f,8.4f,0,-1.5f)>.99f,"Bedroom camera reveals the bed within its footprint");
+Check(RoomSight.Visibility(vision,1.2f,6.3f,0,-1.5f)==0,"Partition blocks a study point inside the camera cone and range");
 vision.yaw=315;
-Check(RoomSight.Visibility(vision,0,3.3f,0,-1.5f)==0,"Rotating camera conceals the old view immediately");
-vision.yaw=135;vision.mount=1;
-Check(RoomSight.Visibility(vision,-1,4.3f,0,-1.5f)==0,"Changing installation point changes coverage");
+Check(RoomSight.Visibility(vision,-3.2f,8.4f,0,-1.5f)==0,"Rotating camera conceals the old view immediately");
+vision.yaw=225;vision.mount=1;
+Check(RoomSight.Visibility(vision,3.25f,6.3f,0,-1.5f)>.99f&&RoomSight.Visibility(vision,-3.2f,8.4f,0,-1.5f)==0,"Study installation changes coverage without seeing through bedroom wall");
 vision.cameraInstalled=false;
 Check(RoomSight.Visibility(vision,0,3.3f,0,-1.5f)==0,"Closed unmonitored room has no retained visibility");
 vision.doorOpen=true;
-Check(RoomSight.Visibility(vision,0,5,0,-1.5f)>.99f&&RoomSight.Visibility(vision,2.7f,.8f,0,-1.5f)==0,"Door aperture reveals only sight lines passing through the opening");
-Check(RoomSight.Visibility(vision,0,5,5,-1.5f)==0,"Door view follows the keeper rather than revealing a whole room");
-Check(RoomSight.Visibility(vision,4,3,0,-1.5f)==0,"Observation never crosses room boundaries");
+Check(RoomSight.Visibility(vision,0,3,0,-1.5f)>.99f&&RoomSight.Visibility(vision,2.7f,.8f,0,-1.5f)==0,"Entrance reveals only lines through its aperture");
+Check(RoomSight.Visibility(vision,0,3,5,-1.5f)==0,"Door view follows the keeper rather than revealing a whole room");
+Check(RoomSight.Visibility(vision,6,3,0,-1.5f)==0,"Observation never crosses suite boundaries");
 vision.doorOpen=false;
-Check(RoomSight.Visibility(vision,1,3,0,2)>.99f,"Keeper can directly inspect a room after entering");
+Check(RoomSight.Visibility(vision,1,3,0,2)>.99f,"Keeper can directly inspect the sitting room after entering");
+Check(RoomSight.Visibility(vision,0,6,0,2)==0,"Interior walls also block the keeper's direct sight");
+Check(RoomSight.Visibility(vision,1.2f,6.2f,1.2f,3.8f)>.99f,"Internal doorway passes direct sight");
+Check(RoomSight.Visibility(vision,3.2f,9.3f,1.2f,6)==0,"Bathroom wall blocks sight from the study");
+Check(SuiteLayout.Clear(-2.7f,4.4f)&&SuiteLayout.Clear(1.2f,7.7f)&&!SuiteLayout.Clear(0,4.4f)&&!SuiteLayout.Clear(-.6f,6),"Doorway walking openings match solid partitions");
+float maximumCoverage=0;
+for(int mount=0;mount<3;mount++)for(int angle=0;angle<360;angle+=15)
+{
+    var camera=new RoomObservation{room=201,cameraInstalled=true,mount=mount,yaw=angle,fieldOfView=95};int samples=0,visible=0;
+    for(float x=-4.8f;x<5;x+=.4f)for(float z=.2f;z<10.5f;z+=.4f)
+    {samples++;if(RoomSight.Camera(camera,x,z)>.5f)visible++;}
+    maximumCoverage=Math.Max(maximumCoverage,visible/(float)samples);
+}
+Check(maximumCoverage<.5f,"Every mount and yaw at widest lens covers less than half the suite");
+Check(SuiteLayout.Width*SuiteLayout.Depth>6.4f*6.6f*2.4f,"Each suite has more than 2.4 times the old floor area");
 var legacy=new GameState{rooms=null};var migrated=new GameModel(legacy);
 Check(migrated.State.rooms.Count==6&&migrated.Observation(201).cameraInstalled&&!migrated.Observation(301).cameraInstalled,"Legacy saves receive all six rooms with safe observation defaults");
 migrated.Observation(202).cameraInstalled=true;migrated.Observation(202).mount=2;migrated.Observation(202).yaw=45;migrated.Observation(203).doorOpen=true;
@@ -74,3 +88,30 @@ hotel.State.keeperFloor=3;hotel.State.keeperX=-6.4f;hotel.State.keeperZ=-1.25f;
 var hotelReload=new GameModel(JsonSerializer.Deserialize<GameState>(JsonSerializer.Serialize(hotel.State,new JsonSerializerOptions{IncludeFields=true}),new JsonSerializerOptions{IncludeFields=true}));
 Check(hotelReload.State.keeperFloor==3&&hotelReload.InRoom(301)!=null&&hotelReload.State.rooms.Count==6,"Save roundtrip preserves floor location and third-floor bookings");
 Console.WriteLine($"{count} total hotel checks passed.");
+var stairSave=new GameModel(new GameState{keeperFloor=2,keeperX=-13,keeperZ=1.5f,keeperY=3.19f,keeperOnStairs=true});
+var stairReload=new GameModel(JsonSerializer.Deserialize<GameState>(JsonSerializer.Serialize(stairSave.State,new JsonSerializerOptions{IncludeFields=true}),new JsonSerializerOptions{IncludeFields=true}));
+Check(stairReload.State.keeperOnStairs&&Math.Abs(stairReload.State.keeperY-3.19f)<.001f,"Stair save preserves intermediate walking height");
+var invalidStair=new GameModel(new GameState{keeperFloor=3,keeperY=float.NaN,keeperOnStairs=true});
+Check(!invalidStair.State.keeperOnStairs&&invalidStair.State.keeperY==HotelLayout.Height(3),"Invalid stair height falls back to saved floor");
+Check(!new GameModel(new GameState{keeperFloor=3}).State.keeperOnStairs,"Legacy floor-only saves do not resume at ground height");
+Console.WriteLine($"{count} total checks passed.");
+
+var oldSuite=new GameModel(new GameState{keeperFloor=3,keeperX=6.4f,keeperZ=-1.25f});
+Check(Math.Abs(oldSuite.State.keeperX-RoomSight.Center(303))<.001f&&oldSuite.State.keeperLayout==2,"Legacy suite position migrates to the same room on wider floor");
+var oldStair=new GameModel(new GameState{keeperFloor=2,keeperX=-13,keeperZ=1.5f,keeperY=3.19f,keeperOnStairs=true});
+Check(Math.Abs(oldStair.State.keeperX-(-13+HotelLayout.StairOffset))<.001f,"Legacy staircase save moves with the expanded west wing");
+Console.WriteLine($"{count} total expanded-hotel checks passed. Maximum camera coverage: {maximumCoverage:P0}");
+Check(StairTransition.FloorOpacity(.9f)==1&&StairTransition.FloorOpacity(3.8f)==0&&Math.Abs(StairTransition.FloorOpacity(1.9f)-.5f)<.001f,"Transition has full, partial and stairwell-only stages");
+bool fadeMonotone=true;float previousOpacity=1;
+for(float z=-.7f;z<4.1f;z+=.01f){float opacity=StairTransition.FloorOpacity(z);fadeMonotone&=opacity<=previousOpacity+.00001f&&opacity>=0&&opacity<=1;previousOpacity=opacity;}
+Check(fadeMonotone,"Approaching a platform fades monotonically without overshoot");
+Check(StairTransition.ViewHeight(1,-11,1.9f)==0&&StairTransition.ViewHeight(1,-13,1.9f)==4.4f,"Visible storeys retain their fixed composition during fades");
+Check(Math.Abs(StairTransition.ViewHeight(1,-12.001f,3.8f)-StairTransition.ViewHeight(1,-11.999f,3.8f))<.01f,"Logical floor boundary does not cause a projection jump");
+bool hiddenRebase=true;
+for(float z=-.7f;z<3.8f;z+=.01f)if(StairTransition.FloorOpacity(z)>.001f)
+    hiddenRebase&=StairTransition.ViewHeight(1,-11,z)==0&&StairTransition.ViewHeight(1,-13,z)==4.4f;
+Check(hiddenRebase,"Projection height changes only while all storeys are hidden");
+Check(Math.Abs(StairTransition.ViewHeight(2,-12,3.8f)-6.6f)<.001f,"Second connection uses the same stairwell transition at its own height");
+Check(Math.Abs(StairTransition.ViewHeight(1,-11.001f,3.6f)-StairTransition.ViewHeight(1,-10.999f,3.6f))<.01f,"Walking sideways around the right corner does not snap the view");
+Check(Math.Abs(StairTransition.ViewHeight(1,-11.3f,3.501f)-StairTransition.ViewHeight(1,-11.3f,3.499f))<.01f,"Hugging a rail into the platform keeps height continuous");
+Console.WriteLine($"{count} total checks passed.");

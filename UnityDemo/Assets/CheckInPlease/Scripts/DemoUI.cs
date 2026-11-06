@@ -82,7 +82,7 @@ namespace CheckInPlease
                 {
                     case "menu":Menu();break;case "brief":Brief();break;case "review":Review();break;case "dispatch":Dispatch();break;
                     case "item":Inspect();break;case "dossier":Dossier();break;case "rooms":Rooms();break;
-                    case "journal":Journal();break;case "help":Help();break;case "ending":Ending();break;case "pause":Pause();break;
+                    case "camera":CameraControls();break;case "journal":Journal();break;case "help":Help();break;case "ending":Ending();break;case "pause":Pause();break;
                 }
             }
             if(Time.unscaledTime<toastUntil && toast!="" && modal!="" && modal!="ending" && modal!="brief")
@@ -136,67 +136,22 @@ namespace CheckInPlease
         void WorldHUD()
         {
             string area=world.CurrentFloor==1?"一楼 · 前台与办公室":world.CurrentFloor==2?"二楼 · 住客客房":"三楼 · 住客客房";
-            L(38,91,350,40,area,world.IsHotelFloor?25:28);L(40,134,340,20,"WASD / 点击地面移动 · 点击标记互动",13,dim);
+            if(world.InStairwell)area="楼梯间 · "+world.ActiveStairLowerFloor+"—"+(world.ActiveStairLowerFloor+1)+" 楼";
+            L(38,91,350,40,area,world.IsHotelFloor?25:28);L(40,134,340,20,"WASD / 点击地面移动 · 靠近后 E 互动",13,dim);
             if(B(1360,90,205,38,"客房分配 / 地图"))modal="rooms";
             if(B(1360,138,98,34,"日志 [J]"))modal="journal";
             if(B(1468,138,97,34,"暂停"))modal="pause";
-            HotelControls();if(world.IsHotelFloor)FloorControls();
-            var placedLabels=new System.Collections.Generic.List<Rect>();
-            foreach(var spot in world.spots.ToArray())
-            {
-                if(world.IsTravelling)break;
-                if(!world.SpotVisible(spot))continue;
-                var p=world.Project(spot.point);
-                float width=spot.label.Length>7?205:160;
-                var rect=new Rect(Mathf.Clamp(p.x-width/2,25,1575-width),p.y-18,width,36);
-                {
-                    for(int attempt=0;attempt<5&&placedLabels.Any(r=>r.Overlaps(new Rect(rect.x-4,rect.y-4,rect.width+8,rect.height+8)));attempt++)rect.y+=42;
-                    placedLabels.Add(rect);
-                }
-                if(B(rect.x,rect.y,width,36,"◇  "+spot.label))
-                {
-                    if(world.IsHotelFloor&&spot.action.StartsWith("search")&&!world.SelectedObservation.doorOpen&&world.PlayerPosition.z<.1f)
-                        Say("摄像头只能观察。打开房门后，才能走近搜查。");
-                    else {var target=spot;world.WalkTo(target.approach,()=>Act(target.action));}
-                }
-            }
+            InteractionHUD();
             string objective=game.State.phase==Shift.Reception?(game.Current!=null?"前往前台审查  "+game.Current.name:"今日来客已处理完毕。开始夜班。"):
                 game.State.phase==Shift.Search?"住客正在统一点名。剩余搜查行动  "+game.State.actions+" / 4":"前往办公室，决定每份档案的去向。";
             Fill(new Rect(28,817,1020,65),new Color(.035f,.045f,.045f,.86f));
             L(44,823,990,27,objective,20);
-            L(44,853,990,24,Time.unscaledTime<toastUntil&&toast!=""?toast:world.IsTravelling?"正在通过楼梯前往 "+world.TravelDestination+" 楼……":world.ManualMoving?"WASD 移动中":world.Walking?"正在前往目标……":"WASD 移动   /   J 值班日志   /   Esc 暂停",14,dim);
-            if(game.State.phase==Shift.Reception && game.Current==null){if(B(1140,830,425,48,"关闭前台 · 开始夜班",!world.IsTravelling,true))Night();}
-            else if(game.State.phase==Shift.Search){if(B(1140,830,425,48,"返回一楼 · 使用举报电脑",!world.IsTravelling,true))Audit();}
-            else if(game.State.phase==Shift.Audit){if(B(1140,830,425,48,"前往办公室电脑",!world.IsTravelling,true))Audit();}
+            L(44,853,990,24,Time.unscaledTime<toastUntil&&toast!=""?toast:world.IsTravelling?"正在通过楼梯前往 "+world.TravelDestination+" 楼……":world.ManualMoving?"WASD 移动中":world.Walking?"正在前往目标……":"E 互动  /  R 或滚轮切换  /  J 日志  /  Esc 暂停",14,dim);
             if(!smoke&&Event.current.type==EventType.MouseDown && Event.current.button==0)
             {
                 var p=Event.current.mousePosition;
                 if(p.y>175&&p.y<815){world.GroundClick(p);Event.current.Use();}
             }
-        }
-        void HotelControls()
-        {
-            for(int floor=1;floor<=3;floor++)
-                if(B(40+(floor-1)*110,174,100,32,(world.CurrentFloor==floor?"● ":"")+floor+" 楼",!world.IsTravelling))TravelToFloor(floor);
-            L(385,180,870,26,world.IsTravelling?"楼梯通行中  ·  目的地 "+world.TravelDestination+" 楼":
-                world.CurrentFloor==1?"前台审查来客  /  办公室电脑举报住户  /  西侧楼梯通往客房":"黑暗 = 当前不可见  /  家具不遮挡视野  /  西侧楼梯连接各层",14,dim);
-            if(world.CurrentFloor!=1)return;
-            L(395,96,830,28,"一楼营业区  ·  前台登记 / 办公室 / 楼梯间",20,cream);
-            if(B(395,138,200,34,"前往前台",!world.IsTravelling))Visit("lobby");
-            if(B(610,138,240,34,"前往办公室电脑",!world.IsTravelling))Visit("office");
-        }
-        void FloorControls()
-        {
-            foreach(int n in HotelLayout.RoomsOn(world.CurrentFloor))if(B(395+(n%100-1)*105,90,95,36,(world.SelectedRoom==n?"● ":"")+n,!world.IsTravelling))world.SelectRoom(n);
-            var s=world.SelectedObservation;
-            L(720,96,600,26,s.cameraInstalled?"监控已连接  ·  "+world.MountLabel+"  ·  朝向 "+s.yaw.ToString("0")+"°  /  视角 "+s.fieldOfView.ToString("0")+"°":"未安装摄像头  ·  开门后可从走廊观察",17,cream);
-            if(B(395,138,125,34,s.doorOpen?"关闭房门":"打开房门",!world.IsTravelling))FloorDoor();
-            if(B(530,138,145,34,s.cameraInstalled?"拆除摄像头":"安装摄像头",!world.IsTravelling))FloorCamera(0);
-            if(B(685,138,145,34,"切换安装位置",s.cameraInstalled&&!world.IsTravelling))FloorCamera(1);
-            if(B(840,138,110,34,"左转 15°",s.cameraInstalled&&!world.IsTravelling))FloorCamera(-15);
-            if(B(960,138,110,34,"右转 15°",s.cameraInstalled&&!world.IsTravelling))FloorCamera(15);
-            if(B(1080,138,145,34,"视角 "+s.fieldOfView.ToString("0")+"°",s.cameraInstalled&&!world.IsTravelling))FloorCamera(2);
-
         }
         void Review()
         {
@@ -312,7 +267,7 @@ namespace CheckInPlease
         void Help()
         {
             Title("KEEPER'S HANDBOOK","值班操作","这是一个可以完整走过三个营业日的玩法原型。");
-            L(100,300,1350,390,"01  WASD 按画面方向移动，或点击地面寻路；点击场景标签走近互动。\n\n02  前台：查看身份证、通行证与今日条例。询问住客，再批准或拒绝。\n\n03  始终只显示当前楼层；点击楼梯或楼层按钮上下楼。二、三楼共六间客房。\n\n04  夜间开门搜查，每夜 4 次；回一楼电脑前，选择同一人的两份材料举报。\n\n05  完成审计进入次日。三日后根据现金、信任与暴露获得结局。\n\nWASD 可接管鼠标寻路 · J 日志 · Esc 暂停 · 每次重要操作自动保存。",23);
+            L(100,300,1350,390,"01  WASD 或点击地面移动；停下后保持朝向。靠近物品才出现交互按钮。\n\n02  按 E 或点击按钮执行；多个目标重叠时，按 R 或滚动鼠标滚轮切换。\n\n03  前台登记、房门开关与监控设置均需靠近；楼梯直接行走，不需要交互。\n\n04  夜间搜查书房的书桌和起居区的行李，每夜 4 次；回一楼电脑前举报。\n\n05  平台只显示楼梯，离开后楼层渐显，角度固定；套房隔墙会挡住视线。\n\nJ 打开日志 · Esc 返回或暂停 · 每次重要操作自动保存。",23);
             if(B(1090,730,430,60,"返回",true,true))modal=game.State.phase==Shift.Morning?"menu":"";
         }
         void Pause()

@@ -19,12 +19,12 @@ namespace CheckInPlease
         readonly Dictionary<int,Transform> cameraBodies = new Dictionary<int,Transform>();
         readonly Dictionary<string,Material> materialCache = new Dictionary<string,Material>();
         const float FloorStep=.28f;
-        const int FloorColumns=86,FloorRows=37;
+        const int FloorColumns=126,FloorRows=54;
         Font floorFont;
         Material signMaterial;
         Material shell,trim,wood,metal,red,plaster;
         public RoomObservation SelectedObservation { get { return floorGame?.Observation(SelectedRoom); } }
-        public string MountLabel { get { return new[]{"后墙左侧","后墙右侧","前墙左侧"}[SelectedObservation.mount]; } }
+        public string MountLabel { get { return new[]{"卧室后角","书房后角","起居室前角"}[SelectedObservation.mount]; } }
         void ReleaseFloor()
         {
             foreach(var m in floorMaterials)if(m!=null)Destroy(m);
@@ -38,6 +38,10 @@ namespace CheckInPlease
             var m=new Material(Resources.Load<Shader>("HotelRoom"));m.name=key;m.color=C(hex);
             m.SetFloat("_Pattern",pattern);m.SetFloat("_RoomCenter",room==0?-100:RoomSight.Center(room));
             m.SetFloat("_Floor",room==0?0:HotelLayout.RoomFloor(room));
+            m.SetVector("_RoomSize",new Vector4(RoomSight.RoomWidth*.5f,RoomSight.Depth,0,0));
+            var partitions=new Vector4[SuiteLayout.Walls.Length];
+            for(int i=0;i<partitions.Length;i++){var w=SuiteLayout.Walls[i];partitions[i]=new Vector4(w.x1,w.z1,w.x2,w.z2);}
+            m.SetVectorArray("_Partitions",partitions);
             m.SetTexture("_SurfaceAtlas",Resources.Load<Texture2D>("Art/RoomSurfaces"));
             floorMaterials.Add(m);materialCache.Add(key,m);
             if(room!=0){if(!observedMaterials.ContainsKey(room))observedMaterials[room]=new List<Material>();observedMaterials[room].Add(m);}
@@ -72,13 +76,13 @@ namespace CheckInPlease
         }
         void BuildGuestLevel(int floor)
         {
-            Box("Building foundation",new Vector3(0,-.2f,1.65f),new Vector3(19.65f,.4f,10.05f),trim);
-            Box("Corridor tiles",new Vector3(0,-.025f,-1.65f),new Vector3(19.2f,.08f,3.3f),Surface("Slate tiles","#565c56",5));
-            Box("Corridor runner",new Vector3(0,.028f,-1.75f),new Vector3(18.7f,.025f,1.34f),Surface("Worn corridor runner","#633a32",4));
-            Box("Near cutaway parapet",new Vector3(0,.18f,-3.35f),new Vector3(19.6f,.36f,.18f),trim);
+            Box("Building foundation",new Vector3(0,-.2f,3.2f),new Vector3(30.95f,.4f,15.0f),trim);
+            Box("Corridor tiles",new Vector3(0,-.025f,-2.1f),new Vector3(30.6f,.08f,4.2f),Surface("Slate tiles","#565c56",5));
+            Box("Corridor runner",new Vector3(0,.028f,-2.1f),new Vector3(30.1f,.025f,1.6f),Surface("Worn corridor runner","#633a32",4));
+            Box("Near cutaway parapet",new Vector3(0,.18f,-4.25f),new Vector3(30.9f,.36f,.18f),trim);
             foreach(int n in HotelLayout.RoomsOn(floor))MakeRoom(n);
-            Box("Corridor east end",new Vector3(9.65f,.38f,-1.65f),new Vector3(.22f,.76f,3.45f),plaster);
-            Box("Corridor end coping",new Vector3(9.65f,.78f,-1.65f),new Vector3(.27f,.08f,3.5f),shell);
+            Box("Corridor east end",new Vector3(15.35f,.38f,-2.1f),new Vector3(.22f,.76f,4.3f),plaster);
+            Box("Corridor end coping",new Vector3(15.35f,.78f,-2.1f),new Vector3(.27f,.08f,4.35f),shell);
         }
         void MakeRoom(int room)
         {
@@ -92,23 +96,23 @@ namespace CheckInPlease
             var blanket=Surface("Red wool blanket","#6a4138",2,room);
             var ivory=Surface("Paper and porcelain","#c6baa0",2,room);
             var brass=Surface("Tarnished brass","#a08c5d",3,room);
-            Box("Room floor "+room,new Vector3(cx,0,3.3f),new Vector3(6.18f,.1f,6.6f),floor);
-            Box("Back wall interior",new Vector3(cx,1.5f,6.62f),new Vector3(6.3f,3,.2f),wall);
-            Box("Back wall dado",new Vector3(cx,.55f,6.48f),new Vector3(6.2f,1.1f,.06f),darkWall);
-            Box("Back wall rail",new Vector3(cx,1.12f,6.43f),new Vector3(6.25f,.07f,.09f),oak);
-            Box("Back wall cornice",new Vector3(cx,2.85f,6.43f),new Vector3(6.25f,.12f,.12f),oak);
-            Box("Back coping",new Vector3(cx,3.05f,6.62f),new Vector3(6.55f,.12f,.32f),shell);
+            Box("Room floor "+room,new Vector3(cx,0,5.3f),new Vector3(9.98f,.1f,10.6f),floor);
+            Box("Back wall interior",new Vector3(cx,1.5f,10.62f),new Vector3(10.1f,3,.2f),wall);
+            Box("Back wall dado",new Vector3(cx,.55f,10.48f),new Vector3(10.0f,1.1f,.06f),darkWall);
+            Box("Back wall rail",new Vector3(cx,1.12f,10.43f),new Vector3(10.05f,.07f,.09f),oak);
+            Box("Back wall cornice",new Vector3(cx,2.85f,10.43f),new Vector3(10.05f,.12f,.12f),oak);
+            Box("Back coping",new Vector3(cx,3.05f,10.62f),new Vector3(10.35f,.12f,.32f),shell);
             for(int side=-1;side<=1;side+=2)
             {
-                float x=cx+side*3.12f;
+                float x=cx+side*5.02f;
                 // Low partitions are deliberate cutaways; the full-height back wall keeps the silhouette.
-                Box("Partition inner face",new Vector3(x,.72f,3.3f),new Vector3(.18f,1.44f,6.6f),wall);
-                Box("Partition coping",new Vector3(x,1.48f,3.3f),new Vector3(.25f,.1f,6.75f),shell);
-                Box("Rear stone post",new Vector3(x,1.52f,6.6f),new Vector3(.32f,3.05f,.32f),shell);
-                float frontX=cx+side*1.99f;
-                Box("Corridor front wall",new Vector3(frontX,.62f,0),new Vector3(2.46f,1.24f,.22f),plaster);
-                Box("Corridor red dado",new Vector3(frontX,.34f,-.14f),new Vector3(2.46f,.63f,.04f),red);
-                Box("Front cutaway cap",new Vector3(frontX,1.28f,0),new Vector3(2.54f,.1f,.29f),shell);
+                Box("Partition inner face",new Vector3(x,.72f,5.3f),new Vector3(.18f,1.44f,10.6f),wall);
+                Box("Partition coping",new Vector3(x,1.48f,5.3f),new Vector3(.25f,.1f,10.75f),shell);
+                Box("Rear stone post",new Vector3(x,1.52f,10.6f),new Vector3(.32f,3.05f,.32f),shell);
+                float frontX=cx+side*2.94f;
+                Box("Corridor front wall",new Vector3(frontX,.62f,0),new Vector3(4.36f,1.24f,.22f),plaster);
+                Box("Corridor red dado",new Vector3(frontX,.34f,-.14f),new Vector3(4.36f,.63f,.04f),red);
+                Box("Front cutaway cap",new Vector3(frontX,1.28f,0),new Vector3(4.44f,.1f,.29f),shell);
                 Box("Door jamb",new Vector3(cx+side*.82f,1.1f,-.02f),new Vector3(.15f,2.2f,.2f),wood);
             }
             Box("Door lintel",new Vector3(cx,2.22f,-.02f),new Vector3(1.8f,.13f,.25f),wood);
@@ -128,7 +132,7 @@ namespace CheckInPlease
             MakeWallLamp(new Vector3(cx+1.9f,1.22f,-.22f),0);
 
             // Bed: four legs, mattress, folded pillow, quilt seams and tubular iron frame.
-            float bx=cx-1.75f,bz=3.9f;
+            float bx=cx-3.2f,bz=8.6f;
             foreach(int sx in new[]{-1,1})foreach(int sz in new[]{-1,1})
                 Rod("Bed post",new Vector3(bx+sx*.82f,.09f,bz+sz*1.4f),new Vector3(bx+sx*.82f,sz>0?1.22f:.92f,bz+sz*1.4f),.065f,blackIron);
             Box("Bed frame",new Vector3(bx,.39f,bz),new Vector3(1.75f,.16f,2.95f),blackIron);
@@ -145,7 +149,7 @@ namespace CheckInPlease
             }
             floorObstacles.Add(new Rect(bx-.99f,bz-1.65f,1.98f,3.3f));
             // Desk and chair leave the centre aisle walkable.
-            float dx=cx+1.65f,dz=5.3f;
+            float dx=cx+3.25f,dz=6.3f;
             Box("Writing desk top",new Vector3(dx,1.04f,dz),new Vector3(2.1f,.15f,1.15f),oak);
             foreach(int sx in new[]{-1,1})foreach(int sz in new[]{-1,1})Box("Desk leg",new Vector3(dx+sx*.88f,.5f,dz+sz*.42f),new Vector3(.1f,1,.1f),oak);
             Box("Desk drawer",new Vector3(dx,.84f,dz-.47f),new Vector3(1.7f,.26f,.17f),oak);
@@ -164,7 +168,7 @@ namespace CheckInPlease
             floorObstacles.Add(new Rect(dx-1.2f,dz-1.65f,2.4f,2.45f));
             Box("Faded room rug",new Vector3(cx-.1f,.061f,3.05f),new Vector3(1.5f,.018f,2.1f),Surface("Faded room rug","#754b3e",4,room));
             // Wardrobe exists as geometry, but deliberately never participates in vision tests.
-            float wx=cx+2.42f;
+            float wx=cx+4.35f;
             Box("Wardrobe body",new Vector3(wx,1.02f,1.22f),new Vector3(.95f,2.04f,1.35f),oak);
             Box("Wardrobe cornice",new Vector3(wx,2.08f,1.22f),new Vector3(1.05f,.12f,1.46f),oak);
             for(int side=-1;side<=1;side+=2)
@@ -177,7 +181,8 @@ namespace CheckInPlease
             for(int side=-1;side<=1;side+=2)Box("Case leather strap",new Vector3(cx+.8f+side*.25f,.458f,1.36f),new Vector3(.07f,.018f,.6f),blackIron);
             Rod("Suitcase handle",new Vector3(cx+.65f,.5f,1.36f),new Vector3(cx+.95f,.5f,1.36f),.06f,blackIron);
             floorObstacles.Add(new Rect(cx+.2f,.9f,1.2f,.95f));
-            MakeWindow(room,cx,wall,oak,ivory);
+            MakeWindow(room,cx-2.15f,wall,oak,ivory);
+            MakeSuitePartitions(room,cx,wall,oak,ivory,blackIron,linen);
             // Camera mount and lens swivel remain visible as installed equipment on the shell.
             var mount=new GameObject("Camera mount "+room).transform;mount.SetParent(roomRoot,false);
             var swivel=new GameObject("Camera swivel "+room).transform;swivel.SetParent(mount,false);
@@ -192,22 +197,22 @@ namespace CheckInPlease
         void MakeWindow(int room,float cx,Material wall,Material oak,Material ivory)
         {
             var glass=Surface("Frosted window","#80938e",0,room);
-            Box("Window recess",new Vector3(cx-.65f,2.03f,6.47f),new Vector3(1.65f,1.65f,.04f),oak);
-            Box("Window glass",new Vector3(cx-.65f,2.03f,6.43f),new Vector3(1.45f,1.45f,.04f),glass);
+            Box("Window recess",new Vector3(cx-.65f,2.03f,10.47f),new Vector3(1.65f,1.65f,.04f),oak);
+            Box("Window glass",new Vector3(cx-.65f,2.03f,10.43f),new Vector3(1.45f,1.45f,.04f),glass);
             for(int i=-1;i<=1;i++)
-                Box("Window muntin",new Vector3(cx-.65f+i*.7f,2.03f,6.37f),new Vector3(.065f,1.55f,.09f),oak);
-            for(int i=-1;i<=1;i++)Box("Window crossbar",new Vector3(cx-.65f,2.03f+i*.7f,6.37f),new Vector3(1.55f,.065f,.09f),oak);
-            Box("Window sill",new Vector3(cx-.65f,1.24f,6.28f),new Vector3(1.85f,.1f,.35f),ivory);
+                Box("Window muntin",new Vector3(cx-.65f+i*.7f,2.03f,10.37f),new Vector3(.065f,1.55f,.09f),oak);
+            for(int i=-1;i<=1;i++)Box("Window crossbar",new Vector3(cx-.65f,2.03f+i*.7f,10.37f),new Vector3(1.55f,.065f,.09f),oak);
+            Box("Window sill",new Vector3(cx-.65f,1.24f,10.28f),new Vector3(1.85f,.1f,.35f),ivory);
             var curtains=Surface("Dusty curtain","#704a3f",2,room);
             for(int side=-1;side<=1;side+=2)for(int fold=0;fold<4;fold++)
-                Box("Curtain fold",new Vector3(cx-.65f+side*(.89f+fold*.08f),2.02f,6.17f+(fold%2)*.055f),new Vector3(.11f,1.72f,.12f),curtains);
+                Box("Curtain fold",new Vector3(cx-.65f+side*(.89f+fold*.08f),2.02f,10.17f+(fold%2)*.055f),new Vector3(.11f,1.72f,.12f),curtains);
             var radiator=Surface("Old radiator","#969b8c",3,room);
             for(int fin=0;fin<12;fin++)
-                Rod("Radiator rib",new Vector3(cx-1.37f+fin*.13f,.24f,6.14f),new Vector3(cx-1.37f+fin*.13f,1.02f,6.14f),.1f,radiator);
-            Rod("Radiator feed",new Vector3(cx-1.6f,.35f,6.25f),new Vector3(cx+.2f,.35f,6.25f),.065f,radiator);
-            Rod("Back wall conduit",new Vector3(cx+2.75f,.3f,6.34f),new Vector3(cx+2.75f,2.8f,6.34f),.045f,oak);
-            Box("Wall notice",new Vector3(cx+1.8f,2.05f,6.46f),new Vector3(.63f,.8f,.04f),ivory);
-            for(int i=0;i<6;i++)Box("Notice print",new Vector3(cx+1.8f,2.3f-i*.09f,6.43f),new Vector3(.43f,.018f,.008f),oak);
+                Rod("Radiator rib",new Vector3(cx-1.37f+fin*.13f,.24f,10.14f),new Vector3(cx-1.37f+fin*.13f,1.02f,10.14f),.1f,radiator);
+            Rod("Radiator feed",new Vector3(cx-1.6f,.35f,10.25f),new Vector3(cx+.2f,.35f,10.25f),.065f,radiator);
+            Rod("Back wall conduit",new Vector3(cx+2.75f,.3f,10.34f),new Vector3(cx+2.75f,2.8f,10.34f),.045f,oak);
+            Box("Wall notice",new Vector3(cx+1.8f,2.05f,10.46f),new Vector3(.63f,.8f,.04f),ivory);
+            for(int i=0;i<6;i++)Box("Notice print",new Vector3(cx+1.8f,2.3f-i*.09f,10.43f),new Vector3(.43f,.018f,.008f),oak);
         }
         void MakeDeskLamp(Vector3 p,Material ironMat,Material brass,int room)
         {
@@ -265,18 +270,34 @@ namespace CheckInPlease
                 foreach(int n in HotelLayout.RoomsOn(CurrentFloor))
                 {
                     float cx=RoomSight.Center(n);
-                    spots.Add(new Hotspot(n+" · 房门","room"+n,new Vector3(cx,h+2.46f,0),DoorApproach(n)));
+                    spots.Add(new Hotspot(n+" · 房门","room"+n,new Vector3(cx,h+2.46f,0),DoorApproach(n),n));
+                    spots.Add(new Hotspot(n+" · 监控","camera",new Vector3(cx+.8f,h+1.8f,0),DoorApproach(n)+Vector3.right*.5f,n));
+                    spots.Add(new Hotspot(n+" · 书桌","search0",new Vector3(cx+3.25f,h+1.2f,6.3f),new Vector3(cx+1.65f,h,5.5f),n));
+                    spots.Add(new Hotspot(n+" · 行李","search1",new Vector3(cx+.8f,h+.6f,1.36f),new Vector3(cx-.3f,h,1.3f),n));
                 }
-                float x=RoomSight.Center(SelectedRoom);
-                spots.Add(new Hotspot("书桌 · 搜查","search0",new Vector3(x+1.6f,h+1.2f,5.3f),new Vector3(x+.2f,h,4.25f)));
-                spots.Add(new Hotspot("行李 · 搜查","search1",new Vector3(x+.8f,h+.6f,1.36f),new Vector3(x-.3f,h,1.3f)));
             }
-            AddStairSpots();
         }
         public bool SpotVisible(Hotspot spot)
         {
             if(!IsHotelFloor||!spot.action.StartsWith("search"))return true;
-            return floorGame.State.phase==Shift.Search&&floorGame.InRoom(SelectedRoom)!=null&&VisibilityAt(SelectedRoom,spot.point)>.62f;
+            return floorGame.State.phase==Shift.Search&&floorGame.InRoom(spot.room)!=null&&VisibilityAt(spot.room,spot.point)>.62f;
+        }
+        Vector3 InteractionApproach(Hotspot spot)
+        {
+            if(spot.action=="review")return ReceptionInteractionPoint;
+            // A door and its monitor control can also be used from inside that room.
+            if(spot.room!=0&&(spot.action.StartsWith("room")||spot.action=="camera")&&PlayerPosition.z>.32f&&Mathf.Abs(PlayerPosition.x-RoomSight.Center(spot.room))<RoomSight.RoomWidth*.5f-.2f)
+                return new Vector3(RoomSight.Center(spot.room),HotelLayout.Height(CurrentFloor),.7f);
+            return spot.approach;
+        }
+        public float InteractionDistance(Hotspot spot){return Vector3.Distance(PlayerPosition,InteractionApproach(spot));}
+        public bool CanInteract(Hotspot spot)
+        {
+            if(IsTravelling||Climbing||spot==null||!spots.Contains(spot)||!SpotVisible(spot)||InteractionDistance(spot)>InteractionRange)return false;
+            // Reject targets across partitions, closed doors and furniture, even when close in projection.
+            Vector3 target=InteractionApproach(spot);int steps=Mathf.Max(1,Mathf.CeilToInt(Vector3.Distance(PlayerPosition,target)/.08f));
+            for(int i=1;i<=steps;i++)if(!FloorClear(Vector3.Lerp(PlayerPosition,target,i/(float)steps)))return false;
+            return true;
         }
         public float VisibilityAt(int room,Vector3 point)
         {
@@ -291,7 +312,7 @@ namespace CheckInPlease
             {
                 if(!SpotVisible(spot))continue;
                 // A camera may reveal a search target behind a closed door; it is intentionally not yet reachable.
-                if(IsHotelFloor&&spot.action.StartsWith("search")&&!SelectedObservation.doorOpen&&PlayerPosition.z<.1f)continue;
+                if(IsHotelFloor&&spot.action.StartsWith("search")&&!floorGame.Observation(spot.room).doorOpen&&!(PlayerPosition.z>.32f&&Mathf.Abs(PlayerPosition.x-RoomSight.Center(spot.room))<RoomSight.RoomWidth*.5f-.2f))continue;
                 bool reachable=FindPath(PlayerPosition,spot.approach)!=null;if(reachable)ReachableHotspots++;else ok=false;
             }
             return ok;
@@ -327,38 +348,39 @@ namespace CheckInPlease
                 var door=doorPivots[n];door.localRotation=Quaternion.Slerp(door.localRotation,Quaternion.Euler(0,s.doorOpen?-95:0,0),1-Mathf.Exp(-Time.deltaTime*10));
             }
         }
-        bool FloorClear(Vector3 point)
+        bool FloorClear(Vector3 point){return FloorClear(point,CurrentFloor);}
+        bool FloorClear(Vector3 point,int floor)
         {
             float x=point.x,z=point.z;
-            if(Mathf.Abs(point.y-HotelLayout.Height(CurrentFloor))>.2f)return false;
-            if(x>=-13.82f&&x< -9.42f&&z>=-3.12f&&z<-.4f)return true;
-            if(x< -9.42f||x>9.42f||z< -3.12f||z>6.28f)return false;
-            if(CurrentFloor==1)return GroundClear(point);
+            if(Mathf.Abs(point.y-HotelLayout.Height(floor))>.02f)return false;
+            if(x>=HotelLayout.West&&x< -HotelLayout.HalfWidth+.18f&&z>=HotelLayout.Front+.18f&&z<=-.7f)return true;
+            if(x< -HotelLayout.HalfWidth+.18f||x>HotelLayout.HalfWidth-.18f||z<HotelLayout.Front+.18f||z>RoomSight.Depth-.32f)return false;
+            if(floor==1)return GroundClear(point);
             if(z<-.28f)return true;
             if(floorGame.State.phase!=Shift.Search)return false;
-            int room=CurrentFloor*100+Mathf.Clamp(Mathf.RoundToInt(x/6.4f)+2,1,3);
+            int room=floor*100+Mathf.Clamp(Mathf.RoundToInt(x/RoomSight.RoomWidth)+2,1,3);
             float local=x-RoomSight.Center(room);
-            if(Mathf.Abs(local)>2.9f)return false;
+            if(Mathf.Abs(local)>RoomSight.RoomWidth*.5f-.3f||!SuiteLayout.Clear(local,z))return false;
             if(z<.32f&&(!floorGame.Observation(room).doorOpen||Mathf.Abs(local)>.58f))return false;
-            foreach(var obstacle in floorObstacles)if(obstacle.Contains(new Vector2(x,z)))return false;
+            foreach(var obstacle in storeyObstacles[floor])if(obstacle.Contains(new Vector2(x,z)))return false;
             return true;
         }
-        Vector3 FloorCell(int index){return new Vector3(-13.86f+(index%FloorColumns)*FloorStep,HotelLayout.Height(CurrentFloor),-3.12f+(index/FloorColumns)*FloorStep);}
-        int FloorNearest(Vector3 point)
+        Vector3 FloorCell(int index,int floor){return new Vector3(HotelLayout.West+(index%FloorColumns)*FloorStep,HotelLayout.Height(floor),HotelLayout.Front+.18f+(index/FloorColumns)*FloorStep);}
+        int FloorNearest(Vector3 point,int floor)
         {
             int best=-1;float distance=float.MaxValue;
             for(int i=0;i<FloorColumns*FloorRows;i++)
             {
-                var p=FloorCell(i);if(!FloorClear(p))continue;
+                var p=FloorCell(i,floor);if(!FloorClear(p,floor))continue;
                 float d=(p-point).sqrMagnitude;if(d<distance){best=i;distance=d;}
             }
             return best;
         }
-        List<Vector3> FloorPath(Vector3 from,Vector3 to)
+        List<Vector3> FloorPath(Vector3 from,Vector3 to,int floor)
         {
             // Never snap an unreachable target to the other side of a locked wall or to a different room.
-            if(!FloorClear(to))return null;
-            int start=FloorNearest(from),goal=FloorNearest(to);if(start<0||goal<0)return null;
+            if(!FloorClear(to,floor))return null;
+            int start=FloorNearest(from,floor),goal=FloorNearest(to,floor);if(start<0||goal<0)return null;
             var previous=new int[FloorColumns*FloorRows];for(int i=0;i<previous.Length;i++)previous[i]=-1;
             var queue=new Queue<int>();queue.Enqueue(start);previous[start]=start;
             while(queue.Count>0&&previous[goal]<0)
@@ -366,13 +388,13 @@ namespace CheckInPlease
                 int v=queue.Dequeue();foreach(int delta in new[]{-FloorColumns,FloorColumns,-1,1})
                 {
                     int next=v+delta;
-                    if(next<0||next>=previous.Length||Mathf.Abs(next%FloorColumns-v%FloorColumns)>1||previous[next]>=0||!FloorClear(FloorCell(next)))continue;
+                    if(next<0||next>=previous.Length||Mathf.Abs(next%FloorColumns-v%FloorColumns)>1||previous[next]>=0||!FloorClear(FloorCell(next,floor),floor))continue;
                     previous[next]=v;queue.Enqueue(next);
                 }
             }
             if(previous[goal]<0)return null;
             var route=new List<Vector3>();
-            for(int cell=goal;cell!=start;cell=previous[cell])route.Add(FloorCell(cell));route.Reverse();route.Add(to);return route;
+            for(int cell=goal;cell!=start;cell=previous[cell])route.Add(FloorCell(cell,floor));route.Reverse();route.Add(to);return route;
         }
     }
 }
