@@ -326,7 +326,7 @@ namespace CheckInPlease
             else s.yaw+=change;
             s.Normalize();TickFloor();
         }
-        public void ToggleDoor(){if(IsHotelFloor&&!IsTravelling&&SelectedObservation!=null){SelectedObservation.doorOpen=!SelectedObservation.doorOpen;path.Clear();arrived=null;TickFloor();}}
+        public void RefreshDoors(){TickFloor();}
         public Vector3 DoorApproach(int room){return new Vector3(RoomSight.Center(room),HotelLayout.Height(HotelLayout.RoomFloor(room)),-1.25f);}
         void TickFloor()
         {
@@ -357,7 +357,6 @@ namespace CheckInPlease
             if(x< -HotelLayout.HalfWidth+.18f||x>HotelLayout.HalfWidth-.18f||z<HotelLayout.Front+.18f||z>RoomSight.Depth-.32f)return false;
             if(floor==1)return GroundClear(point);
             if(z<-.28f)return true;
-            if(floorGame.State.phase!=Shift.Search)return false;
             int room=floor*100+Mathf.Clamp(Mathf.RoundToInt(x/RoomSight.RoomWidth)+2,1,3);
             float local=x-RoomSight.Center(room);
             if(Mathf.Abs(local)>RoomSight.RoomWidth*.5f-.3f||!SuiteLayout.Clear(local,z))return false;

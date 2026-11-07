@@ -27,7 +27,7 @@ namespace CheckInPlease
         {
             if(spot.action=="review")return game.State.phase==Shift.Reception&&game.Current==null?"开始夜班":"开始登记";
             if(spot.action=="dossier")return "使用举报电脑";
-            if(spot.action.StartsWith("room"))return game.Observation(spot.room).doorOpen?"关门":"开门";
+            if(spot.action.StartsWith("room"))return openingRoom==spot.room?"取消开锁":game.Observation(spot.room).doorOpen?"关门":game.NeedsUnlock(spot.room,world.PlayerInsideRoom(spot.room))?"开锁":"开门";
             if(spot.action=="camera")return game.Observation(spot.room).cameraInstalled?"调整摄像头":"安装摄像头";
             return spot.action=="search0"?"搜查书桌":"搜查行李";
         }
@@ -36,11 +36,11 @@ namespace CheckInPlease
             RefreshInteractions();var spot=FocusedInteraction;
             if(spot==null||!world.CanInteract(spot)||interactionFrame==Time.frameCount)return;
             interactionFrame=Time.frameCount;world.StopWalking();
+            if(openingRoom!=0&&(!spot.action.StartsWith("room")||spot.room!=openingRoom))CancelDoorOpening(false);
             if(spot.room!=0)world.SelectRoom(spot.room);
             if(spot.action.StartsWith("room"))
             {
-                if(game.State.phase!=Shift.Search)Say("宵禁点名后才能打开客房门。");
-                else{world.ToggleDoor();Save();}
+                UseRoomDoor(spot.room);
             }
             else if(spot.action=="camera")
             {

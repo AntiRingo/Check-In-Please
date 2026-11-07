@@ -14,8 +14,8 @@ Direct3D:
     VRAM:     4039 MB
     Driver:   31.0.101.2115
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.195 seconds
-- Finished resetting the current domain, in  0.003 seconds
+- Loaded All Assemblies, in  0.329 seconds
+- Finished resetting the current domain, in  0.004 seconds
 [Physics::Module] Selected backend.
 [Physics::Module] Name: PhysX
 [Physics::Module] Id: 0xf2b8ea05
@@ -26,28 +26,39 @@ Begin MonoManager ReloadAssembly
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
-UnloadTime: 1.246700 ms
+UnloadTime: 1.081200 ms
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
-VALIDATION_FRAMES C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data\..\Validation\0.4.6\run-20261106-084136-581
+VALIDATION_FRAMES C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data\..\Validation\0.4.7\run-20261107-024018-742
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
 HOTEL_TRAVEL 1 -> 2
+INTERACTION_CHECK PASS nearby room201:201
+INTERACTION_CHECK PASS interaction finished room201
 ART_SCALE 201 keeperHeight=40.4px reachable=8/12
 ART_SCALE 201 keeperHeight=40.4px reachable=8/12
 HOTEL_TRAVEL 2 -> 3
 INTERACTION_CHECK PASS nearby camera:301
+INTERACTION_CHECK PASS interaction finished camera
 INTERACTION_CHECK PASS nearby camera opens control panel
 ART_SCALE 301 keeperHeight=40.4px reachable=6/12
+INTERACTION_CHECK PASS nearby room301:301
+INTERACTION_CHECK PASS interaction finished room301
 ART_SCALE 301 keeperHeight=40.4px reachable=8/12
 ART_SCALE 301 keeperHeight=40.4px reachable=8/12
 HOTEL_TRAVEL 3 -> 1
 ART_SCALE office keeperHeight=40.4px reachable=2/2
 ART_SCALE office keeperHeight=40.4px reachable=2/2
 HOTEL_TRAVEL 1 -> 2
+INTERACTION_CHECK PASS nearby room201:201
+INTERACTION_CHECK PASS interaction finished room201
 HOTEL_TRAVEL 2 -> 1
 HOTEL_TRAVEL 1 -> 2
+INTERACTION_CHECK PASS nearby room201:201
+INTERACTION_CHECK PASS interaction finished room201
 HOTEL_TRAVEL 2 -> 3
+INTERACTION_CHECK PASS nearby room301:301
+INTERACTION_CHECK PASS interaction finished room301
 HOTEL_TRAVEL 3 -> 1
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
 DEMO_SMOKE_TEST PASS

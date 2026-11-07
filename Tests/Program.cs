@@ -96,6 +96,49 @@ Check(!invalidStair.State.keeperOnStairs&&invalidStair.State.keeperY==HotelLayou
 Check(!new GameModel(new GameState{keeperFloor=3}).State.keeperOnStairs,"Legacy floor-only saves do not resume at ground height");
 Console.WriteLine($"{count} total checks passed.");
 
+var access=new GameModel();
+foreach(var phase in new[]{Shift.Morning,Shift.Reception,Shift.Search,Shift.Audit,Shift.Finished})
+{
+    access.State.phase=phase;access.Observation(303).doorLocked=true;
+    Check(!access.OpenDoor(303,false,2.99f)&&!access.Observation(303).doorOpen,"Locked door waits in "+phase);
+    Check(access.OpenDoor(303,false,3)&&!access.Observation(303).doorLocked,"Locked door opens after delay in "+phase);
+    access.CloseDoor(303);
+    Check(access.OpenDoor(303,false),"Unlocked door opens immediately in "+phase);access.CloseDoor(303);
+}
+access=new GameModel();access.StartDay();access.Decide(true,202);
+Check(access.Observation(202).doorLocked&&!access.OpenDoor(202,false)&&!access.OpenDoor(202,false,float.NaN),"Occupied doors lock and cannot bypass timing");
+Check(access.OpenDoor(202,true),"Inside handle always permits immediate exit");access.CloseDoor(202);
+Check(access.Observation(202).doorLocked,"Occupied door relocks when closed");
+Check(!access.OwnerCanSee(202,2,0,-1.25f,.15f,3.6f,0,-1),"Owner cannot see through closed entrance even with camera");
+access.Observation(202).cameraInstalled=true;
+Check(!access.OwnerCanSee(202,2,0,-1.25f,.15f,3.6f,0,-1),"Installed camera does not give owner sight through door");
+access.OpenDoor(202,false,3);
+Check(access.OwnerCanSee(202,2,0,-1.25f,.15f,3.6f,0,-1),"Owner sees player opening doorway");
+Check(!access.OwnerCanSee(202,3,0,2,.15f,3.6f,0,-1),"Owner sight cannot cross floors");
+Check(!access.OwnerCanSee(202,2,0,6,.15f,3.6f,0,1),"Interior wall blocks owner sight even facing player");
+Check(!access.OwnerCanSee(202,2,0,2,.15f,3.6f,0,1),"Owner does not see behind their back");
+Check(!access.OwnerCanSee(202,2,3,-1.25f,.15f,3.6f,0,-1),"Open doorway does not reveal corridor through front wall");
+Check(!access.OwnerCanSee(202,2,10.2f,2,.15f,3.6f,0,-1),"Owner cannot see into adjacent room");
+var tenant=access.InRoom(202);
+Check(access.NoticeIntrusion(202,false)!=""&&tenant.resentment==15&&tenant.vigilance==20,"Witnessed opening increases personal resentment and vigilance");
+Check(access.NoticeIntrusion(202,false)==""&&tenant.resentment==15,"Repeated sight of same opening does not repeatedly penalize");
+Check(access.NoticeIntrusion(202,true)!=""&&tenant.resentment==40&&tenant.vigilance==50,"Discovery inside escalates intrusion once");
+Check(access.NoticeIntrusion(202,true)==""&&!access.ResetIntrusion(202,2,1.2f,6),"Hiding inside does not reset the same encounter");
+var accessReload=new GameModel(JsonSerializer.Deserialize<GameState>(JsonSerializer.Serialize(access.State,new JsonSerializerOptions{IncludeFields=true}),new JsonSerializerOptions{IncludeFields=true}));
+Check(accessReload.InRoom(202).vigilance==50&&accessReload.InRoom(202).resentment==40&&accessReload.NoticeIntrusion(202,true)==""&&accessReload.Observation(202).doorOpen,"Save roundtrip keeps owner reactions, encounter and door state");
+Check(access.ResetIntrusion(202,2,3,-1.25f)&&access.NoticeIntrusion(202,false)!="","A later intrusion after leaving can be noticed again");
+tenant.vigilance=0;bool calmSees=access.OwnerCanSee(202,2,3,2,0,3.6f,0,-1);
+tenant.vigilance=100;Check(!calmSees&&access.OwnerCanSee(202,2,3,2,0,3.6f,0,-1),"Vigilance widens the owner's actual field of view");
+for(int i=0;i<8;i++){access.ResetIntrusion(202,1,0,0);access.NoticeIntrusion(202,true);}
+Check(tenant.resentment==100&&tenant.vigilance==100,"Owner reaction values are capped");
+while(access.Current!=null)access.Decide(false,0);access.BeginNight();
+Check(!access.OwnerCanSee(202,2,0,2,.15f,3.6f,0,-1)&&access.NoticeIntrusion(202,true)=="","Absent owner cannot witness intrusion");
+access.BeginAudit();Check(access.OwnerPresent(202),"Owner returns when roll call ends for audit");
+access.EndDay();Check(!access.Observation(202).doorOpen&&!access.Observation(202).doorLocked&&access.InRoom(202)==null,"Next day vacates and unlocks rooms");
+var legacyAccess=new GameState();legacyAccess.guests.Add(new Guest{day=1,room=301,decision=Decision.Admitted});
+var migratedAccess=new GameModel(legacyAccess);Check(migratedAccess.Observation(301).doorLocked&&!migratedAccess.Observation(302).doorLocked,"Old saves gain locks only on occupied closed rooms");
+Console.WriteLine($"{count} total checks including room access and owner detection passed.");
+
 var oldSuite=new GameModel(new GameState{keeperFloor=3,keeperX=6.4f,keeperZ=-1.25f});
 Check(Math.Abs(oldSuite.State.keeperX-RoomSight.Center(303))<.001f&&oldSuite.State.keeperLayout==2,"Legacy suite position migrates to the same room on wider floor");
 var oldStair=new GameModel(new GameState{keeperFloor=2,keeperX=-13,keeperZ=1.5f,keeperY=3.19f,keeperOnStairs=true});

@@ -5,11 +5,12 @@ namespace CheckInPlease
     [Serializable]
     public sealed class RoomObservation
     {
-        public int room, mount;
-        public bool cameraInstalled, doorOpen;
+        public int room, mount, accessVersion;
+        public bool cameraInstalled, doorOpen, doorLocked;
         public float yaw = 135, fieldOfView = 60;
         public void Normalize()
         {
+            if(doorOpen)doorLocked=false;
             mount = Math.Max(0, Math.Min(2, mount));
             if (float.IsNaN(yaw) || float.IsInfinity(yaw)) yaw = 135;
             yaw = (yaw % 360 + 360) % 360;

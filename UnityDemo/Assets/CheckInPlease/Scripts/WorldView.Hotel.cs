@@ -12,6 +12,7 @@ namespace CheckInPlease
         readonly Dictionary<int,Transform> downstairs=new Dictionary<int,Transform>();
         readonly Dictionary<int,List<Rect>> storeyObstacles=new Dictionary<int,List<Rect>>();
         readonly List<Transform> residents=new List<Transform>();
+        readonly Dictionary<int,Transform> roomOwners=new Dictionary<int,Transform>();
         readonly int[] selectedRooms={0,0,201,301};
         public int CurrentFloor {get;private set;}=1;
         public bool Climbing {get;private set;}
@@ -44,7 +45,7 @@ namespace CheckInPlease
         public bool AtReception {get{return CurrentFloor==1&&!IsTravelling&&Vector3.Distance(PlayerPosition,ReceptionInteractionPoint)<=InteractionRange;}}
         void ReleaseHotel()
         {
-            storeys.Clear();upstairs.Clear();downstairs.Clear();storeyObstacles.Clear();residents.Clear();
+            storeys.Clear();upstairs.Clear();downstairs.Clear();storeyObstacles.Clear();residents.Clear();roomOwners.Clear();
             travelDestination=0;travelArrived=null;Climbing=false;OnStairLanding=false;activeStair=0;stairEntryFloor=0;
         }
         void BuildHotel(string area,GameModel model)
@@ -309,14 +310,15 @@ namespace CheckInPlease
         public void RefreshResidents()
         {
             foreach(var resident in residents)if(resident!=null){resident.gameObject.SetActive(false);Destroy(resident.gameObject);}residents.Clear();
-            if(floorGame.State.phase!=Shift.Reception)return;
-            if(floorGame.Current!=null)residents.Add(Person(new Vector3(-3.3f,0,2.45f),floorGame.Current.portrait,false,storeys[1],.85f));
+            roomOwners.Clear();
+            if(floorGame.State.phase==Shift.Reception&&floorGame.Current!=null)residents.Add(Person(new Vector3(-3.3f,0,2.45f),floorGame.Current.portrait,false,storeys[1],.85f));
             foreach(var resident in residents)SetBranchLayer(resident,StoreyTransitionEffect.StoreyLayer);
             foreach(int room in HotelLayout.Rooms)
             {
-                var guest=floorGame.InRoom(room);if(guest==null)continue;
+                var guest=floorGame.InRoom(room);if(!floorGame.OwnerPresent(room))continue;
                 int floor=HotelLayout.RoomFloor(room);
                 var resident=Person(new Vector3(RoomSight.Center(room)+.15f,HotelLayout.Height(floor)+.05f,3.6f),guest.portrait,false,storeys[floor],.85f);residents.Add(resident);
+                roomOwners.Add(room,resident);
                 foreach(var renderer in resident.GetComponentsInChildren<Renderer>())
                 {
                     if(renderer.sharedMaterial==shadowMat){renderer.enabled=false;continue;}
@@ -325,6 +327,24 @@ namespace CheckInPlease
                 SetBranchLayer(resident,StoreyTransitionEffect.StoreyLayer);
             }
             TickFloor();
+        }
+        public bool PlayerInsideRoom(int room)
+        {
+            return !Climbing&&CurrentFloor==HotelLayout.RoomFloor(room)&&PlayerPosition.z>.18f&&PlayerPosition.z<SuiteLayout.Depth&&
+                Mathf.Abs(PlayerPosition.x-RoomSight.Center(room))<SuiteLayout.Width*.5f-.18f;
+        }
+        public bool OwnerSeesPlayer(int room)
+        {
+            if(Climbing||!roomOwners.TryGetValue(room,out var owner))return false;
+            var position=owner.position;var facing=-owner.forward;
+            return floorGame.OwnerCanSee(room,CurrentFloor,PlayerPosition.x-RoomSight.Center(room),PlayerPosition.z,
+                position.x-RoomSight.Center(room),position.z,facing.x,facing.z);
+        }
+        public void FaceIntruder(int room)
+        {
+            if(!roomOwners.TryGetValue(room,out var owner))return;
+            var facing=Vector3.ProjectOnPlane(owner.position-PlayerPosition,Vector3.up);
+            if(facing.sqrMagnitude>.0001f)owner.rotation=Quaternion.LookRotation(facing);
         }
     }
 }

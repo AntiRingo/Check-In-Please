@@ -62,6 +62,8 @@ namespace CheckInPlease
                 (Input.GetKey(KeyCode.W)?1:0)-(Input.GetKey(KeyCode.S)?1:0)):Vector2.zero;
             bool wasManual=world.ManualMoving;
             world.Tick(modal!="",movement);
+            TickDoorOpening(movement);
+            if(modal=="")CheckRoomIntrusions(openingRoom);
             RefreshInteractions();
             if(!smoke&&Application.isFocused&&modal==""&&!world.IsTravelling)
             {
@@ -93,7 +95,7 @@ namespace CheckInPlease
                 var s=JsonUtility.FromJson<GameState>(File.ReadAllText(SavePath));
                 if(s==null||s.version!=1||s.guests==null||s.guests.Count!=9||s.day<1||s.day>3)
                     throw new InvalidDataException("存档格式不匹配");
-                game=new GameModel(s);world.Build("saved",game);RestoreModal();
+                CancelDoorOpening(false);game=new GameModel(s);world.Build("saved",game);RestoreModal();
             }
             catch(Exception e){Say("无法读取存档："+e.Message);}
         }
@@ -103,11 +105,12 @@ namespace CheckInPlease
         }
         void LeaveModal() {modal=game.State.phase==Shift.Finished?"ending":game.State.phase==Shift.Morning?"menu":"";}
         void NewGame()
-        {game=new GameModel();world.Build("lobby",game);modal="brief";confirmNew=false;selected.Clear();Save();}
+        {CancelDoorOpening(false);game=new GameModel();world.Build("lobby",game);modal="brief";confirmNew=false;selected.Clear();Save();}
         void StartDay()
         {Say(game.StartDay());world.Build("lobby",game);modal=game.State.phase==Shift.Finished?"ending":game.State.news.Count>0?"dispatch":"";Save();}
         void Visit(string area)
         {
+            CancelDoorOpening(false);
             if(world.IsTravelling){Say("正在沿楼梯前往目标楼层。");return;}
             int room=int.TryParse(area,out int parsed)&&HotelLayout.IsRoom(parsed)?parsed:0;
             int floor=room==0?1:HotelLayout.RoomFloor(room);modal="";
@@ -130,7 +133,7 @@ namespace CheckInPlease
             else if(action=="dossier")
             {
                 if(!world.AtComputer){Say("请到一楼办公室的电脑前办理举报。");return;}
-                if(game.State.phase==Shift.Search){Say(game.BeginAudit());Save();}
+                if(game.State.phase==Shift.Search){Say(game.BeginAudit());world.RefreshResidents();Save();}
                 if(game.State.phase!=Shift.Audit){Say("档案处置在夜间审计时进行。");return;}
                 toast="";selected.Clear();subject=game.State.clues.FirstOrDefault(c=>CanUse(c))?.guestId??"";modal="dossier";
             }
@@ -156,12 +159,6 @@ namespace CheckInPlease
         {Say(game.Decide(admit,roomChoice));comparison="";modal="";world.RefreshResidents();Save();}
         void Night()
         {Say(game.BeginNight());modal="";world.RefreshResidents();Save();}
-        void FloorDoor()
-        {
-            if(game.State.phase!=Shift.Search){Say("宵禁点名后才能打开客房门。");return;}
-            int room=world.SelectedRoom;
-            world.WalkTo(world.DoorApproach(room),()=>{world.SelectRoom(room);world.ToggleDoor();Save();});
-        }
         void FloorCamera(int change)
         {
             if((change==0||change==1)&&game.State.phase!=Shift.Search){Say("宵禁点名后才能安装、拆除或移动摄像头。");return;}
@@ -228,7 +225,7 @@ namespace CheckInPlease
                         CheckInteraction(modal=="camera"&&game.Observation(301).cameraInstalled,"nearby camera opens control panel");
                         yield return Capture("interaction-05-camera-controls");modal="";
                     }
-                    world.SelectedObservation.doorOpen=true;
+                    if(!world.SelectedObservation.doorOpen)yield return UseInteractionDuringTest("room"+g.room,g.room);
                     yield return WalkDuringTest(world.spots.First(s=>s.action=="search0"&&s.room==world.SelectedRoom).approach);
                     if(d==1)yield return Capture("04-room-"+g.room);
                     Act("search0");if(d==1)yield return Capture("05-inspection-"+g.room);modal="";

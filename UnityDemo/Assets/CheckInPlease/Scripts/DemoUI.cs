@@ -142,6 +142,7 @@ namespace CheckInPlease
             if(B(1360,138,98,34,"日志 [J]"))modal="journal";
             if(B(1468,138,97,34,"暂停"))modal="pause";
             InteractionHUD();
+            RoomAccessHUD();
             string objective=game.State.phase==Shift.Reception?(game.Current!=null?"前往前台审查  "+game.Current.name:"今日来客已处理完毕。开始夜班。"):
                 game.State.phase==Shift.Search?"住客正在统一点名。剩余搜查行动  "+game.State.actions+" / 4":"前往办公室，决定每份档案的去向。";
             Fill(new Rect(28,817,1020,65),new Color(.035f,.045f,.045f,.86f));
@@ -150,7 +151,7 @@ namespace CheckInPlease
             if(!smoke&&Event.current.type==EventType.MouseDown && Event.current.button==0)
             {
                 var p=Event.current.mousePosition;
-                if(p.y>175&&p.y<815){world.GroundClick(p);Event.current.Use();}
+                if(p.y>175&&p.y<815){CancelDoorOpening();world.GroundClick(p);Event.current.Use();}
             }
         }
         void Review()
@@ -251,7 +252,7 @@ namespace CheckInPlease
                 int n=HotelLayout.Rooms[i];float x=80+(i%3)*490,y=395+(i/3)*202;var g=game.InRoom(n);
                 Fill(new Rect(x,y,460,180),panel);L(x+22,y+12,130,48,n.ToString(),32);
                 L(x+165,y+15,270,56,g==null?"空房 · 可分配":g.name+" / "+g.occupation,19,cream);
-                L(x+22,y+66,410,30,(n/100)+" 楼  ·  "+(game.Observation(n).cameraInstalled?"已安装摄像头":"未安装摄像头"),16,dim);
+                L(x+22,y+66,410,30,g==null?(n/100)+" 楼  ·  空房未上锁":(game.OwnerPresent(n)?"在房内":"外出点名")+"  ·  反感 "+g.resentment+" / 警惕 "+g.vigilance,16,dim);
                 if(B(x+22,y+112,416,46,"沿楼梯前往 "+n))Visit(n.ToString());
             }
         }
@@ -267,7 +268,7 @@ namespace CheckInPlease
         void Help()
         {
             Title("KEEPER'S HANDBOOK","值班操作","这是一个可以完整走过三个营业日的玩法原型。");
-            L(100,300,1350,390,"01  WASD 或点击地面移动；停下后保持朝向。靠近物品才出现交互按钮。\n\n02  按 E 或点击按钮执行；多个目标重叠时，按 R 或滚动鼠标滚轮切换。\n\n03  前台登记、房门开关与监控设置均需靠近；楼梯直接行走，不需要交互。\n\n04  夜间搜查书房的书桌和起居区的行李，每夜 4 次；回一楼电脑前举报。\n\n05  平台只显示楼梯，离开后楼层渐显，角度固定；套房隔墙会挡住视线。\n\nJ 打开日志 · Esc 返回或暂停 · 每次重要操作自动保存。",23);
+            L(100,300,1350,410,"01  WASD 或点击地面移动；靠近后按 E / 点击按钮互动，R / 滚轮切换目标。\n\n02  房门随时可开。空房直接开门；锁门需 3 秒，移动、再次互动或打开界面会中断。\n\n03  已入住的房门关上即上锁，门内可直接开门。被房主撞见开门或在房内，会增加反感与警惕。\n\n04  房主视线受朝向、距离、房门与隔墙限制；警惕越高越容易发现你。反应记入日志并保存。\n\n05  夜间点名期间住客外出，审计时回房。搜查仍限夜班，每夜 4 次；回一楼电脑前举报。\n\n楼梯直接行走 · J 日志 · Esc 返回或暂停 · 重要操作自动保存。",22);
             if(B(1090,730,430,60,"返回",true,true))modal=game.State.phase==Shift.Morning?"menu":"";
         }
         void Pause()

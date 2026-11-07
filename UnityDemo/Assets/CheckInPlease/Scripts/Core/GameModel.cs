@@ -12,6 +12,7 @@ namespace CheckInPlease
     {
         public string id, name, occupation, purpose, permitId, statement;
         public int day, expires, room, portrait;
+        public int resentment, vigilance, intrusionLevel;
         public bool workPermit, visitor;
         public Decision decision;
         public string[] items;
@@ -46,12 +47,18 @@ namespace CheckInPlease
     }
 
     // Pure C# rules: UI, saves and automated tests all use this same model.
-    public sealed class GameModel
+    public sealed partial class GameModel
     {
         public GameState State { get; private set; }
         public GameModel(GameState state = null)
         {
             State = state ?? NewState();
+            foreach(var guest in State.guests)
+            {
+                guest.resentment=Math.Max(0,Math.Min(100,guest.resentment));
+                guest.vigilance=Math.Max(0,Math.Min(100,guest.vigilance));
+                guest.intrusionLevel=Math.Max(0,Math.Min(2,guest.intrusionLevel));
+            }
             // Older v1 saves did not contain observation settings.
             if (State.rooms == null) State.rooms = new List<RoomObservation>();
             foreach (int room in HotelLayout.Rooms)
@@ -63,6 +70,11 @@ namespace CheckInPlease
                     State.rooms.Add(observation);
                 }
                 observation.Normalize();
+                if(observation.accessVersion==0)
+                {
+                    observation.doorLocked=!observation.doorOpen&&InRoom(room)!=null;
+                    observation.accessVersion=1;
+                }
             }
             if(State.keeperFloor<1||State.keeperFloor>3)State.keeperFloor=1;
             if(State.keeperLayout<2)
@@ -178,6 +190,7 @@ namespace CheckInPlease
             if (admit)
             {
                 g.room = room; State.money += 14;
+                Observation(room).doorLocked=!Observation(room).doorOpen;
                 Log(g.name + " 入住 " + room + "，房费 +14。");
                 if (violation != "") State.pending.Add(new Consequence { dueDay = State.day + 1, money = -10, trust = -2,
                     text = "复核通知：" + g.name + " 的登记违反规定（" + violation + "）。罚款 10，信任 -2。" });
@@ -210,7 +223,7 @@ namespace CheckInPlease
         public string BeginAudit()
         {
             if (State.phase != Shift.Search) return "还未进入夜间。";
-            State.phase = Shift.Audit; return "请逐人整理证据。同一人的两个独立来源，才能向管理局提交。";
+            State.phase = Shift.Audit; return "点名结束，住客已回房。请逐人整理证据，同一人的两个独立来源才能提交。";
         }
         public string Resolve(string guestId, Disposition choice, IEnumerable<string> selected)
         {
@@ -255,7 +268,9 @@ namespace CheckInPlease
                     "尚未熄灭的灯\n你保住了旅店，也保留了一些没有上交的秘密。";
                 Log("三日试营业结束。"); return State.ending;
             }
-            State.day++; State.phase = Shift.Morning; return "夜班结束。未处置的线索已自动封存。";
+            State.day++; State.phase = Shift.Morning;
+            foreach(var room in State.rooms){room.doorOpen=false;room.doorLocked=false;}
+            return "夜班结束。未处置的线索已自动封存。";
         }
         bool CheckFailure()
         {

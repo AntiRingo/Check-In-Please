@@ -15,7 +15,7 @@ namespace CheckInPlease
             interactionPassed&=condition;
             if(condition)Debug.Log("INTERACTION_CHECK PASS "+label);else Debug.LogError("INTERACTION_CHECK FAIL "+label);
         }
-        IEnumerator UseInteractionDuringTest(string action,int room=0)
+        IEnumerator UseInteractionDuringTest(string action,int room=0,bool waitForUnlock=true)
         {
             RefreshInteractions();
             var target=nearbyInteractions.FirstOrDefault(s=>s.action==action&&s.room==room);
@@ -23,6 +23,12 @@ namespace CheckInPlease
             if(target==null)yield break;
             for(int i=0;i<nearbyInteractions.Count&&interactionId!=target.Id;i++)CycleInteraction(1);
             PerformInteraction();yield return null;
+            if(waitForUnlock)
+            {
+                float deadline=Time.realtimeSinceStartup+8;
+                while(openingRoom!=0&&Time.realtimeSinceStartup<deadline)yield return null;
+                CheckInteraction(openingRoom==0,"interaction finished "+action);
+            }
         }
         Vector2 validationMovement;
         float testedMoveSpeed;
@@ -108,6 +114,8 @@ namespace CheckInPlease
         IEnumerator FloorSmokeTest()
         {
             yield return new WaitForSeconds(1);game=new GameModel();game.StartDay();modal="";toast="";world.Build("lobby",game);
+            yield return RoomAccessSmokeTest();
+            game=new GameModel();game.StartDay();modal="";toast="";world.Build("lobby",game);
             yield return KeyboardSmokeTest();
             RefreshInteractions();CheckInteraction(nearbyInteractions.Count==0,"no distant labels or actions");
             yield return Capture("hotel-01-ground-floor");
@@ -155,11 +163,11 @@ namespace CheckInPlease
             visibility&=game.State.clues.Count==2;
             yield return UseInteractionDuringTest("room302",302);CheckInteraction(!game.Observation(302).doorOpen,"close door from inside");
             yield return UseInteractionDuringTest("room302",302);CheckInteraction(game.Observation(302).doorOpen,"open door from inside");
-            yield return WalkDuringTest(world.DoorApproach(302));world.ToggleDoor();
+            yield return WalkDuringTest(world.DoorApproach(302));yield return UseInteractionDuringTest("room302",302);
             visibility&=world.VisibilityAt(302,new Vector3(0,8.8f,4))==0&&!world.spots.Any(s=>s.room==302&&s.action.StartsWith("search")&&world.SpotVisible(s));
             world.StoreLocation(game.State);var saved=JsonUtility.ToJson(game.State);game=new GameModel(JsonUtility.FromJson<GameState>(saved));world.Build("saved",game);
             bool persistence=world.CurrentFloor==3&&game.Observation(301).cameraInstalled&&!game.Observation(302).doorOpen&&game.InRoom(301)!=null;
-            yield return TravelDuringTest("203");world.ToggleDoor();yield return Capture("hotel-08-second-floor");
+            yield return TravelDuringTest("203");yield return UseInteractionDuringTest("room203",203);yield return Capture("hotel-08-second-floor");
             visibility&=world.VisibilityAt(203,new Vector3(RoomSight.Center(203),4.4f,4))>.95f&&world.VisibilityAt(303,new Vector3(RoomSight.Center(303),8.8f,4))==0;
             yield return WalkDuringTest(new Vector3(-12+HotelLayout.StairOffset,4.4f,-1.25f));RefreshInteractions();
             CheckInteraction(nearbyInteractions.Count==0&&!world.spots.Any(s=>s.action.StartsWith("stairs")),"stair landing has no interaction prompts");
