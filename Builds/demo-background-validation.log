@@ -1,10 +1,10 @@
-Mono path[0] = 'C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/Managed'
-Mono config path = 'C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/MonoBleedingEdge/etc'
+Mono path[0] = 'D:/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/Managed'
+Mono config path = 'D:/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/MonoBleedingEdge/etc'
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
 Initialize engine version: 6000.3.28f1 (8f082d2fe476)
-[Subsystems] Discovering subsystems at path C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data/UnitySubsystems
 Forcing GfxDevice: Direct3D 11
 GfxDevice: creating device client; kGfxThreadingModeClientWorkerJobs
 Direct3D:
@@ -14,8 +14,8 @@ Direct3D:
     VRAM:     4039 MB
     Driver:   31.0.101.2115
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.329 seconds
-- Finished resetting the current domain, in  0.004 seconds
+- Loaded All Assemblies, in  0.138 seconds
+- Finished resetting the current domain, in  0.003 seconds
 [Physics::Module] Selected backend.
 [Physics::Module] Name: PhysX
 [Physics::Module] Id: 0xf2b8ea05
@@ -26,9 +26,9 @@ Begin MonoManager ReloadAssembly
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
-UnloadTime: 1.081200 ms
+UnloadTime: 351.284900 ms
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
-VALIDATION_FRAMES C:/Users/Administrator/Desktop/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data\..\Validation\0.4.7\run-20261107-024018-742
+VALIDATION_FRAMES D:/Trae Code/贪吃蛇/test/独游/Check In,Please/Builds/Windows/CheckInPlease_Data\..\Validation\0.4.7\run-20261117-080817-307
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
 ART_SCALE lobby keeperHeight=40.4px reachable=2/2
